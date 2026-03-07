@@ -1,0 +1,494 @@
+'''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kittens Manager - Soporte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/true-typewriter');
+        @import url('https://fonts.cdnfonts.com/css/brindan-writte');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-blue: #3333ff;
+        }
+        
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        
+        .logo-container {
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--text-white);
+            text-decoration: none;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+            width: 226px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo-container:hover .dropdown,
+        .logo-container.active .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-logo {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .dropdown-links {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .dropdown-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-white);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-bar {
+            width: 200px;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .search-bar:focus {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* MAIN CONTENT */
+        main {
+            padding: 120px 60px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page-title {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Support Container */
+        .support-container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .support-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .support-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .support-image::before {
+            content: '回復力';
+            position: absolute;
+            color: var(--accent-blue);
+            font-size: 48px;
+            font-weight: bold;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(51, 51, 255, 0.5);
+        }
+        
+        .support-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .form-group label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            padding: 15px 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 60px;
+        }
+        
+        .faq-title {
+            font-family: 'Brindan Writte', cursive;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .faq-question {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            main {
+                padding: 100px 20px 40px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .support-container {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+            
+            .support-image {
+                height: 300px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo" onclick="this.parentElement.classList.toggle('active')">
+                <span style="font-size: 12px; letter-spacing: 2px;">KITTENS</span>
+                <span style="font-size: 8px; opacity: 0.8;">MANAGERS</span>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-logo">
+                    <svg width="80" height="60" viewBox="0 0 200 150" fill="none">
+                        <text x="100" y="40" text-anchor="middle" fill="white" font-family="serif" font-size="24">KITTENS MANAGER</text>
+                        <text x="100" y="60" text-anchor="middle" fill="white" font-family="sans-serif" font-size="10">FALLAR NO ES UNA OPCION</text>
+                        <rect x="85" y="70" width="30" height="20" rx="3" fill="white"/>
+                        <rect x="88" y="73" width="24" height="14" rx="2" fill="black"/>
+                        <circle cx="95" cy="80" r="2" fill="white"/>
+                        <circle cx="105" cy="80" r="2" fill="white"/>
+                    </svg>
+                </div>
+                <div class="dropdown-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="contactanos.html">Contáctanos</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="nav-links">
+                <a href="patrocinados.html">PATROCINADOS</a>
+                <a href="soporte.html">SOPORTE</a>
+                <a href="contactanos.html">CONTACTANOS</a>
+                <a href="kiritsu.html">KRITSU</a>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="busqueda">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">SOPORTE</h1>
+        
+        <div class="support-container">
+            <div class="support-image">
+                <img src="https://images.unsplash.com/photo-1618005198919-d3c4a0381ac3?w=600&h=800&fit=crop" alt="Support Image" style="opacity: 0.6;">
+            </div>
+            
+            <form class="support-form">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Escribe el título...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Describe tu problema o consulta..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Enviar</button>
+            </form>
+        </div>
+        
+        <div class="faq-section">
+            <h2 class="faq-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">¿Cómo puedo contactar al equipo de soporte?</h3>
+                <p class="faq-answer">Puedes usar el formulario de esta página o escribirnos directamente a través de nuestros canales oficiales.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">¿Cuál es el tiempo de respuesta?</h3>
+                <p class="faq-answer">Normalmente respondemos dentro de 24-48 horas hábiles.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">¿Ofrecen soporte técnico especializado?</h3>
+                <p class="faq-answer">Sí, contamos con un equipo técnico especializado para resolver cualquier incidencia.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            const logoContainer = document.querySelector('.logo-container');
+            if (!logoContainer.contains(e.target)) {
+                logoContainer.classList.remove('active');
+            }
+        });
+        
+        // Form submission
+        document.querySelector('.support-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensaje enviado. Te contactaremos pronto.');
+        });
+    </script>
+</body>
+</html>'''

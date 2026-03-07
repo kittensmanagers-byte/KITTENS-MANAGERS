@@ -1,0 +1,510 @@
+'''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kittens Manager - Patrocinados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/true-typewriter');
+        @import url('https://fonts.cdnfonts.com/css/brindan-writte');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-purple: #8b5cf6;
+        }
+        
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        
+        .logo-container {
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--text-white);
+            text-decoration: none;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+            width: 226px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo-container:hover .dropdown,
+        .logo-container.active .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-logo {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .dropdown-links {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .dropdown-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-white);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-bar {
+            width: 200px;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .search-bar:focus {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* MAIN CONTENT */
+        main {
+            padding: 120px 60px 60px;
+        }
+        
+        .page-title {
+            font-family: 'True Typewriter', 'Courier New', monospace;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Sponsor Cards */
+        .sponsors-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .sponsor-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sponsor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sponsor-card:hover::before {
+            opacity: 1;
+        }
+        
+        .sponsor-card.featured {
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+        }
+        
+        .sponsor-info {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .sponsor-info h2 {
+            font-family: 'Brindan Writte', cursive;
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--text-white);
+        }
+        
+        .sponsor-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+        
+        .sponsor-main-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .sponsor-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .sponsor-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .sponsor-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        .redirect-btn {
+            padding: 12px 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: fit-content;
+        }
+        
+        .redirect-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .sponsor-thumbnails {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .thumbnail {
+            flex: 1;
+            height: 100px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sponsor-card {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .sponsor-side {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 100px 20px 40px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .sponsor-card {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+            
+            .sponsor-side {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo" onclick="this.parentElement.classList.toggle('active')">
+                <span style="font-size: 12px; letter-spacing: 2px;">KITTENS</span>
+                <span style="font-size: 8px; opacity: 0.8;">MANAGERS</span>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-logo">
+                    <svg width="80" height="60" viewBox="0 0 200 150" fill="none">
+                        <text x="100" y="40" text-anchor="middle" fill="white" font-family="serif" font-size="24">KITTENS MANAGER</text>
+                        <text x="100" y="60" text-anchor="middle" fill="white" font-family="sans-serif" font-size="10">FALLAR NO ES UNA OPCION</text>
+                        <rect x="85" y="70" width="30" height="20" rx="3" fill="white"/>
+                        <rect x="88" y="73" width="24" height="14" rx="2" fill="black"/>
+                        <circle cx="95" cy="80" r="2" fill="white"/>
+                        <circle cx="105" cy="80" r="2" fill="white"/>
+                    </svg>
+                </div>
+                <div class="dropdown-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="contactanos.html">Contáctanos</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="nav-links">
+                <a href="patrocinados.html">PATROCINADOS</a>
+                <a href="soporte.html">SOPORTE</a>
+                <a href="contactanos.html">CONTACTANOS</a>
+                <a href="kiritsu.html">KRITSU</a>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="busqueda">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">PATROCINADOS</h1>
+        
+        <div class="sponsors-container">
+            <div class="sponsor-card featured">
+                <div class="sponsor-info">
+                    <h2>Agregar un título</h2>
+                    <h3>Agregar un subtítulo</h3>
+                </div>
+                <div class="sponsor-main-image">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop" alt="Sponsor 1">
+                </div>
+                <div class="sponsor-side">
+                    <p class="sponsor-text">Agregar algo de texto descriptivo sobre el patrocinador. Información relevante y detalles importantes.</p>
+                    <a href="#" class="redirect-btn">REDIRECCION</a>
+                    <div class="sponsor-thumbnails">
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop" alt="Thumb 1">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=300&h=200&fit=crop" alt="Thumb 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sponsor-card">
+                <div class="sponsor-info">
+                    <h2>Agregar un título</h2>
+                    <h3>Agregar un subtítulo</h3>
+                </div>
+                <div class="sponsor-main-image">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop" alt="Sponsor 2">
+                </div>
+                <div class="sponsor-side">
+                    <p class="sponsor-text">Agregar algo de texto descriptivo sobre el patrocinador. Información relevante y detalles importantes.</p>
+                    <a href="#" class="redirect-btn">REDIRECCION</a>
+                    <div class="sponsor-thumbnails">
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop" alt="Thumb 3">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=300&h=200&fit=crop" alt="Thumb 4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sponsor-card featured">
+                <div class="sponsor-info">
+                    <h2>Agregar un título</h2>
+                    <h3>Agregar un subtítulo</h3>
+                </div>
+                <div class="sponsor-main-image">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop" alt="Sponsor 3">
+                </div>
+                <div class="sponsor-side">
+                    <p class="sponsor-text">Agregar algo de texto descriptivo sobre el patrocinador. Información relevante y detalles importantes.</p>
+                    <a href="#" class="redirect-btn">REDIRECCION</a>
+                    <div class="sponsor-thumbnails">
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop" alt="Thumb 5">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&h=200&fit=crop" alt="Thumb 6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            const logoContainer = document.querySelector('.logo-container');
+            if (!logoContainer.contains(e.target)) {
+                logoContainer.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>'''
