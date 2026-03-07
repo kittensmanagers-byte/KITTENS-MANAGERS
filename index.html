@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kittens Manager - Inicio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.cdnfonts.com/css/true-typewriter');
         @import url('https://fonts.cdnfonts.com/css/brindan-writte');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
         
         :root {
             --bg-black: #000000;
             --text-white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --accent-red: #ff3333;
-            --accent-blue: #3333ff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-strong: rgba(255, 255, 255, 0.08);
+            --accent-red: #e63946;
+            --accent-blue: #4361ee;
+            --metallic: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
         }
         
         body {
@@ -33,592 +34,597 @@
             overflow-x: hidden;
         }
         
-        /* HEADER & NAVIGATION */
+        /* HEADER MODERNO */
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 40px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1400px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            background: var(--glass-strong);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         
-        .logo-container {
-            position: relative;
+        .logo-container { 
+            position: relative; 
+            flex-shrink: 0;
         }
         
         .logo {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 14px;
+            font-family: 'True Typewriter', monospace;
+            font-size: 13px;
             color: var(--text-white);
-            text-decoration: none;
-            padding: 10px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
+            padding: 12px 24px;
+            background: var(--metallic);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
+            gap: 3px;
             cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
         
         .logo:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
         }
         
-        .logo img {
-            width: 30px;
-            height: auto;
+        .logo span:first-child {
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-weight: 500;
         }
         
-        .logo-text {
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-        
-        .logo-sub {
-            font-size: 8px;
+        .logo span:last-child {
+            font-size: 9px;
+            letter-spacing: 4px;
             opacity: 0.8;
         }
         
-        /* DROPDOWN MENU */
+        /* DROPDOWN */
         .dropdown {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 15px);
             left: 0;
-            margin-top: 10px;
-            width: 226px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 20px;
+            width: 220px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(-20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
         }
         
         .logo-container:hover .dropdown,
         .logo-container.active .dropdown {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
         
         .dropdown-logo {
             width: 100%;
             text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
-        .dropdown-logo img {
-            width: 80px;
-            height: auto;
+        .dropdown-logo svg {
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
         }
         
         .dropdown-links {
-            margin-top: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
         .dropdown-links a {
-            color: var(--text-white);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-family: 'Oswald', sans-serif;
             font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-red), var(--accent-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .dropdown-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            background: rgba(255,255,255,0.05);
+            padding-left: 20px;
         }
         
-        /* NAV LINKS */
+        .dropdown-links a:hover::before {
+            opacity: 1;
+        }
+        
+        /* NAV CENTRAL */
         nav {
+            flex: 1;
             display: flex;
-            gap: 30px;
+            justify-content: center;
             align-items: center;
+            margin: 0 40px;
         }
         
-        .nav-links {
+        .nav-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 8px;
             display: flex;
-            gap: 25px;
+            gap: 5px;
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 5px; 
         }
         
         .nav-links a {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--text-white);
+            font-family: 'True Typewriter', monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            padding: 5px 10px;
-            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         
-        .nav-links a::before {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(5px);
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
             border-radius: 20px;
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
         }
         
-        .nav-links a:hover::before {
+        .nav-links a:hover {
+            color: white;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+        
+        .nav-links a:hover::after {
             opacity: 1;
         }
         
-        .nav-links a:hover {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        /* SEARCH BAR MODERNA */
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
         
-        /* SEARCH BAR */
         .search-container {
             position: relative;
-        }
-        
-        .search-bar {
-            width: 200px;
-            padding: 10px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 25px;
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            outline: none;
+            padding: 5px 5px 5px 20px;
             transition: all 0.3s ease;
         }
         
-        .search-bar::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .search-container:focus-within {
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
         }
         
-        .search-bar:focus {
-            width: 250px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        .search-bar {
+            width: 140px;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            outline: none;
+            letter-spacing: 1px;
         }
         
-        /* HERO SECTION */
+        .search-bar::placeholder { 
+            color: rgba(255, 255, 255, 0.4); 
+        }
+        
+        .search-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        .search-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+        
+        /* HERO SECTION REDISEÑADO */
         .hero {
-            height: 100vh;
-            display: flex;
-            padding: 120px 60px 60px;
-            gap: 40px;
-            position: relative;
-        }
-        
-        .hero-left {
-            flex: 0 0 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .hero-image-small {
-            width: 100%;
-            height: 200px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
-        }
-        
-        .hero-image-small img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .hero-main {
-            flex: 1;
+            padding: 140px 60px 100px;
             position: relative;
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--glass-border);
-            border-radius: 30px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .hero-main img {
+        .hero-main-container {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 1200px;
+            position: relative;
         }
         
-        .hero-content {
+        .hero-card {
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            background: linear-gradient(135deg, rgba(20,20,30,0.8), rgba(10,10,15,0.9));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.8),
+                inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+        
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1600&h=900&fit=crop') center/cover;
+            opacity: 0.6;
+        }
+        
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), transparent 60%);
+        }
+        
+        .hero-content-card {
             position: absolute;
             right: 60px;
             top: 50%;
             transform: translateY(-50%);
-            text-align: right;
+            z-index: 10;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 30px 40px;
+            max-width: 400px;
         }
         
         .hero-btn {
-            padding: 15px 40px;
-            background: var(--glass-bg);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border: 2px solid var(--glass-border);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 30px;
             color: var(--text-white);
             font-family: 'Oswald', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            display: inline-block;
         }
         
         .hero-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.1);
+            transform: translateY(-2px);
         }
         
-        .hero-bottom {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+        /* SECCIÓN QUIENES SOMOS */
+        .quienes-somos {
+            padding: 100px 60px;
+            background: var(--bg-black);
+            position: relative;
         }
         
-        .hero-bottom-image {
-            width: 300px;
-            height: 150px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* SUBTITLES SECTION */
-        .subtitles-section {
-            padding: 80px 60px;
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
+            grid-template-columns: 1fr auto;
+            gap: 60px;
+            align-items: start;
         }
         
-        .subtitle-block {
-            text-align: center;
+        .section-header {
+            margin-bottom: 30px;
         }
         
-        .subtitle-block h3 {
+        .section-title {
             font-family: 'Brindan Writte', cursive;
-            font-size: 24px;
+            font-size: 48px;
             margin-bottom: 10px;
-            color: var(--text-white);
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .subtitle-block p {
-            font-family: 'Oswald', sans-serif;
+        .section-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: justify;
+            font-weight: 300;
+        }
+        
+        .kanji-container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+        }
+        
+        .kanji {
+            font-size: 64px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .kanji-reading {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 3px;
         }
         
-        /* TEAM SECTION */
+        /* SECCIÓN NUESTRA VISIÓN */
+        .nuestra-vision {
+            padding: 100px 60px;
+            background: var(--bg-black);
+            position: relative;
+            border-left: 3px solid transparent;
+            border-image: linear-gradient(to bottom, var(--accent-red), var(--accent-blue)) 1;
+        }
+        
+        .vision-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 60px;
+            align-items: start;
+            padding-left: 40px;
+        }
+        
+        /* NUESTRO EQUIPO */
         .team-section {
             padding: 100px 60px;
             position: relative;
             overflow: hidden;
         }
         
-        .section-title {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 32px;
+        .team-title {
+            font-family: 'True Typewriter', monospace;
+            font-size: 42px;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 8px;
+            position: relative;
+            z-index: 1;
         }
         
-        /* Floating balls decoration */
+        /* Bolas decorativas */
         .floating-ball {
             position: absolute;
             border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.6;
+            filter: blur(60px);
             z-index: 0;
         }
         
-        .ball-red-1 {
-            width: 150px;
-            height: 150px;
-            background: var(--accent-red);
-            top: 100px;
-            left: 5%;
+        .ball-red-1 { 
+            width: 200px; 
+            height: 200px; 
+            background: var(--accent-red); 
+            top: 50px; 
+            left: 5%; 
+            opacity: 0.5;
+        }
+        .ball-red-2 { 
+            width: 120px; 
+            height: 120px; 
+            background: var(--accent-red); 
+            top: 300px; 
+            left: 15%; 
+            opacity: 0.3; 
+        }
+        .ball-red-3 { 
+            width: 80px; 
+            height: 80px; 
+            background: var(--accent-red); 
+            top: 200px; 
+            left: 2%; 
+            opacity: 0.2; 
         }
         
-        .ball-red-2 {
-            width: 100px;
-            height: 100px;
-            background: var(--accent-red);
-            top: 300px;
-            left: 15%;
-            opacity: 0.4;
-        }
-        
-        .ball-red-3 {
-            width: 80px;
-            height: 80px;
-            background: var(--accent-red);
-            top: 200px;
-            left: 2%;
-            opacity: 0.3;
-        }
-        
-        .ball-blue-1 {
-            width: 150px;
-            height: 150px;
-            background: var(--accent-blue);
-            bottom: 300px;
-            right: 5%;
-        }
-        
-        .ball-blue-2 {
-            width: 100px;
-            height: 100px;
-            background: var(--accent-blue);
-            bottom: 500px;
-            right: 15%;
-            opacity: 0.4;
-        }
-        
-        .ball-blue-3 {
-            width: 120px;
-            height: 120px;
-            background: var(--accent-blue);
-            bottom: 400px;
-            right: 2%;
-            opacity: 0.3;
-        }
-        
-        /* Team rows */
-        .team-row {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
+        .team-showcase {
+            max-width: 1200px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
         }
         
-        .team-card-large {
-            flex: 1;
-            height: 400px;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 40px;
-        }
-        
-        .team-card-large.red {
-            background: linear-gradient(135deg, rgba(255, 51, 51, 0.2), rgba(255, 51, 51, 0.05));
-            border: 2px solid rgba(255, 51, 51, 0.3);
-        }
-        
-        .team-card-large.blue {
-            background: linear-gradient(135deg, rgba(51, 51, 255, 0.2), rgba(51, 51, 255, 0.05));
-            border: 2px solid rgba(51, 51, 255, 0.3);
-        }
-        
-        .team-card-large img {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            object-fit: cover;
-            mask-image: linear-gradient(to left, black, transparent);
-            -webkit-mask-image: linear-gradient(to left, black, transparent);
-        }
-        
-        .team-card-content {
-            position: relative;
-            z-index: 2;
-            max-width: 50%;
-        }
-        
-        .team-card-content h3 {
-            font-family: 'Brindan Writte', cursive;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-        
-        .team-card-content p {
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-        }
-        
-        .team-card-small {
-            width: 300px;
-            height: 400px;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .team-card-small img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Team grid bottom */
-        .team-grid {
+        .team-card-main {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(230, 57, 70, 0.05));
+            border: 2px solid rgba(230, 57, 70, 0.3);
+            border-radius: 40px;
+            padding: 50px;
             display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card-main::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            top: -100px;
+            left: -100px;
+        }
+        
+        .team-content {
             position: relative;
             z-index: 1;
         }
         
-        .team-grid-side {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .team-member-name {
+            font-family: 'Brindan Writte', cursive;
+            font-size: 56px;
+            margin-bottom: 10px;
+            color: white;
         }
         
-        .team-grid-item {
-            height: 180px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            gap: 15px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
+        .team-member-role {
+            font-size: 24px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
         }
         
-        .team-grid-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-        
-        .team-grid-item h4 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 16px;
-        }
-        
-        .team-grid-center {
-            height: 380px;
+        .team-photo-container {
+            position: relative;
+            height: 400px;
             border-radius: 30px;
             overflow: hidden;
-            border: 2px solid var(--glass-border);
         }
         
-        .team-grid-center img {
+        .team-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 30px;
+        }
+        
+        .team-mascot {
+            position: absolute;
+            right: -50px;
+            bottom: -50px;
+            width: 300px;
+            height: 300px;
+            z-index: 10;
+        }
+        
+        .team-mascot img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
         }
         
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .hero {
-                flex-direction: column;
-                padding: 100px 30px 30px;
+            header {
+                width: 95%;
+                padding: 12px 20px;
             }
-            
-            .hero-left {
-                flex: none;
-                width: 100%;
-                flex-direction: row;
+            .nav-links a {
+                padding: 8px 16px;
+                font-size: 11px;
             }
-            
-            .hero-image-small {
-                height: 150px;
-                flex: 1;
+            .hero-card {
+                height: 60vh;
             }
-            
-            .team-row {
-                flex-direction: column;
+            .section-container,
+            .vision-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
-            
-            .team-card-small {
-                width: 100%;
-                height: 300px;
+            .kanji-container {
+                order: -1;
             }
-            
-            .team-grid {
+            .team-card-main {
                 grid-template-columns: 1fr;
             }
-            
-            .team-grid-center {
-                height: 300px;
+            .team-mascot {
+                position: relative;
+                right: 0;
+                bottom: 0;
+                margin: 0 auto;
             }
         }
         
         @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-                flex-wrap: wrap;
-                gap: 15px;
+            .nav-links { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero-content-card {
+                right: 20px;
+                left: 20px;
+                transform: translateY(-50%);
             }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .search-bar {
-                width: 150px;
-            }
-            
-            .subtitles-section {
-                grid-template-columns: 1fr;
-                padding: 40px 20px;
-            }
-            
-            .team-section {
-                padding: 60px 20px;
-            }
+            .section-title { font-size: 36px; }
+            .kanji { font-size: 48px; }
         }
     </style>
 </head>
@@ -626,18 +632,19 @@
     <header>
         <div class="logo-container">
             <div class="logo" onclick="this.parentElement.classList.toggle('active')">
-                <span class="logo-text">KITTENS</span>
-                <span class="logo-sub">MANAGERS</span>
+                <span>KITTENS</span>
+                <span>MANAGERS</span>
             </div>
             <div class="dropdown">
                 <div class="dropdown-logo">
-                    <svg width="80" height="60" viewBox="0 0 200 150" fill="none">
-                        <text x="100" y="40" text-anchor="middle" fill="white" font-family="serif" font-size="24">KITTENS MANAGER</text>
-                        <text x="100" y="60" text-anchor="middle" fill="white" font-family="sans-serif" font-size="10">FALLAR NO ES UNA OPCION</text>
-                        <rect x="85" y="70" width="30" height="20" rx="3" fill="white"/>
-                        <rect x="88" y="73" width="24" height="14" rx="2" fill="black"/>
-                        <circle cx="95" cy="80" r="2" fill="white"/>
-                        <circle cx="105" cy="80" r="2" fill="white"/>
+                    <svg width="100" height="70" viewBox="0 0 200 150">
+                        <text x="100" y="45" text-anchor="middle" fill="white" font-family="serif" font-size="28" font-weight="bold">KITTENS</text>
+                        <text x="100" y="70" text-anchor="middle" fill="white" font-family="serif" font-size="20">MANAGER</text>
+                        <text x="100" y="90" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" letter-spacing="2">FALLAR NO ES UNA OPCION</text>
+                        <rect x="85" y="100" width="30" height="25" rx="4" fill="white"/>
+                        <rect x="89" y="104" width="22" height="17" rx="2" fill="#111"/>
+                        <circle cx="96" cy="112" r="2.5" fill="white"/>
+                        <circle cx="104" cy="112" r="2.5" fill="white"/>
                     </svg>
                 </div>
                 <div class="dropdown-links">
@@ -651,129 +658,97 @@
         </div>
         
         <nav>
-            <div class="nav-links">
-                <a href="patrocinados.html">PATROCINADOS</a>
-                <a href="soporte.html">SOPORTE</a>
-                <a href="contactanos.html">CONTACTANOS</a>
-                <a href="kiritsu.html">KRITSU</a>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="busqueda">
+            <div class="nav-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">PATROCINADOS</a>
+                    <a href="soporte.html">SOPORTE</a>
+                    <a href="contactanos.html">CONTACTANOS</a>
+                    <a href="kiritsu.html">KRITSU</a>
+                </div>
             </div>
         </nav>
+        
+        <div class="search-wrapper">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="busqueda">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
     </header>
 
     <section class="hero">
-        <div class="hero-left">
-            <div class="hero-image-small">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop" alt="Imagen 1">
-            </div>
-            <div class="hero-image-small">
-                <img src="https://images.unsplash.com/photo-1634017839464-5c339ez?w=400&h=400&fit=crop" alt="Imagen 2" onerror="this.style.display='none'; this.parentElement.innerHTML='Imagen 2'">
-            </div>
-        </div>
-        
-        <div class="hero-main">
-            <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=1200&h=800&fit=crop" alt="Hero Main" style="opacity: 0.8;">
-            <div class="hero-content">
-                <a href="#" class="hero-btn">BOTON REDIRE</a>
-            </div>
-        </div>
-        
-        <div class="hero-bottom">
-            <div class="hero-bottom-image">
-                <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=600&h=300&fit=crop" alt="Imagen bottom" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="hero-main-container">
+            <div class="hero-card">
+                <div class="hero-content-card">
+                    <a href="#" class="hero-btn">
+                        <span>BOTON REDIRE</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="subtitles-section">
-        <div class="subtitle-block">
-            <h3>Agregar un subtítulo</h3>
-            <p>Agregar un subtítulo</p>
+    <section class="quienes-somos">
+        <div class="section-container">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2 class="section-title">Quienes somos ?</h2>
+                </div>
+                <p class="section-text">
+                    Kittens Managers no es solo una empresa, es el punto donde las ideas dejan de ser pensamientos y empiezan a convertirse en realidad. Es la estructura que sostiene la creatividad, el orden detrás del talento y la estrategia que transforma proyectos en algo serio, escalable y con identidad propia. No nace para improvisar, nace para construir; no existe para seguir tendencias, existe para crear universos, marcas y experiencias con coherencia, disciplina y visión a largo plazo. Kittens Managers representa mentalidad, constancia y la decisión de hacer las cosas bien desde el inicio, incluso cuando nadie está mirando.
+                </p>
+            </div>
+            <div class="kanji-container">
+                <div class="kanji">回復力</div>
+                <div class="kanji-reading">Kaifuku-ryoku</div>
+            </div>
         </div>
-        <div class="subtitle-block">
-            <h3>Agregar un subtítulo</h3>
-            <p>Agregar algo de texto</p>
-        </div>
-        <div class="subtitle-block">
-            <h3>Agregar un subtítulo</h3>
-            <p>Agregar un subtítulo</p>
-        </div>
-        <div class="subtitle-block">
-            <h3>Agregar un subtítulo</h3>
-            <p>Agregar algo de texto</p>
+    </section>
+
+    <section class="nuestra-vision">
+        <div class="vision-container">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2 class="section-title">Nuestra vision</h2>
+                </div>
+                <p class="section-text">
+                    La visión de Kittens Managers es convertirse en un ecosistema creativo sólido y reconocido, capaz de desarrollar proyectos digitales, culturales y de entretenimiento con identidad propia y proyección internacional. No se trata solo de lanzar productos, sino de construir un legado: una marca que conecte culturas, que combine disciplina, innovación y estética, y que demuestre que con estructura, enfoque y perseverancia se pueden crear proyectos que trasciendan fronteras. Kittens Managers aspira a ser el origen de ideas que crecen, evolucionan y dejan huella.
+                </p>
+            </div>
+            <div class="kanji-container">
+                <div class="kanji">勝利</div>
+                <div class="kanji-reading">Shōri</div>
+            </div>
         </div>
     </section>
 
     <section class="team-section">
-        <h2 class="section-title">NUESTRO EQUIPO</h2>
+        <h2 class="team-title">NUESTRO EQUIPO</h2>
         
-        <!-- Floating balls -->
         <div class="floating-ball ball-red-1"></div>
         <div class="floating-ball ball-red-2"></div>
         <div class="floating-ball ball-red-3"></div>
-        <div class="floating-ball ball-blue-1"></div>
-        <div class="floating-ball ball-blue-2"></div>
-        <div class="floating-ball ball-blue-3"></div>
         
-        <div class="team-row">
-            <div class="team-card-large red">
-                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop" alt="Team member 1">
-                <div class="team-card-content">
-                    <h3>Texto Título</h3>
-                    <p>Cuadro rojo, no te guíes de este color. Este es un espacio para describir al miembro del equipo con un estilo único y profesional.</p>
+        <div class="team-showcase">
+            <div class="team-card-main">
+                <div class="team-content">
+                    <h3 class="team-member-name">PELUDIN</h3>
+                    <p class="team-member-role">el mejor jugador</p>
                 </div>
-            </div>
-            <div class="team-card-small">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop" alt="Team member 2">
-            </div>
-        </div>
-        
-        <div class="team-row">
-            <div class="team-card-large blue">
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop" alt="Team member 3">
-                <div class="team-card-content">
-                    <h3>Texto Título</h3>
-                    <p>Descripción del miembro del equipo. Estilo profesional con enfoque creativo y moderno para destacar en la industria.</p>
-                </div>
-            </div>
-            <div class="team-card-small">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop" alt="Team member 4">
-            </div>
-        </div>
-        
-        <div class="team-grid">
-            <div class="team-grid-side">
-                <div class="team-grid-item">
-                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop" alt="Member">
-                    <h4>Texto Título</h4>
-                </div>
-                <div class="team-grid-item">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop" alt="Member">
-                    <h4>Texto Título</h4>
-                </div>
-            </div>
-            
-            <div class="team-grid-center">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&h=600&fit=crop" alt="Center Image">
-            </div>
-            
-            <div class="team-grid-side">
-                <div class="team-grid-item">
-                    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop" alt="Member">
-                    <h4>Texto Título</h4>
-                </div>
-                <div class="team-grid-item">
-                    <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop" alt="Member">
-                    <h4>Texto Título</h4>
+                <div class="team-photo-container">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop" alt="Peludin" class="team-photo">
+                    <div class="team-mascot">
+                        <img src="https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=400&h=400&fit=crop" alt="Mascota">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        // Cerrar dropdown al hacer click fuera
         document.addEventListener('click', function(e) {
             const logoContainer = document.querySelector('.logo-container');
             if (!logoContainer.contains(e.target)) {
