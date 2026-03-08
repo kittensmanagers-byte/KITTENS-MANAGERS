@@ -25,7 +25,7 @@
             font-family: 'Oswald', sans-serif;
         }
         
-        /* HEADER INICIAL - SIN RECUADRO */
+        /* HEADER */
         .header-initial {
             position: fixed;
             top: 0;
@@ -45,7 +45,6 @@
             visibility: hidden;
         }
         
-        /* HEADER SCROLL - CUADRADO */
         .header-scroll {
             position: fixed;
             top: 0;
@@ -56,8 +55,9 @@
             justify-content: space-between;
             align-items: center;
             z-index: 999;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             transform: translateY(-100%);
             transition: transform 0.4s ease;
@@ -67,7 +67,6 @@
             transform: translateY(0);
         }
         
-        /* LOGO */
         .logo-container { position: relative; }
         
         .logo {
@@ -103,7 +102,6 @@
             opacity: 0.8;
         }
         
-        /* DROPDOWN */
         .dropdown {
             position: absolute;
             top: calc(100% + 15px);
@@ -146,7 +144,6 @@
             background: rgba(255,255,255,0.05);
         }
         
-        /* NAV */
         .nav-center {
             display: flex;
             align-items: center;
@@ -189,7 +186,6 @@
             width: 100%;
         }
         
-        /* SEARCH */
         .search-container {
             display: flex;
             align-items: center;
@@ -225,7 +221,8 @@
             background: rgba(255,255,255,0.2);
             transform: scale(1.1);
         }
-                /* HERO */
+        
+        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -302,7 +299,7 @@
             transform: translateY(-3px);
         }
         
-        /* SECCIONES CON LÍNEAS */
+        /* SECCIONES */
         .content-section {
             padding: 80px 60px;
             background: var(--bg-black);
@@ -313,16 +310,19 @@
         .section-inner {
             max-width: 1100px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 50px;
-            align-items: start;
         }
         
         .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title-wrapper {
+            flex: 1;
             text-align: center;
-            margin-bottom: 40px;
-            grid-column: 1 / -1;
         }
         
         .section-title {
@@ -345,281 +345,45 @@
             background: linear-gradient(to right, transparent, white, transparent);
         }
         
-        .section-text {
-            font-size: 16px;
-            line-height: 2;
-            color: rgba(255, 255, 255, 0.85);
-            text-align: center;
-            font-weight: 300;
-        }
-        
-        /* KANJI */
+        /* KANJI ARRIBA DERECHA */
         .kanji-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            padding: 15px 25px;
+            gap: 3px;
+            padding: 10px 15px;
             background: rgba(255,255,255,0.02);
-            border-radius: 15px;
+            border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .kanji {
-            font-size: 36px;
+            font-size: 28px;
             color: rgba(255,255,255,0.9);
             line-height: 1;
             font-weight: 500;
         }
         
         .kanji-reading {
-            font-size: 11px;
+            font-size: 10px;
             color: rgba(255,255,255,0.4);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
-                /* NUESTRO EQUIPO */
-        .team-section {
-            padding: 100px 60px;
-            position: relative;
-            overflow: hidden;
-        }
         
-        .team-title {
-            font-family: 'True Typewriter', monospace;
-            font-size: 38px;
+        .section-text {
+            font-size: 16px;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.85);
             text-align: center;
-            margin-bottom: 70px;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .team-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(to right, var(--accent-red), var(--accent-blue));
-        }
-        
-        /* Bolas decorativas */
-        .floating-ball {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(50px);
-            z-index: 0;
-        }
-        
-        .ball-red-1 { width: 180px; height: 180px; background: var(--accent-red); top: 80px; left: 3%; opacity: 0.4; }
-        .ball-red-2 { width: 100px; height: 100px; background: var(--accent-red); top: 250px; left: 12%; opacity: 0.25; }
-        .ball-blue-1 { width: 180px; height: 180px; background: var(--accent-blue); bottom: 200px; right: 3%; opacity: 0.4; }
-        .ball-blue-2 { width: 100px; height: 100px; background: var(--accent-blue); bottom: 400px; right: 10%; opacity: 0.25; }
-        
-        .team-grid {
-            max-width: 1200px;
+            font-weight: 300;
+            max-width: 900px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .team-card {
-            border-radius: 35px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 350px;
-        }
-        
-        .team-card.red {
-            background: linear-gradient(135deg, rgba(230, 57, 70, 0.12), rgba(230, 57, 70, 0.04));
-            border: 1px solid rgba(230, 57, 70, 0.25);
-        }
-        
-        .team-card.blue {
-            background: linear-gradient(135deg, rgba(67, 97, 238, 0.12), rgba(67, 97, 238, 0.04));
-            border: 1px solid rgba(67, 97, 238, 0.25);
-        }
-        
-        .team-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .team-member-name {
-            font-family: 'Brindan Writte', cursive;
-            font-size: 48px;
-            margin-bottom: 8px;
-            color: white;
-        }
-        
-        .team-member-role {
-            font-size: 20px;
-            color: rgba(255,255,255,0.7);
-            font-style: italic;
-        }
-        
-        .team-visual {
-            position: relative;
-            height: 280px;
-        }
-        
-        .team-photo {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            z-index: 2;
-        }
-        
-        .team-mascot {
-            position: absolute;
-            right: -20px;
-            bottom: -30px;
-            width: 220px;
-            height: 220px;
-            z-index: 3;
-        }
-        
-        .team-mascot img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
-        }
-        
-        /* FOOTER */
-        .footer {
-            background: rgba(5, 5, 5, 0.98);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 60px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .footer-logo {
-            font-family: 'True Typewriter', monospace;
-            font-size: 18px;
-            letter-spacing: 3px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .header-initial, .header-scroll {
-                padding: 15px 30px;
-            }
-            .nav-links {
-                gap: 20px;
-            }
-            .nav-links a {
-                font-size: 11px;
-            }
-            .hero-card {
-                height: 60vh;
-            }
-            .section-inner {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .kanji-wrapper {
-                order: -1;
-                justify-self: center;
-            }
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-            .team-card {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .team-visual {
-                height: 320px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero { padding: 100px 20px 60px; }
-            .hero-btn-container {
-                right: 50%;
-                transform: translate(50%, -50%);
-            }
-            .content-section {
-                padding: 60px 20px;
-            }
-            .section-title {
-                font-size: 32px;
-            }
-            .kanji {
-                font-size: 28px;
-            }
-            .team-title {
-                font-size: 28px;
-            }
-            .team-member-name {
-                font-size: 36px;
-            }
-            .footer {
-                padding: 40px 20px;
-            }
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header inicial (sin recuadro) -->
+    <!-- Header inicial -->
     <header class="header-initial" id="headerInitial">
         <div class="logo-container">
             <div class="logo" onclick="this.parentElement.classList.toggle('active')">
@@ -654,7 +418,7 @@
         </div>
     </header>
 
-    <!-- Header scroll (barra cuadrada) -->
+    <!-- Header scroll -->
     <header class="header-scroll" id="headerScroll">
         <div class="logo-container">
             <div class="logo" onclick="this.parentElement.classList.toggle('active')">
@@ -688,7 +452,8 @@
             </button>
         </div>
     </header>
-        <!-- HERO -->
+
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-main-container">
             <div class="hero-card">
@@ -705,36 +470,36 @@
     <!-- QUIENES SOMOS -->
     <section class="content-section">
         <div class="section-inner">
-            <div style="grid-column: 1 / -1;">
-                <div class="section-header">
+            <div class="section-header">
+                <div class="section-title-wrapper">
                     <h2 class="section-title">Quienes somos ?</h2>
                 </div>
-                <p class="section-text">
-                    Kittens Managers no es solo una empresa, es el punto donde las ideas dejan de ser pensamientos y empiezan a convertirse en realidad. Es la estructura que sostiene la creatividad, el orden detrás del talento y la estrategia que transforma proyectos en algo serio, escalable y con identidad propia. No nace para improvisar, nace para construir; no existe para seguir tendencias, existe para crear universos, marcas y experiencias con coherencia, disciplina y visión a largo plazo. Kittens Managers representa mentalidad, constancia y la decisión de hacer las cosas bien desde el inicio, incluso cuando nadie está mirando.
-                </p>
+                <div class="kanji-wrapper">
+                    <div class="kanji">回復力</div>
+                    <div class="kanji-reading">Kaifuku-ryoku</div>
+                </div>
             </div>
-            <div class="kanji-wrapper" style="justify-self: center; margin-top: 30px;">
-                <div class="kanji">回復力</div>
-                <div class="kanji-reading">Kaifuku-ryoku</div>
-            </div>
+            <p class="section-text">
+                Kittens Managers no es solo una empresa, es el punto donde las ideas dejan de ser pensamientos y empiezan a convertirse en realidad. Es la estructura que sostiene la creatividad, el orden detrás del talento y la estrategia que transforma proyectos en algo serio, escalable y con identidad propia. No nace para improvisar, nace para construir; no existe para seguir tendencias, existe para crear universos, marcas y experiencias con coherencia, disciplina y visión a largo plazo. Kittens Managers representa mentalidad, constancia y la decisión de hacer las cosas bien desde el inicio, incluso cuando nadie está mirando.
+            </p>
         </div>
     </section>
 
     <!-- NUESTRA VISIÓN -->
     <section class="content-section">
         <div class="section-inner">
-            <div style="grid-column: 1 / -1;">
-                <div class="section-header">
+            <div class="section-header">
+                <div class="section-title-wrapper">
                     <h2 class="section-title">Nuestra vision</h2>
                 </div>
-                <p class="section-text">
-                    La visión de Kittens Managers es convertirse en un ecosistema creativo sólido y reconocido, capaz de desarrollar proyectos digitales, culturales y de entretenimiento con identidad propia y proyección internacional. No se trata solo de lanzar productos, sino de construir un legado: una marca que conecte culturas, que combine disciplina, innovación y estética, y que demuestre que con estructura, enfoque y perseverancia se pueden crear proyectos que trasciendan fronteras. Kittens Managers aspira a ser el origen de ideas que crecen, evolucionan y dejan huella.
-                </p>
+                <div class="kanji-wrapper">
+                    <div class="kanji">勝利</div>
+                    <div class="kanji-reading">Shōri</div>
+                </div>
             </div>
-            <div class="kanji-wrapper" style="justify-self: center; margin-top: 30px;">
-                <div class="kanji">勝利</div>
-                <div class="kanji-reading">Shōri</div>
-            </div>
+            <p class="section-text">
+                La visión de Kittens Managers es convertirse en un ecosistema creativo sólido y reconocido, capaz de desarrollar proyectos digitales, culturales y de entretenimiento con identidad propia y proyección internacional. No se trata solo de lanzar productos, sino de construir un legado: una marca que conecte culturas, que combine disciplina, innovación y estética, y que demuestre que con estructura, enfoque y perseverancia se pueden crear proyectos que trasciendan fronteras. Kittens Managers aspira a ser el origen de ideas que crecen, evolucionan y dejan huella.
+            </p>
         </div>
     </section>
         <!-- NUESTRO EQUIPO -->
@@ -789,7 +554,6 @@
     </footer>
 
     <script>
-        // Scroll effect para cambiar entre headers
         window.addEventListener('scroll', function() {
             const headerInitial = document.getElementById('headerInitial');
             const headerScroll = document.getElementById('headerScroll');
@@ -804,7 +568,6 @@
             }
         });
         
-        // Cerrar dropdown al hacer click fuera
         document.addEventListener('click', function(e) {
             const logoContainers = document.querySelectorAll('.logo-container');
             logoContainers.forEach(container => {
