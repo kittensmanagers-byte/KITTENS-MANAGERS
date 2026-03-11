@@ -391,7 +391,7 @@
             margin: 0 auto;
         }
         
-        /* NUESTRO EQUIPO - REDISEÑADO */
+        /* NUESTRO EQUIPO - REDISEÑADO CON TUS IMAGENES */
         .team-section {
             padding: 100px 60px;
             background: var(--bg-black);
@@ -420,61 +420,9 @@
             background: linear-gradient(to right, transparent, white, transparent);
         }
         
-        /* Efectos de fondo */
-        .floating-ball {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .ball-red-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-red);
-            top: 10%;
-            left: -100px;
-            animation-delay: 0s;
-        }
-        
-        .ball-red-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent-red);
-            bottom: 20%;
-            right: -50px;
-            animation-delay: -5s;
-        }
-        
-        .ball-blue-1 {
-            width: 250px;
-            height: 250px;
-            background: var(--accent-blue);
-            top: 40%;
-            right: -100px;
-            animation-delay: -10s;
-        }
-        
-        .ball-blue-2 {
-            width: 180px;
-            height: 180px;
-            background: var(--accent-blue);
-            bottom: 10%;
-            left: 10%;
-            animation-delay: -15s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -30px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.9); }
-            75% { transform: translate(20px, 10px) scale(1.05); }
-        }
-        
         /* Grid de equipo - 3 tarjetas verticales */
         .team-grid {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -485,33 +433,52 @@
         
         .team-card {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border-radius: 40px;
             position: relative;
             overflow: hidden;
             display: flex;
             transition: all 0.5s ease;
             cursor: pointer;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
         
         .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
         }
         
-        .team-card.red {
-            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(20, 10, 10, 0.9));
-            border: 1px solid rgba(230, 57, 70, 0.3);
+        /* Tarjeta 1: El Negro - Rojo */
+        .team-card.negro {
+            background: linear-gradient(135deg, rgba(180, 30, 30, 0.3), rgba(20, 10, 10, 0.95));
+            border: 2px solid rgba(180, 30, 30, 0.4);
         }
         
-        .team-card.blue {
-            background: linear-gradient(135deg, rgba(67, 97, 238, 0.2), rgba(10, 10, 20, 0.9));
-            border: 1px solid rgba(67, 97, 238, 0.3);
+        .team-card.negro:hover {
+            border-color: rgba(180, 30, 30, 0.8);
+            box-shadow: 0 40px 80px rgba(180, 30, 30, 0.3);
         }
         
-        .team-card.purple {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(20, 10, 20, 0.9));
-            border: 1px solid rgba(139, 92, 246, 0.3);
+        /* Tarjeta 2: El Gordo - Dorado/Amarillo */
+        .team-card.gordo {
+            background: linear-gradient(135deg, rgba(180, 140, 40, 0.3), rgba(20, 15, 5, 0.95));
+            border: 2px solid rgba(180, 140, 40, 0.4);
+        }
+        
+        .team-card.gordo:hover {
+            border-color: rgba(180, 140, 40, 0.8);
+            box-shadow: 0 40px 80px rgba(180, 140, 40, 0.3);
+        }
+        
+        /* Tarjeta 3: Laztrality - Azul */
+        .team-card.laztrality {
+            background: linear-gradient(135deg, rgba(30, 120, 180, 0.3), rgba(5, 10, 20, 0.95));
+            border: 2px solid rgba(30, 120, 180, 0.4);
+        }
+        
+        .team-card.laztrality:hover {
+            border-color: rgba(30, 120, 180, 0.8);
+            box-shadow: 0 40px 80px rgba(30, 120, 180, 0.3);
         }
         
         .team-content {
@@ -525,18 +492,27 @@
         
         .team-member-name {
             font-family: 'True Typewriter', monospace;
-            font-size: 42px;
+            font-size: 48px;
             letter-spacing: 4px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: white;
+            text-transform: uppercase;
         }
         
         .team-member-role {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 2px;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 3px;
             text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .team-member-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 30px;
+            font-style: italic;
         }
         
         /* Botón estilo hero */
@@ -544,14 +520,14 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 15px 35px;
+            padding: 16px 40px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 30px;
             color: var(--text-white);
             font-family: 'Oswald', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
@@ -561,22 +537,26 @@
         }
         
         .team-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255,255,255,0.4);
-            box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255,255,255,0.6);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.2);
             transform: translateY(-3px);
         }
         
         .team-visual {
-            width: 45%;
+            width: 55%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .team-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             transition: all 0.5s ease;
         }
         
@@ -584,30 +564,42 @@
             transform: scale(1.05);
         }
         
-        .team-mascot {
+        /* Efecto overlay en la imagen */
+        .team-visual::after {
+            content: '';
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.4s ease;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+            pointer-events: none;
         }
         
-        .team-mascot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* Responsive para equipo */
+        @media (max-width: 900px) {
+            .team-card {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .team-visual {
+                width: 100%;
+                height: 300px;
+                order: -1;
+            }
+            
+            .team-visual::after {
+                background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+            }
+            
+            .team-content {
+                padding: 30px;
+            }
+            
+            .team-member-name {
+                font-size: 32px;
+            }
         }
         
-        .team-card:hover .team-mascot {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        /* FOOTER ESPECTACULAR */
+        /* FOOTER ESPECTACULAR - SIN CAMBIOS */
         .footer {
             background: linear-gradient(to top, rgba(10,10,10,1), rgba(0,0,0,1));
             padding: 100px 60px 60px;
@@ -711,7 +703,7 @@
             width: 100%;
         }
         
-        /* SECCIÓN DE REDES SOCIALES ESPECTACULAR */
+        /* SECCIÓN DE REDES SOCIALES ESPECTACULAR - SIN CAMBIOS */
         .social-section {
             text-align: center;
             padding: 60px 0;
@@ -887,32 +879,6 @@
             color: rgba(255,255,255,0.3);
             letter-spacing: 2px;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .team-card {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .team-visual {
-                width: 100%;
-                height: 250px;
-            }
-            
-            .team-content {
-                padding: 30px;
-            }
-            
-            .team-member-name {
-                font-size: 28px;
-            }
-            
-            .social-item {
-                width: 80px;
-                height: 80px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -935,7 +901,6 @@
         </div>
         
         <nav class="nav-center">
-            <!-- NUEVO: Contenedor borroso para los links -->
             <div class="nav-links-container">
                 <div class="nav-links">
                     <a href="patrocinados.html">PATROCINADOS</a>
@@ -973,7 +938,6 @@
         </div>
         
         <nav class="nav-center">
-            <!-- NUEVO: Contenedor borroso para los links -->
             <div class="nav-links-container">
                 <div class="nav-links">
                     <a href="patrocinados.html">PATROCINADOS</a>
@@ -1042,73 +1006,62 @@
         </div>
     </section>
     
-    <!-- NUESTRO EQUIPO - 3 MIEMBROS -->
+    <!-- NUESTRO EQUIPO - ACTUALIZADO CON LAS 3 FOTOS REALES -->
     <section class="team-section">
         <h2 class="team-title">NUESTRO EQUIPO</h2>
         
-        <div class="floating-ball ball-red-1"></div>
-        <div class="floating-ball ball-red-2"></div>
-        <div class="floating-ball ball-blue-1"></div>
-        <div class="floating-ball ball-blue-2"></div>
-        
         <div class="team-grid">
-            <!-- Miembro 1 -->
-            <div class="team-card red">
+            <!-- Miembro 1: EL NEGRO -->
+            <div class="team-card negro">
                 <div class="team-content">
-                    <h3 class="team-member-name">PELUDIN</h3>
-                    <p class="team-member-role">el mejor jugador</p>
+                    <h3 class="team-member-name">EL NEGRO</h3>
+                    <p class="team-member-role">CEO</p>
+                    <p class="team-member-desc">Le toca hacer de todo</p>
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="team-visual">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop" alt="Peludin" class="team-photo">
-                    <div class="team-mascot">
-                        <img src="https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=400&h=400&fit=crop" alt="Mascota">
-                    </div>
+                    <img src="/mnt/kimi/upload/el negro.png" alt="El Negro - CEO" class="team-photo">
                 </div>
             </div>
             
-            <!-- Miembro 2 -->
-            <div class="team-card blue">
+            <!-- Miembro 2: EL GORDO -->
+            <div class="team-card gordo">
                 <div class="team-content">
-                    <h3 class="team-member-name">EQUIPO AZUL</h3>
-                    <p class="team-member-role">creatividad sin límites</p>
+                    <h3 class="team-member-name">EL GORDO</h3>
+                    <p class="team-member-role">Fundador de Éxitos</p>
+                    <p class="team-member-desc">Joven - El Letrado</p>
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="team-visual">
-                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop" alt="Team Blue" class="team-photo">
-                    <div class="team-mascot">
-                        <img src="https://images.unsplash.com/photo-1614726365723-49cfae9278b7?w=400&h=400&fit=crop" alt="Mascota Blue">
-                    </div>
+                    <img src="/mnt/kimi/upload/el gordo.png" alt="El Gordo - Fundador" class="team-photo">
                 </div>
             </div>
             
-            <!-- Miembro 3 - NUEVO -->
-            <div class="team-card purple">
+            <!-- Miembro 3: LAZTRALITY -->
+            <div class="team-card laztrality">
                 <div class="team-content">
-                    <h3 class="team-member-name">NUEVO TALENTO</h3>
-                    <p class="team-member-role">innovación constante</p>
+                    <h3 class="team-member-name">LAZTRALITY</h3>
+                    <p class="team-member-role">El Mejor Jugador del Mundo</p>
+                    <p class="team-member-desc">_paparellena_ - Le toca hacer de todo</p>
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="team-visual">
-                    <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=400&fit=crop" alt="New Talent" class="team-photo">
-                    <div class="team-mascot">
-                        <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&h=400&fit=crop" alt="Mascota Purple">
-                    </div>
+                    <img src="/mnt/kimi/upload/menguan.png" alt="Laztrality - Jugador" class="team-photo">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER ESPECTACULAR -->
+    <!-- FOOTER - EXACTAMENTE IGUAL, NO TOCAR -->
     <footer class="footer">
         <div class="particles" id="particles"></div>
         
@@ -1141,7 +1094,7 @@
                 </div>
             </div>
             
-            <!-- SECCIÓN DE REDES SOCIALES INCREÍBLE -->
+            <!-- SECCIÓN DE REDES SOCIALES - SIN CAMBIOS -->
             <div class="social-section">
                 <p class="social-title">Síguenos en nuestras redes</p>
                 <div class="social-container">
