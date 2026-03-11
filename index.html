@@ -150,7 +150,7 @@
             gap: 40px;
         }
         
-        /* NUEVO: Contenedor borroso para los links de navegación */
+        /* Contenedor borroso para los links de navegación */
         .nav-links-container {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
@@ -391,7 +391,9 @@
             margin: 0 auto;
         }
         
-        /* NUESTRO EQUIPO - REDISEÑADO CON TUS IMAGENES */
+        /* ============================================================
+           NUESTRO EQUIPO - TARJETAS LIMPIAS SOLO CON BOTÓN
+           ============================================================ */
         .team-section {
             padding: 100px 60px;
             background: var(--bg-black);
@@ -420,182 +422,192 @@
             background: linear-gradient(to right, transparent, white, transparent);
         }
         
-        /* Grid de equipo - 3 tarjetas verticales */
+        /* Grid de equipo - 3 tarjetas verticales con ESPACIO GENEROSO */
         .team-grid {
             max-width: 1100px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 80px; /* Espacio grande entre tarjetas */
             position: relative;
             z-index: 1;
         }
         
+        /* ============================================================
+           TARJETAS DE EQUIPO - SOLO FONDO, BORDE Y BOTÓN
+           ============================================================ */
         .team-card {
             width: 100%;
-            height: 500px;
+            height: 500px; /* Altura fija para consistencia */
             border-radius: 40px;
             position: relative;
             overflow: hidden;
             display: flex;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            /* Sombra inicial sutil */
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
         
+        /* Efecto hover épico */
         .team-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.7);
         }
         
-        /* Tarjeta 1: El Negro - Rojo */
-        .team-card.negro {
-            background: linear-gradient(135deg, rgba(180, 30, 30, 0.3), rgba(20, 10, 10, 0.95));
-            border: 2px solid rgba(180, 30, 30, 0.4);
+        /* ============================================================
+           TARJETA 1: ROJA (para El Negro)
+           ============================================================ */
+        .team-card.card-1 {
+            background: linear-gradient(135deg, rgba(180, 30, 30, 0.25), rgba(10, 5, 5, 0.98));
+            border: 2px solid rgba(180, 30, 30, 0.5);
         }
         
-        .team-card.negro:hover {
-            border-color: rgba(180, 30, 30, 0.8);
-            box-shadow: 0 40px 80px rgba(180, 30, 30, 0.3);
+        .team-card.card-1:hover {
+            border-color: rgba(220, 50, 50, 0.9);
+            box-shadow: 0 50px 100px rgba(180, 30, 30, 0.4);
         }
         
-        /* Tarjeta 2: El Gordo - Dorado/Amarillo */
-        .team-card.gordo {
-            background: linear-gradient(135deg, rgba(180, 140, 40, 0.3), rgba(20, 15, 5, 0.95));
-            border: 2px solid rgba(180, 140, 40, 0.4);
+        /* ============================================================
+           TARJETA 2: DORADA/AMARILLA (para El Gordo)
+           ============================================================ */
+        .team-card.card-2 {
+            background: linear-gradient(135deg, rgba(200, 160, 60, 0.25), rgba(15, 10, 5, 0.98));
+            border: 2px solid rgba(200, 160, 60, 0.5);
         }
         
-        .team-card.gordo:hover {
-            border-color: rgba(180, 140, 40, 0.8);
-            box-shadow: 0 40px 80px rgba(180, 140, 40, 0.3);
+        .team-card.card-2:hover {
+            border-color: rgba(240, 200, 80, 0.9);
+            box-shadow: 0 50px 100px rgba(200, 160, 60, 0.4);
         }
         
-        /* Tarjeta 3: Laztrality - Azul */
-        .team-card.laztrality {
-            background: linear-gradient(135deg, rgba(30, 120, 180, 0.3), rgba(5, 10, 20, 0.95));
-            border: 2px solid rgba(30, 120, 180, 0.4);
+        /* ============================================================
+           TARJETA 3: AZUL (para Laztrality)
+           ============================================================ */
+        .team-card.card-3 {
+            background: linear-gradient(135deg, rgba(40, 130, 200, 0.25), rgba(5, 8, 15, 0.98));
+            border: 2px solid rgba(40, 130, 200, 0.5);
         }
         
-        .team-card.laztrality:hover {
-            border-color: rgba(30, 120, 180, 0.8);
-            box-shadow: 0 40px 80px rgba(30, 120, 180, 0.3);
+        .team-card.card-3:hover {
+            border-color: rgba(60, 170, 255, 0.9);
+            box-shadow: 0 50px 100px rgba(40, 130, 200, 0.4);
         }
         
-        .team-content {
-            flex: 1;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 2;
+        /* ============================================================
+           CONTENEDOR DE IMAGEN - 100% LIBRE PARA TU FOTO
+           ============================================================ */
+        .team-image-container {
+            position: absolute;
+            inset: 0; /* Ocupa toda la tarjeta */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
         
-        .team-member-name {
-            font-family: 'True Typewriter', monospace;
-            font-size: 48px;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            color: white;
-            text-transform: uppercase;
+        /* La imagen que tú vas a poner */
+        .team-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubre todo sin deformarse */
+            object-position: center;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .team-member-role {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: 300;
+        /* Efecto zoom suave en la imagen al hacer hover */
+        .team-card:hover .team-image {
+            transform: scale(1.08);
         }
         
-        .team-member-desc {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 30px;
-            font-style: italic;
+        /* Overlay sutil para que el botón resalte siempre */
+        .team-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top, 
+                rgba(0,0,0,0.6) 0%, 
+                rgba(0,0,0,0.2) 30%, 
+                transparent 60%
+            );
+            pointer-events: none; /* No interfiere con clicks */
+            transition: all 0.4s ease;
         }
         
-        /* Botón estilo hero */
+        .team-card:hover .team-overlay {
+            background: linear-gradient(
+                to top, 
+                rgba(0,0,0,0.4) 0%, 
+                rgba(0,0,0,0.1) 40%, 
+                transparent 70%
+            );
+        }
+        
+        /* ============================================================
+           BOTÓN ESTILO HERO - POSICIONADO A LA DERECHA
+           ============================================================ */
+        .team-btn-container {
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        
         .team-btn {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 40px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 18px 45px;
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.3);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 30px;
             color: var(--text-white);
             font-family: 'Oswald', sans-serif;
             font-size: 14px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            width: fit-content;
+            /* Sombra inicial */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         
+        /* Efecto hover del botón - IGUAL AL HERO */
         .team-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255,255,255,0.6);
-            box-shadow: 0 10px 40px rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 15px 50px rgba(255,255,255,0.2);
             transform: translateY(-3px);
         }
         
-        .team-visual {
-            width: 55%;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Icono de flecha con animación */
+        .team-btn i {
+            transition: transform 0.3s ease;
         }
         
-        .team-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: all 0.5s ease;
+        .team-btn:hover i {
+            transform: translateX(5px);
         }
         
-        .team-card:hover .team-photo {
-            transform: scale(1.05);
-        }
-        
-        /* Efecto overlay en la imagen */
-        .team-visual::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
-            pointer-events: none;
-        }
-        
-        /* Responsive para equipo */
-        @media (max-width: 900px) {
+        /* Responsive */
+        @media (max-width: 768px) {
             .team-card {
-                flex-direction: column;
-                height: auto;
+                height: 400px;
             }
             
-            .team-visual {
-                width: 100%;
-                height: 300px;
-                order: -1;
+            .team-btn-container {
+                right: 30px;
+                top: auto;
+                bottom: 40px;
+                transform: none;
             }
             
-            .team-visual::after {
-                background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
-            }
-            
-            .team-content {
-                padding: 30px;
-            }
-            
-            .team-member-name {
-                font-size: 32px;
+            .team-btn {
+                padding: 15px 35px;
+                font-size: 12px;
             }
         }
         
@@ -1006,58 +1018,68 @@
         </div>
     </section>
     
-    <!-- NUESTRO EQUIPO - ACTUALIZADO CON LAS 3 FOTOS REALES -->
+    <!-- ============================================================
+         NUESTRO EQUIPO - 3 TARJETAS CON TUS IMAGENES DE GITHUB
+         ============================================================ -->
     <section class="team-section">
         <h2 class="team-title">NUESTRO EQUIPO</h2>
         
         <div class="team-grid">
-            <!-- Miembro 1: EL NEGRO -->
-            <div class="team-card negro">
-                <div class="team-content">
-                    <h3 class="team-member-name">EL NEGRO</h3>
-                    <p class="team-member-role">CEO</p>
-                    <p class="team-member-desc">Le toca hacer de todo</p>
+            
+            <!-- =========================================================
+                 TARJETA 1: EL NEGRO - ROJA
+                 ========================================================= -->
+            <div class="team-card card-1">
+                <div class="team-image-container">
+                    <!-- REEMPLAZA: ponedor14 → tu usuario, kittens-manager → tu repo -->
+                    <img src="https://raw.githubusercontent.com/ponedor14/kittens-manager/main/images/el%20negro.png" alt="El Negro" class="team-image">
+                    <div class="team-overlay"></div>
+                </div>
+                
+                <div class="team-btn-container">
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                </div>
-                <div class="team-visual">
-                    <img src="/mnt/kimi/upload/el negro.png" alt="El Negro - CEO" class="team-photo">
                 </div>
             </div>
             
-            <!-- Miembro 2: EL GORDO -->
-            <div class="team-card gordo">
-                <div class="team-content">
-                    <h3 class="team-member-name">EL GORDO</h3>
-                    <p class="team-member-role">Fundador de Éxitos</p>
-                    <p class="team-member-desc">Joven - El Letrado</p>
+            <!-- =========================================================
+                 TARJETA 2: EL GORDO - DORADA
+                 ========================================================= -->
+            <div class="team-card card-2">
+                <div class="team-image-container">
+                    <!-- REEMPLAZA: ponedor14 → tu usuario, kittens-manager → tu repo -->
+                    <img src="https://raw.githubusercontent.com/ponedor14/kittens-manager/main/images/el%20gordo.png" alt="El Gordo" class="team-image">
+                    <div class="team-overlay"></div>
+                </div>
+                
+                <div class="team-btn-container">
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                </div>
-                <div class="team-visual">
-                    <img src="/mnt/kimi/upload/el gordo.png" alt="El Gordo - Fundador" class="team-photo">
                 </div>
             </div>
             
-            <!-- Miembro 3: LAZTRALITY -->
-            <div class="team-card laztrality">
-                <div class="team-content">
-                    <h3 class="team-member-name">LAZTRALITY</h3>
-                    <p class="team-member-role">El Mejor Jugador del Mundo</p>
-                    <p class="team-member-desc">_paparellena_ - Le toca hacer de todo</p>
+            <!-- =========================================================
+                 TARJETA 3: LAZTRALITY - AZUL
+                 ========================================================= -->
+            <div class="team-card card-3">
+                <div class="team-image-container">
+                    <!-- REEMPLAZA: ponedor14 → tu usuario, kittens-manager → tu repo -->
+                    <img src="https://raw.githubusercontent.com/ponedor14/kittens-manager/main/images/menguan.png" alt="Laztrality" class="team-image">
+                    <div class="team-overlay"></div>
+                </div>
+                
+                <div class="team-btn-container">
                     <a href="#" class="team-btn">
                         <span>VER PERFIL</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
-                <div class="team-visual">
-                    <img src="/mnt/kimi/upload/menguan.png" alt="Laztrality - Jugador" class="team-photo">
-                </div>
             </div>
+            
         </div>
     </section>
 
