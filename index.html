@@ -150,6 +150,16 @@
             gap: 40px;
         }
         
+        /* NUEVO: Contenedor borroso para los links de navegación */
+        .nav-links-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 8px 25px;
+        }
+        
         .nav-links { 
             display: flex; 
             gap: 30px; 
@@ -380,6 +390,529 @@
             max-width: 900px;
             margin: 0 auto;
         }
+        
+        /* NUESTRO EQUIPO - REDISEÑADO */
+        .team-section {
+            padding: 100px 60px;
+            background: var(--bg-black);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-title {
+            font-family: 'True Typewriter', monospace;
+            font-size: 48px;
+            letter-spacing: 8px;
+            text-align: center;
+            margin-bottom: 80px;
+            color: white;
+            position: relative;
+        }
+        
+        .team-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, white, transparent);
+        }
+        
+        /* Efectos de fondo */
+        .floating-ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .ball-red-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-red);
+            top: 10%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .ball-red-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-red);
+            bottom: 20%;
+            right: -50px;
+            animation-delay: -5s;
+        }
+        
+        .ball-blue-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-blue);
+            top: 40%;
+            right: -100px;
+            animation-delay: -10s;
+        }
+        
+        .ball-blue-2 {
+            width: 180px;
+            height: 180px;
+            background: var(--accent-blue);
+            bottom: 10%;
+            left: 10%;
+            animation-delay: -15s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 10px) scale(1.05); }
+        }
+        
+        /* Grid de equipo - 3 tarjetas verticales */
+        .team-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .team-card {
+            width: 100%;
+            height: 400px;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        
+        .team-card.red {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(20, 10, 10, 0.9));
+            border: 1px solid rgba(230, 57, 70, 0.3);
+        }
+        
+        .team-card.blue {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.2), rgba(10, 10, 20, 0.9));
+            border: 1px solid rgba(67, 97, 238, 0.3);
+        }
+        
+        .team-card.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(20, 10, 20, 0.9));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .team-content {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .team-member-name {
+            font-family: 'True Typewriter', monospace;
+            font-size: 42px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .team-member-role {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        /* Botón estilo hero */
+        .team-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 35px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 30px;
+            color: var(--text-white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            width: fit-content;
+        }
+        
+        .team-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+        
+        .team-visual {
+            width: 45%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .team-card:hover .team-photo {
+            transform: scale(1.05);
+        }
+        
+        .team-mascot {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .team-mascot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-card:hover .team-mascot {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* FOOTER ESPECTACULAR */
+        .footer {
+            background: linear-gradient(to top, rgba(10,10,10,1), rgba(0,0,0,1));
+            padding: 100px 60px 60px;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-brand {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-logo {
+            font-family: 'True Typewriter', monospace;
+            font-size: 32px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, rgba(255,255,255,0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column h4 {
+            font-family: 'True Typewriter', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: white;
+            text-transform: uppercase;
+        }
+        
+        .footer-column a {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            width: fit-content;
+        }
+        
+        .footer-column a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-column a:hover::after {
+            width: 100%;
+        }
+        
+        /* SECCIÓN DE REDES SOCIALES ESPECTACULAR */
+        .social-section {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .social-title {
+            font-family: 'True Typewriter', monospace;
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .social-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+        }
+        
+        .social-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+        
+        .social-item:hover .social-card {
+            transform: rotateY(180deg);
+        }
+        
+        .social-front, .social-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-front {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-back {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.3);
+            transform: rotateY(180deg);
+            font-size: 14px;
+            font-family: 'True Typewriter', monospace;
+            letter-spacing: 1px;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .social-back span {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+        
+        /* Colores específicos para cada red al hacer hover */
+        .social-item.instagram:hover .social-front,
+        .social-item.instagram:hover .social-back {
+            box-shadow: 0 0 30px rgba(225, 48, 108, 0.5);
+            border-color: rgba(225, 48, 108, 0.5);
+        }
+        
+        .social-item.twitter:hover .social-front,
+        .social-item.twitter:hover .social-back {
+            box-shadow: 0 0 30px rgba(29, 161, 242, 0.5);
+            border-color: rgba(29, 161, 242, 0.5);
+        }
+        
+        .social-item.youtube:hover .social-front,
+        .social-item.youtube:hover .social-back {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+        
+        .social-item.discord:hover .social-front,
+        .social-item.discord:hover .social-back {
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.5);
+            border-color: rgba(88, 101, 242, 0.5);
+        }
+        
+        .social-item.twitch:hover .social-front,
+        .social-item.twitch:hover .social-back {
+            box-shadow: 0 0 30px rgba(145, 70, 255, 0.5);
+            border-color: rgba(145, 70, 255, 0.5);
+        }
+        
+        .social-item.tiktok:hover .social-front,
+        .social-item.tiktok:hover .social-back {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Efecto de partículas en el footer */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particle-float 15s infinite;
+        }
+        
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+                90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 20px;
+        }
+        
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+        }
+        
+        .footer-signature {
+            font-family: 'True Typewriter', monospace;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .team-card {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .team-visual {
+                width: 100%;
+                height: 250px;
+            }
+            
+            .team-content {
+                padding: 30px;
+            }
+            
+            .team-member-name {
+                font-size: 28px;
+            }
+            
+            .social-item {
+                width: 80px;
+                height: 80px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -402,11 +935,14 @@
         </div>
         
         <nav class="nav-center">
-            <div class="nav-links">
-                <a href="patrocinados.html">PATROCINADOS</a>
-                <a href="soporte.html">SOPORTE</a>
-                <a href="contactanos.html">CONTACTANOS</a>
-                <a href="kiritsu.html">KRITSU</a>
+            <!-- NUEVO: Contenedor borroso para los links -->
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">PATROCINADOS</a>
+                    <a href="soporte.html">SOPORTE</a>
+                    <a href="contactanos.html">CONTACTANOS</a>
+                    <a href="kiritsu.html">KRITSU</a>
+                </div>
             </div>
         </nav>
         
@@ -437,11 +973,14 @@
         </div>
         
         <nav class="nav-center">
-            <div class="nav-links">
-                <a href="patrocinados.html">PATROCINADOS</a>
-                <a href="soporte.html">SOPORTE</a>
-                <a href="contactanos.html">CONTACTANOS</a>
-                <a href="kiritsu.html">KRITSU</a>
+            <!-- NUEVO: Contenedor borroso para los links -->
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">PATROCINADOS</a>
+                    <a href="soporte.html">SOPORTE</a>
+                    <a href="contactanos.html">CONTACTANOS</a>
+                    <a href="kiritsu.html">KRITSU</a>
+                </div>
             </div>
         </nav>
         
@@ -502,7 +1041,8 @@
             </p>
         </div>
     </section>
-        <!-- NUESTRO EQUIPO -->
+    
+    <!-- NUESTRO EQUIPO - 3 MIEMBROS -->
     <section class="team-section">
         <h2 class="team-title">NUESTRO EQUIPO</h2>
         
@@ -512,10 +1052,15 @@
         <div class="floating-ball ball-blue-2"></div>
         
         <div class="team-grid">
+            <!-- Miembro 1 -->
             <div class="team-card red">
                 <div class="team-content">
                     <h3 class="team-member-name">PELUDIN</h3>
                     <p class="team-member-role">el mejor jugador</p>
+                    <a href="#" class="team-btn">
+                        <span>VER PERFIL</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="team-visual">
                     <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop" alt="Peludin" class="team-photo">
@@ -525,10 +1070,15 @@
                 </div>
             </div>
             
+            <!-- Miembro 2 -->
             <div class="team-card blue">
                 <div class="team-content">
                     <h3 class="team-member-name">EQUIPO AZUL</h3>
                     <p class="team-member-role">creatividad sin límites</p>
+                    <a href="#" class="team-btn">
+                        <span>VER PERFIL</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="team-visual">
                     <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop" alt="Team Blue" class="team-photo">
@@ -537,23 +1087,147 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Miembro 3 - NUEVO -->
+            <div class="team-card purple">
+                <div class="team-content">
+                    <h3 class="team-member-name">NUEVO TALENTO</h3>
+                    <p class="team-member-role">innovación constante</p>
+                    <a href="#" class="team-btn">
+                        <span>VER PERFIL</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="team-visual">
+                    <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=400&fit=crop" alt="New Talent" class="team-photo">
+                    <div class="team-mascot">
+                        <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&h=400&fit=crop" alt="Mascota Purple">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER ESPECTACULAR -->
     <footer class="footer">
+        <div class="particles" id="particles"></div>
+        
         <div class="footer-content">
-            <div class="footer-logo">KITTENS MANAGER</div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">KITTENS MANAGER</div>
+                    <p class="footer-tagline">Construyendo el futuro del entretenimiento digital. Donde la creatividad encuentra su estructura y las ideas se convierten en realidad.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explorar</h4>
+                        <a href="index.html">Inicio</a>
+                        <a href="patrocinados.html">Patrocinados</a>
+                        <a href="kiritsu.html">Kiritsu</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Soporte</h4>
+                        <a href="soporte.html">Centro de Ayuda</a>
+                        <a href="contactanos.html">Contáctanos</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacidad</a>
+                        <a href="#">Términos</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SECCIÓN DE REDES SOCIALES INCREÍBLE -->
+            <div class="social-section">
+                <p class="social-title">Síguenos en nuestras redes</p>
+                <div class="social-container">
+                    <div class="social-item instagram">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-instagram"></i>
+                                <span>INSTAGRAM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-item twitter">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-twitter"></i>
+                                <span>TWITTER</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-item youtube">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-youtube"></i>
+                                <span>YOUTUBE</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-item discord">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-discord"></i>
+                                <span>DISCORD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-item twitch">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-twitch"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-twitch"></i>
+                                <span>TWITCH</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-item tiktok">
+                        <div class="social-card">
+                            <div class="social-front">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div class="social-back">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TIKTOK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 Kittens Managers. Todos los derechos reservados.</p>
+                <p class="footer-signature">Diseñado con disciplina y visión</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Header scroll effect
         window.addEventListener('scroll', function() {
             const headerInitial = document.getElementById('headerInitial');
             const headerScroll = document.getElementById('headerScroll');
@@ -568,6 +1242,7 @@
             }
         });
         
+        // Cerrar dropdowns al hacer click fuera
         document.addEventListener('click', function(e) {
             const logoContainers = document.querySelectorAll('.logo-container');
             logoContainers.forEach(container => {
@@ -576,6 +1251,23 @@
                 }
             });
         });
+        
+        // Generar partículas en el footer
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        createParticles();
     </script>
 </body>
 </html>
