@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kittens Manager - Patrocinados</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.cdnfonts.com/css/true-typewriter');
-        @import url('https://fonts.cdnfonts.com/css/brindan-writte');
-        
         * {
             margin: 0;
             padding: 0;
@@ -18,415 +15,194 @@
         }
         
         :root {
-            --bg-black: #000000;
-            --text-white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-purple: #8b5cf6;
-            --accent-red: #e63946;
-            --accent-gold: #d4af37;
-            --accent-blue: #4361ee;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --accent: #f5f5f7;
+            --border: rgba(255, 255, 255, 0.08);
         }
         
         body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.5;
             min-height: 100vh;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
-        /* BACKGROUND ANIMATED GRID */
-        .bg-grid {
+        /* ============================================================
+           HEADER - ESTILO APPLE MINIMALISTA
+           ============================================================ */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 0;
-            animation: gridMove 20s linear infinite;
-        }
-        
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-        
-        /* FLOATING ORBS */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-            animation: orbFloat 15s ease-in-out infinite;
-        }
-        
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-purple);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-        
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-red);
-            bottom: 20%;
-            left: -100px;
-            animation-delay: -5s;
-        }
-        
-        .orb-3 {
-            width: 350px;
-            height: 350px;
-            background: var(--accent-gold);
-            top: 40%;
-            right: 10%;
-            animation-delay: -10s;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        
-        /* HEADER - ESTILO INDEX MEJORADO */
-        .header-initial {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 25px 60px;
+            padding: 0 50px;
+            height: 52px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
-            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
         
-        .header-scroll {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 999;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-        }
-        
-        .header-scroll.visible {
-            transform: translateY(0);
-        }
-        
-        .logo-container { 
-            position: relative; 
+        .header-scrolled {
+            background: rgba(0, 0, 0, 0.95);
         }
         
         .logo {
-            font-family: 'True Typewriter', monospace;
-            font-size: 13px;
-            color: var(--text-white);
-            padding: 12px 24px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
         }
         
         .logo:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
-            border-color: rgba(139, 92, 246, 0.5);
-        }
-        
-        .dropdown {
-            position: absolute;
-            top: calc(100% + 15px);
-            left: 0;
-            width: 220px;
-            background: rgba(10, 10, 10, 0.98);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-        }
-        
-        .logo-container:hover .dropdown {
             opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
         }
         
-        .dropdown-links {
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-top: 10px;
+            gap: 40px;
+            align-items: center;
         }
         
-        .dropdown-links a {
-            color: rgba(255, 255, 255, 0.7);
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 13px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+        
+        .search-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .search-icon:hover {
+            color: var(--text-primary);
+        }
+        
+        /* ============================================================
+           MAIN CONTENT
+           ============================================================ */
+        main {
+            padding-top: 52px;
+        }
+        
+        /* ============================================================
+           HERO SECTION - MINIMALISTA APPLE + JAPÓN
+           ============================================================ */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .dropdown-links a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.3), transparent);
-            transition: width 0.3s ease;
+        .hero-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .dropdown-links a:hover {
-            color: white;
-            padding-left: 20px;
-        }
-        
-        .dropdown-links a:hover::before {
-            width: 100%;
-        }
-        
-        .nav-center {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .nav-links-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 10px 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-links-container:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-        
-        .nav-links { 
-            display: flex; 
-            gap: 30px; 
-        }
-        
-        .nav-links a {
-            font-family: 'True Typewriter', monospace;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            padding: 8px 0;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent-purple), white);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: white;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .search-container {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 25px;
-            padding: 8px 8px 8px 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-container:focus-within {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(139, 92, 246, 0.5);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-        }
-        
-        .search-bar {
-            width: 130px;
-            background: transparent;
-            border: none;
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            font-size: 13px;
-            outline: none;
-            transition: width 0.3s ease;
-        }
-        
-        .search-bar:focus {
-            width: 180px;
-        }
-        
-        .search-btn {
-            width: 34px;
-            height: 34px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-btn:hover {
-            background: rgba(139, 92, 246, 0.8);
-            transform: scale(1.1) rotate(10deg);
-        }
-        
-        /* MAIN CONTENT */
-        main {
-            padding: 140px 60px 80px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* HERO SECTION - TÍTULO ÉPICO */
-        .hero-section {
-            text-align: center;
-            margin-bottom: 80px;
-            position: relative;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 30px;
-            animation: badgePulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
-            50% { box-shadow: 0 0 20px 5px rgba(139, 92, 246, 0.2); }
-        }
-        
-        .page-title {
-            font-family: 'True Typewriter', monospace;
-            font-size: clamp(36px, 8vw, 72px);
-            text-transform: uppercase;
-            letter-spacing: 15px;
+        .hero-kanji {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #888 50%, #fff 100%);
+            letter-spacing: 0.2em;
+        }
+        
+        .hero-title {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% auto;
-            animation: shine 3s linear infinite;
-            position: relative;
         }
         
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-        
-        .page-subtitle {
-            font-size: 18px;
-            color: rgba(255,255,255,0.6);
+        .hero-subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-weight: 300;
+            margin: 0 auto 40px;
+            line-height: 1.5;
         }
         
-        /* SPONSORS CONTAINER */
-        .sponsors-container {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            max-width: 1200px;
+        .hero-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
             margin: 0 auto;
         }
         
         /* ============================================================
-           SPONSOR CARDS - DISEÑO PREMIUM ESTILO CANVA MEJORADO
+           SPONSORS SECTION
+           ============================================================ */
+        .sponsors {
+            padding: 60px 0 120px;
+        }
+        
+        .sponsors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* ============================================================
+           SPONSOR CARDS - DISEÑO PREMIUM MINIMALISTA
            ============================================================ */
         .sponsor-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 0;
-            display: grid;
-            grid-template-columns: 1.2fr 1.5fr 1fr;
-            gap: 0;
-            align-items: stretch;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin-bottom: 30px;
             overflow: hidden;
-            min-height: 320px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
         
         .sponsor-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(139, 92, 246, 0.1) 100%);
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(255,255,255,0.06), transparent 40%);
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.3s;
             pointer-events: none;
         }
         
@@ -434,202 +210,137 @@
             opacity: 1;
         }
         
-        /* BORDE BRILLANTE ANIMADO */
-        .sponsor-card::after {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(139, 92, 246, 0.3), 
-                rgba(255,255,255,0.2),
-                rgba(139, 92, 246, 0.3), 
-                transparent);
-            border-radius: 30px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            filter: blur(1px);
-        }
-        
-        .sponsor-card:hover::after {
-            opacity: 1;
-            animation: borderGlow 3s linear infinite;
-        }
-        
-        @keyframes borderGlow {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
         .sponsor-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            box-shadow: 
-                0 30px 60px rgba(0,0,0,0.5),
-                0 0 40px rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
-        /* VARIANTES DE COLOR */
-        .sponsor-card.quantix { --card-accent: #e63946; }
-        .sponsor-card.skarlync { --card-accent: #8b5cf6; }
-        .sponsor-card.dorian { --card-accent: #d4af37; }
-        
-        .sponsor-card.quantix::after {
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(230, 57, 70, 0.4), 
-                rgba(255,255,255,0.2),
-                rgba(230, 57, 70, 0.4), 
-                transparent);
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            min-height: 400px;
         }
         
-        .sponsor-card.skarlync::after {
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(139, 92, 246, 0.4), 
-                rgba(255,255,255,0.2),
-                rgba(139, 92, 246, 0.4), 
-                transparent);
-        }
-        
-        .sponsor-card.dorian::after {
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(212, 175, 55, 0.4), 
-                rgba(255,255,255,0.2),
-                rgba(212, 175, 55, 0.4), 
-                transparent);
-        }
-        
-        /* LEFT SECTION - INFO */
+        /* LEFT: INFO */
         .sponsor-info {
-            padding: 40px;
+            padding: 48px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            border-right: 1px solid rgba(255,255,255,0.05);
+            justify-content: space-between;
+            border-right: 1px solid var(--border);
         }
         
-        .sponsor-label {
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 15px;
+        .sponsor-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
         
-        .sponsor-label::before {
-            content: '';
-            width: 20px;
+        .sponsor-number {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .sponsor-line {
+            flex: 1;
             height: 1px;
-            background: var(--card-accent, var(--accent-purple));
+            background: var(--border);
         }
         
         .sponsor-name {
-            font-family: 'Brindan Writte', cursive;
-            font-size: clamp(28px, 4vw, 42px);
-            margin-bottom: 10px;
-            color: var(--text-white);
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
             line-height: 1.1;
-            transition: all 0.3s ease;
         }
         
-        .sponsor-card:hover .sponsor-name {
-            transform: translateX(10px);
-            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        .sponsor-name-jp {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
         }
         
         .sponsor-status {
-            font-size: 14px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            width: fit-content;
         }
         
-        .status-dot {
+        .status-indicator {
             width: 6px;
             height: 6px;
-            background: var(--card-accent, var(--accent-purple));
+            background: #30d158;
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 2s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
-        /* CENTER SECTION - MAIN IMAGE */
-        .sponsor-main-image {
+        /* CENTER: IMAGE */
+        .sponsor-visual {
             position: relative;
+            border-right: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            min-height: 320px;
-            border-right: 1px solid rgba(255,255,255,0.05);
         }
         
-        .sponsor-main-image img {
+        .sponsor-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: grayscale(20%);
-        }
-        
-        .sponsor-card:hover .sponsor-main-image img {
-            transform: scale(1.1);
-            filter: grayscale(0%);
-        }
-        
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        
-        .sponsor-card:hover .image-overlay {
             opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .sponsor-image.loaded {
+            opacity: 1;
         }
         
         .image-placeholder {
             position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            font-size: 13px;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
         }
         
-        /* RIGHT SECTION - DETAILS */
-        .sponsor-side {
-            padding: 40px;
+        /* RIGHT: DETAILS */
+        .sponsor-details {
+            padding: 48px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            z-index: 1;
         }
         
-        .sponsor-tagline {
-            font-size: 13px;
-            color: rgba(255,255,255,0.4);
+        .sponsor-quote {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
             font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 40px;
         }
         
         .sponsor-actions {
@@ -638,500 +349,388 @@
             gap: 20px;
         }
         
-        /* BOTÓN REDIRECCIÓN ESTILO HERO */
-        .redirect-btn {
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
+            border-radius: 980px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         
-        .redirect-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(255,255,255,0.3);
         }
         
-        .redirect-btn:hover::before {
-            left: 100%;
-        }
-        
-        .redirect-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255,255,255,0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .redirect-btn i {
-            transition: transform 0.3s ease;
-        }
-        
-        .redirect-btn:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* THUMBNAILS */
-        .sponsor-thumbnails {
+        .thumbnails {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
         
         .thumbnail {
             aspect-ratio: 16/10;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
-            position: relative;
-            cursor: pointer;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--text-secondary);
             transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
         }
         
         .thumbnail:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.2);
         }
         
         .thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.3s ease;
-            filter: grayscale(30%);
-        }
-        
-        .thumbnail:hover img {
-            transform: scale(1.15);
-            filter: grayscale(0%);
-        }
-        
-        .thumbnail-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: rgba(255,255,255,0.3);
-            text-transform: uppercase;
-        }
-        
-        /* SCROLL REVEAL ANIMATION */
-        .sponsor-card {
             opacity: 0;
-            transform: translateY(50px);
-            animation: revealCard 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            transition: opacity 0.4s;
         }
         
-        .sponsor-card:nth-child(1) { animation-delay: 0.1s; }
-        .sponsor-card:nth-child(2) { animation-delay: 0.2s; }
-        .sponsor-card:nth-child(3) { animation-delay: 0.3s; }
+        .thumbnail img.loaded {
+            opacity: 1;
+        }
         
-        @keyframes revealCard {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* VARIANTS */
+        .sponsor-card.quantix .sponsor-name {
+            background: linear-gradient(135deg, #fff 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sponsor-card.skarlync .sponsor-name {
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sponsor-card.dorian .sponsor-name {
+            background: linear-gradient(135deg, #fff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         /* ============================================================
-           RESPONSIVE - MOBILE OPTIMIZED
+           FOOTER MINIMALISTA
+           ============================================================ */
+        .footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+        
+        /* ============================================================
+           RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .sponsor-card {
+            .header {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                gap: 24px;
+            }
+            
+            .sponsor-grid {
                 grid-template-columns: 1fr 1fr;
-                min-height: auto;
             }
             
-            .sponsor-main-image {
-                min-height: 280px;
+            .sponsor-visual {
+                grid-column: 1 / -1;
+                min-height: 300px;
                 border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
+                border-bottom: 1px solid var(--border);
             }
             
-            .sponsor-side {
+            .sponsor-details {
                 grid-column: 1 / -1;
                 flex-direction: row;
                 align-items: center;
-                padding: 30px;
-                gap: 20px;
+                gap: 40px;
             }
             
             .sponsor-actions {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .redirect-btn {
-                width: auto;
+                min-width: 200px;
             }
         }
         
         @media (max-width: 768px) {
-            main {
-                padding: 100px 20px 40px;
+            .header {
+                height: 48px;
             }
             
-            .header-initial,
-            .header-scroll {
-                padding: 15px 20px;
-            }
-            
-            .nav-links-container {
+            .nav-links {
                 display: none;
             }
             
-            .page-title {
-                letter-spacing: 5px;
+            .hero {
+                padding: 100px 0 60px;
             }
             
-            .hero-badge {
-                font-size: 10px;
-                padding: 6px 15px;
+            .hero-title {
+                font-size: 40px;
             }
             
-            .sponsor-card {
+            .hero-subtitle {
+                font-size: 17px;
+            }
+            
+            .sponsors-container {
+                padding: 0 20px;
+            }
+            
+            .sponsor-grid {
                 grid-template-columns: 1fr;
-                margin: 0 10px;
             }
             
             .sponsor-info {
-                padding: 30px;
+                padding: 32px;
                 border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-                text-align: center;
-            }
-            
-            .sponsor-label {
-                justify-content: center;
-            }
-            
-            .sponsor-label::before {
-                display: none;
+                border-bottom: 1px solid var(--border);
             }
             
             .sponsor-name {
                 font-size: 32px;
             }
             
-            .sponsor-main-image {
-                min-height: 220px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-            
-            .sponsor-side {
+            .sponsor-details {
                 flex-direction: column;
-                padding: 30px;
-                text-align: center;
+                padding: 32px;
+                gap: 24px;
             }
             
-            .sponsor-actions {
-                width: 100%;
+            .sponsor-quote {
+                font-size: 15px;
             }
-            
-            .redirect-btn {
-                width: 100%;
-            }
-            
-            .sponsor-thumbnails {
-                width: 100%;
-            }
-        }
-        
-        /* FOOTER SIMPLIFICADO */
-        .footer {
-            background: linear-gradient(to top, rgba(10,10,10,1), rgba(0,0,0,0));
-            padding: 60px 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 80px;
-        }
-        
-        .footer-text {
-            font-size: 12px;
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 2px;
-            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
-    <!-- BACKGROUND EFFECTS -->
-    <div class="bg-grid"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
     <!-- HEADER -->
-    <header class="header-initial" id="headerInitial">
-        <div class="logo-container">
-            <div class="logo" onclick="this.parentElement.classList.toggle('active')">
-                <span style="font-size: 12px; letter-spacing: 3px;">KITTENS</span>
-                <span style="font-size: 8px; letter-spacing: 2px; opacity: 0.8;">MANAGERS</span>
-            </div>
-            <div class="dropdown">
-                <div class="dropdown-links">
-                    <a href="index.html">Inicio</a>
-                    <a href="patrocinados.html">Patrocinados</a>
-                    <a href="soporte.html">Soporte</a>
-                    <a href="contactanos.html">Contáctanos</a>
-                    <a href="kiritsu.html">Kiritsu</a>
-                </div>
-            </div>
-        </div>
+    <header class="header" id="header">
+        <a href="index.html" class="logo">Kittens Managers</a>
         
-        <nav class="nav-center">
-            <div class="nav-links-container">
-                <div class="nav-links">
-                    <a href="patrocinados.html">PATROCINADOS</a>
-                    <a href="soporte.html">SOPORTE</a>
-                    <a href="contactanos.html">CONTACTANOS</a>
-                    <a href="kiritsu.html">KRITSU</a>
-                </div>
-            </div>
-            
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="busqueda">
-                <button class="search-btn">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="patrocinados.html" class="active">Patrocinados</a>
+            <a href="soporte.html">Soporte</a>
+            <a href="contactanos.html">Contacto</a>
+            <a href="kiritsu.html">Kiritsu</a>
         </nav>
+        
+        <i class="fas fa-search search-icon"></i>
     </header>
 
-    <!-- HEADER SCROLL -->
-    <header class="header-scroll" id="headerScroll">
-        <div class="logo-container">
-            <div class="logo">
-                <span style="font-size: 12px; letter-spacing: 3px;">KITTENS</span>
-                <span style="font-size: 8px; letter-spacing: 2px; opacity: 0.8;">MANAGERS</span>
-            </div>
-            <div class="dropdown">
-                <div class="dropdown-links">
-                    <a href="index.html">Inicio</a>
-                    <a href="patrocinados.html">Patrocinados</a>
-                    <a href="soporte.html">Soporte</a>
-                    <a href="contactanos.html">Contáctanos</a>
-                    <a href="kiritsu.html">Kiritsu</a>
-                </div>
-            </div>
-        </div>
-        
-        <nav class="nav-center">
-            <div class="nav-links-container">
-                <div class="nav-links">
-                    <a href="patrocinados.html">PATROCINADOS</a>
-                    <a href="soporte.html">SOPORTE</a>
-                    <a href="contactanos.html">CONTACTANOS</a>
-                    <a href="kiritsu.html">KRITSU</a>
-                </div>
-            </div>
-            
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="busqueda">
-                <button class="search-btn">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <main>
-        <!-- HERO SECTION -->
-        <section class="hero-section">
-            <div class="hero-badge">Nuestros Aliados</div>
-            <h1 class="page-title">PATROCINADOS</h1>
-            <p class="page-subtitle">
-                Cada uno tiene su propio proceso, pero nuestro proceso es bestial. 
-                Colaboramos con los mejores para crear experiencias extraordinarias.
-            </p>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-kanji">協力</div>
+                <h1 class="hero-title">Patrocinados</h1>
+                <p class="hero-subtitle">
+                    Cada uno tiene su propio proceso, pero nuestro proceso es bestial.
+                </p>
+                <div class="hero-divider"></div>
+            </div>
         </section>
 
         <!-- SPONSORS -->
-        <div class="sponsors-container">
-            
-            <!-- QUANTIX -->
-            <article class="sponsor-card quantix">
-                <div class="sponsor-info">
-                    <div class="sponsor-label">Patrocinador Principal</div>
-                    <h2 class="sponsor-name">Quantix</h2>
-                    <div class="sponsor-status">
-                        <span class="status-dot"></span>
-                        Próximamente
-                    </div>
-                </div>
+        <section class="sponsors">
+            <div class="sponsors-container">
                 
-                <div class="sponsor-main-image">
-                    <div class="image-placeholder">foto**</div>
-                    <div class="image-overlay"></div>
-                </div>
-                
-                <div class="sponsor-side">
-                    <p class="sponsor-tagline">"Innovación que transforma el mañana"</p>
-                    <div class="sponsor-actions">
-                        <a href="#" class="redirect-btn">
-                            <span>Ver Proyecto</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <div class="sponsor-thumbnails">
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                <!-- QUANTIX -->
+                <article class="sponsor-card quantix" onmousemove="handleMouseMove(event, this)">
+                    <div class="sponsor-grid">
+                        <div class="sponsor-info">
+                            <div>
+                                <div class="sponsor-header">
+                                    <span class="sponsor-number">01</span>
+                                    <div class="sponsor-line"></div>
+                                </div>
+                                <h2 class="sponsor-name">Quantix</h2>
+                                <div class="sponsor-name-jp">クアンティックス</div>
                             </div>
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                            <div class="sponsor-status">
+                                <span class="status-indicator"></span>
+                                Próximamente
+                            </div>
+                        </div>
+                        
+                        <div class="sponsor-visual">
+                            <span class="image-placeholder">Imagen principal</span>
+                            <img class="sponsor-image" data-src="quantix-main.jpg" alt="Quantix">
+                        </div>
+                        
+                        <div class="sponsor-details">
+                            <p class="sponsor-quote">
+                                "Innovación que transforma el mañana. La precisión en cada detalle."
+                            </p>
+                            <div class="sponsor-actions">
+                                <a href="#" class="btn-primary">
+                                    Ver proyecto
+                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                                </a>
+                                <div class="thumbnails">
+                                    <div class="thumbnail">Img 1</div>
+                                    <div class="thumbnail">Img 2</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <!-- SKARLYNC -->
-            <article class="sponsor-card skarlync">
-                <div class="sponsor-info">
-                    <div class="sponsor-label">Colaborador Elite</div>
-                    <h2 class="sponsor-name">Skarlync</h2>
-                    <div class="sponsor-status">
-                        <span class="status-dot"></span>
-                        Próximamente
-                    </div>
-                </div>
-                
-                <div class="sponsor-main-image">
-                    <div class="image-placeholder">foto**</div>
-                    <div class="image-overlay"></div>
-                </div>
-                
-                <div class="sponsor-side">
-                    <p class="sponsor-tagline">"Diseño sin límites, creatividad sin fronteras"</p>
-                    <div class="sponsor-actions">
-                        <a href="#" class="redirect-btn">
-                            <span>Ver Proyecto</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <div class="sponsor-thumbnails">
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                <!-- SKARLYNC -->
+                <article class="sponsor-card skarlync" onmousemove="handleMouseMove(event, this)">
+                    <div class="sponsor-grid">
+                        <div class="sponsor-info">
+                            <div>
+                                <div class="sponsor-header">
+                                    <span class="sponsor-number">02</span>
+                                    <div class="sponsor-line"></div>
+                                </div>
+                                <h2 class="sponsor-name">Skarlync</h2>
+                                <div class="sponsor-name-jp">スカーリンク</div>
                             </div>
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                            <div class="sponsor-status">
+                                <span class="status-indicator"></span>
+                                Próximamente
+                            </div>
+                        </div>
+                        
+                        <div class="sponsor-visual">
+                            <span class="image-placeholder">Imagen principal</span>
+                            <img class="sponsor-image" data-src="skarlync-main.jpg" alt="Skarlync">
+                        </div>
+                        
+                        <div class="sponsor-details">
+                            <p class="sponsor-quote">
+                                "Diseño sin límites. Donde la creatividad encuentra su forma."
+                            </p>
+                            <div class="sponsor-actions">
+                                <a href="#" class="btn-primary">
+                                    Ver proyecto
+                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                                </a>
+                                <div class="thumbnails">
+                                    <div class="thumbnail">Img 1</div>
+                                    <div class="thumbnail">Img 2</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <!-- DORIAN -->
-            <article class="sponsor-card dorian">
-                <div class="sponsor-info">
-                    <div class="sponsor-label">Proyecto Especial</div>
-                    <h2 class="sponsor-name">*******</h2>
-                    <div class="sponsor-status">
-                        <span class="status-dot"></span>
-                        con Dorian?
-                    </div>
-                </div>
-                
-                <div class="sponsor-main-image">
-                    <div class="image-placeholder">foto**</div>
-                    <div class="image-overlay"></div>
-                </div>
-                
-                <div class="sponsor-side">
-                    <p class="sponsor-tagline">"Llama a la fiscalía, eche"</p>
-                    <div class="sponsor-actions">
-                        <a href="#" class="redirect-btn">
-                            <span>Ver Proyecto</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <div class="sponsor-thumbnails">
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                <!-- DORIAN -->
+                <article class="sponsor-card dorian" onmousemove="handleMouseMove(event, this)">
+                    <div class="sponsor-grid">
+                        <div class="sponsor-info">
+                            <div>
+                                <div class="sponsor-header">
+                                    <span class="sponsor-number">03</span>
+                                    <div class="sponsor-line"></div>
+                                </div>
+                                <h2="sponsor-name">*******</h2>
+                                <div class="sponsor-name-jp">ドリアン</div>
                             </div>
-                            <div class="thumbnail">
-                                <div class="thumbnail-placeholder">foto**</div>
+                            <div class="sponsor-status">
+                                <span class="status-indicator"></span>
+                                Con Dorian
+                            </div>
+                        </div>
+                        
+                        <div class="sponsor-visual">
+                            <span class="image-placeholder">Imagen principal</span>
+                            <img class="sponsor-image" data-src="dorian-main.jpg" alt="Dorian">
+                        </div>
+                        
+                        <div class="sponsor-details">
+                            <p class="sponsor-quote">
+                                "Llama a la fiscalía, eche. La excelencia no negocia."
+                            </p>
+                            <div class="sponsor-actions">
+                                <a href="#" class="btn-primary">
+                                    Ver proyecto
+                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
+                                </a>
+                                <div class="thumbnails">
+                                    <div class="thumbnail">Img 1</div>
+                                    <div class="thumbnail">Img 2</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-        </div>
+            </div>
+        </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p class="footer-text">Kittens Managers © 2024 — Fallar no es una opción</p>
+        <p class="footer-text">Kittens Managers © 2024</p>
     </footer>
 
     <script>
         // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const headerInitial = document.getElementById('headerInitial');
-            const headerScroll = document.getElementById('headerScroll');
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 100) {
-                headerInitial.classList.add('scrolled');
-                headerScroll.classList.add('visible');
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('header-scrolled');
             } else {
-                headerInitial.classList.remove('scrolled');
-                headerScroll.classList.remove('visible');
+                header.classList.remove('header-scrolled');
             }
         });
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const logoContainers = document.querySelectorAll('.logo-container');
-            logoContainers.forEach(container => {
-                if (!container.contains(e.target)) {
-                    container.classList.remove('active');
-                }
-            });
-        });
+        // Mouse follow effect for cards
+        function handleMouseMove(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        }
         
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
+        // Lazy load images
+        const images = document.querySelectorAll('.sponsor-image, .thumbnail img');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.onload = () => img.classList.add('loaded');
+                    observer.unobserve(img);
                 }
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.sponsor-card').forEach(card => {
-            observer.observe(card);
         });
+        
+        images.forEach(img => imageObserver.observe(img));
     </script>
 </body>
 </html>
