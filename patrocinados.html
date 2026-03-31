@@ -3,734 +3,535 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kittens Manager - Patrocinados</title>
+    <title>Kittens Manager - Fest</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;600&family=Oswald:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
             --bg-primary: #000000;
-            --bg-secondary: #0a0a0a;
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --accent: #f5f5f7;
-            --border: rgba(255, 255, 255, 0.08);
+            --text-secondary: rgba(255,255,255,0.6);
+            --text-tertiary: rgba(255,255,255,0.4);
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.15);
+            --font-primary: 'Inter', sans-serif;
+            --font-jp: 'Noto Serif JP', serif;
+            --font-display: 'Oswald', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --blur: blur(20px) saturate(180%);
+            --transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
-        
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            line-height: 1.5;
-            min-height: 100vh;
+            background: #000;
+            color: white;
+            font-family: var(--font-primary);
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        
-        /* ============================================================
-           HEADER - ESTILO APPLE MINIMALISTA
-           ============================================================ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 0 50px;
-            height: 52px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+        ::selection { background: rgba(255,255,255,0.2); color: white; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+        /* ── HEADER ── */
+        .header-initial {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            padding: 0 50px; display: flex; justify-content: space-between;
+            align-items: center; z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            transition: var(--transition);
+        }
+        .header-initial.scrolled { opacity: 0; visibility: hidden; transform: translateY(-20px); }
+        .header-scroll {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            padding: 0 50px; display: flex; justify-content: space-between;
+            align-items: center; z-index: 999;
+            background: rgba(0,0,0,0.7); backdrop-filter: var(--blur);
             border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
         }
-        
-        .header-scrolled {
-            background: rgba(0, 0, 0, 0.95);
-        }
-        
+        .header-scroll.visible { transform: translateY(0); }
+
+        .logo-container { position: relative; }
         .logo {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            color: var(--text-primary);
-            text-decoration: none;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
+            font-family: var(--font-primary); font-size: 14px; font-weight: 500;
+            color: white; padding: 10px 20px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            border-radius: 100px; display: flex; flex-direction: column;
+            align-items: center; gap: 2px; cursor: pointer; transition: var(--transition);
         }
-        
-        .logo:hover {
-            opacity: 1;
+        .logo:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+        .logo span:first-child { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+        .logo span:last-child { font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-secondary); }
+
+        .dropdown {
+            position: absolute; top: calc(100% + 15px); left: 0; width: 240px;
+            background: rgba(10,10,10,0.98); border: 1px solid var(--border);
+            border-radius: 16px; padding: 20px;
+            opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s; backdrop-filter: blur(20px);
         }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
+        .logo-container:hover .dropdown, .logo-container.active .dropdown {
+            opacity: 1; visibility: visible; transform: translateY(0) scale(1);
         }
-        
+        .dropdown-links { display: flex; flex-direction: column; gap: 4px; }
+        .dropdown-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 13px;
+            padding: 12px 16px; border-radius: 8px; transition: all 0.2s;
+            position: relative;
+        }
+        .dropdown-links a::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background: white; transform: scaleY(0); transition: transform 0.2s;
+        }
+        .dropdown-links a:hover { color: white; background: rgba(255,255,255,0.05); padding-left: 20px; }
+        .dropdown-links a:hover::before { transform: scaleY(1); }
+
+        .nav-center { display: flex; align-items: center; }
+        .nav-links-container {
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 100px; padding: 8px 30px;
+            transition: var(--transition);
+        }
+        .nav-links-container:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
+        .nav-links { display: flex; gap: 32px; }
         .nav-links a {
-            font-size: 12px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            text-decoration: none;
-            letter-spacing: 0.02em;
-            transition: color 0.3s ease;
+            font-size: 12px; font-weight: 500; color: var(--text-secondary);
+            text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
+            padding: 8px 0; position: relative; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: white; transition: width 0.3s;
+        }
+        .nav-links a:hover { color: white; }
+        .nav-links a:hover::after { width: 100%; }
+        .search-container {
+            display: flex; align-items: center;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            border-radius: 100px; padding: 6px 6px 6px 20px;
+            transition: all 0.5s; width: 160px;
+        }
+        .search-container:focus-within { width: 240px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+        .search-bar { width: 90px; background: transparent; border: none; color: white; font-size: 13px; outline: none; }
+        .search-bar::placeholder { color: var(--text-secondary); }
+        .search-container:focus-within .search-bar { width: 160px; }
+        .search-btn {
+            width: 34px; height: 34px; background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+            color: var(--text-secondary); cursor: pointer; margin-left: 10px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+        .search-btn:hover { background: rgba(255,255,255,0.15); color: white; transform: scale(1.15) rotate(15deg); }
+        .search-btn i { font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .header-initial, .header-scroll { padding: 0 20px; }
+            .nav-center { display: none; }
+        }
+
+        /* ── FEST HERO — PANTALLA NEGRA ÉPICA ── */
+        .fest-hero {
             position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-        
-        .nav-links a.active {
-            color: var(--text-primary);
-        }
-        
-        .search-icon {
-            width: 16px;
-            height: 16px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        
-        .search-icon:hover {
-            color: var(--text-primary);
-        }
-        
-        /* ============================================================
-           MAIN CONTENT
-           ============================================================ */
-        main {
-            padding-top: 52px;
-        }
-        
-        /* ============================================================
-           HERO SECTION - MINIMALISTA APPLE + JAPÓN
-           ============================================================ */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
+            width: 100%; height: 100vh; min-height: 600px;
+            background: #000;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             overflow: hidden;
         }
-        
-        .hero-content {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .hero-kanji {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 24px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            letter-spacing: 0.2em;
-        }
-        
-        .hero-title {
-            font-size: clamp(48px, 8vw, 80px);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            margin-bottom: 24px;
-            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.8) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero-subtitle {
-            font-size: 21px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.5;
-        }
-        
-        .hero-divider {
-            width: 40px;
-            height: 1px;
-            background: var(--border);
-            margin: 0 auto;
-        }
-        
-        /* ============================================================
-           SPONSORS SECTION
-           ============================================================ */
-        .sponsors {
-            padding: 60px 0 120px;
-        }
-        
-        .sponsors-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-        
-        /* ============================================================
-           SPONSOR CARDS - DISEÑO PREMIUM MINIMALISTA
-           ============================================================ */
-        .sponsor-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            margin-bottom: 30px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-        
-        .sponsor-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(255,255,255,0.06), transparent 40%);
-            opacity: 0;
-            transition: opacity 0.3s;
+
+        /* Grain texture overlay */
+        .fest-grain {
+            position: absolute; inset: 0; z-index: 1;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
             pointer-events: none;
         }
-        
-        .sponsor-card:hover::before {
-            opacity: 1;
+
+        /* Subtle vignette */
+        .fest-vignette {
+            position: absolute; inset: 0; z-index: 2;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
         }
-        
-        .sponsor-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+        /* Horizontal lines — cinema feel */
+        .fest-lines {
+            position: absolute; inset: 0; z-index: 1;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255,255,255,0.008) 3px,
+                rgba(255,255,255,0.008) 4px
+            );
+            pointer-events: none;
         }
-        
-        .sponsor-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            min-height: 400px;
+
+        /* Ambient glow very subtle */
+        .fest-glow {
+            position: absolute; inset: 0; z-index: 1;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(230,57,70,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
         }
-        
-        /* LEFT: INFO */
-        .sponsor-info {
-            padding: 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid var(--border);
-        }
-        
-        .sponsor-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        
-        .sponsor-number {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        
-        .sponsor-line {
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        
-        .sponsor-name {
-            font-size: 42px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-            line-height: 1.1;
-        }
-        
-        .sponsor-name-jp {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            letter-spacing: 0.1em;
-            margin-bottom: 32px;
-        }
-        
-        .sponsor-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            width: fit-content;
-        }
-        
-        .status-indicator {
-            width: 6px;
-            height: 6px;
-            background: #30d158;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* CENTER: IMAGE */
-        .sponsor-visual {
-            position: relative;
-            border-right: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .sponsor-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-        
-        .sponsor-image.loaded {
-            opacity: 1;
-        }
-        
-        .image-placeholder {
-            position: absolute;
-            font-size: 13px;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-        }
-        
-        /* RIGHT: DETAILS */
-        .sponsor-details {
-            padding: 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .sponsor-quote {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 16px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-style: italic;
-            margin-bottom: 40px;
-        }
-        
-        .sponsor-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: var(--text-primary);
-            color: var(--bg-primary);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            text-decoration: none;
-            border-radius: 980px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(255,255,255,0.3);
-        }
-        
-        .thumbnails {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        
-        .thumbnail {
-            aspect-ratio: 16/10;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .thumbnail:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.2);
-        }
-        
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .thumbnail img.loaded {
-            opacity: 1;
-        }
-        
-        /* VARIANTS */
-        .sponsor-card.quantix .sponsor-name {
-            background: linear-gradient(135deg, #fff 0%, #ff6b6b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .sponsor-card.skarlync .sponsor-name {
-            background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .sponsor-card.dorian .sponsor-name {
-            background: linear-gradient(135deg, #fff 0%, #fbbf24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* ============================================================
-           FOOTER MINIMALISTA
-           ============================================================ */
-        .footer {
-            padding: 40px;
+
+        .fest-content {
+            position: relative; z-index: 10;
             text-align: center;
+            padding: 0 40px;
+        }
+
+        /* Top label */
+        .fest-label {
+            font-family: var(--font-display); font-size: 11px; font-weight: 400;
+            letter-spacing: 0.5em; text-transform: uppercase;
+            color: var(--text-tertiary); margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+        }
+
+        /* Main title — "Con Dorian" */
+        .fest-main-title {
+            font-family: var(--font-serif);
+            font-size: clamp(52px, 10vw, 110px);
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: white;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        /* Subtitle — "Eche kike que" */
+        .fest-subtitle {
+            font-family: var(--font-primary);
+            font-size: clamp(14px, 2vw, 18px);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1s forwards;
+        }
+
+        /* Divider line */
+        .fest-divider {
+            width: 1px; height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            margin: 0 auto 60px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.2s forwards;
+        }
+
+        /* Location / event detail */
+        .fest-detail {
+            display: flex; align-items: center; justify-content: center;
+            gap: 32px; flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.4s forwards;
+        }
+        .fest-detail-item {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+        }
+        .fest-detail-item span:first-child {
+            font-family: var(--font-jp); font-size: 10px; color: var(--text-tertiary);
+            letter-spacing: 0.2em;
+        }
+        .fest-detail-item span:last-child {
+            font-family: var(--font-display); font-size: 13px; font-weight: 400;
+            letter-spacing: 0.15em; text-transform: uppercase; color: white;
+        }
+        .fest-detail-sep {
+            width: 1px; height: 30px;
+            background: rgba(255,255,255,0.15);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom scroll line */
+        .fest-scroll {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            opacity: 0; animation: fadeUp 0.8s ease 1.8s forwards;
+        }
+        .fest-scroll span {
+            font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+        .fest-scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            animation: scrollPulse 2s ease-in-out infinite 2s;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 0.4; }
+            50%       { transform: scaleY(0.6); opacity: 1; }
+        }
+
+        /* ── FEST INFO SECTION ── */
+        .fest-info {
+            position: relative; padding: 140px 50px;
+            background: #000; overflow: hidden;
+        }
+        .fest-info::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 200px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        .fest-info-inner {
+            max-width: 900px; margin: 0 auto; text-align: center;
+        }
+        .fest-info-kanji {
+            font-family: var(--font-jp); font-size: 14px; color: var(--text-tertiary);
+            letter-spacing: 0.3em; margin-bottom: 20px;
+        }
+        .fest-info-title {
+            font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px);
+            font-weight: 400; font-style: italic; line-height: 1.15;
+            margin-bottom: 32px;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .fest-info-text {
+            font-size: 17px; font-weight: 300; color: var(--text-secondary);
+            line-height: 2; max-width: 700px; margin: 0 auto 60px;
+        }
+        .fest-info-text strong { color: white; font-weight: 500; }
+
+        /* Cards de info */
+        .fest-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            margin-top: 60px;
+        }
+        .fest-card {
+            padding: 32px 28px; background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border); border-radius: 20px;
+            text-align: left; transition: var(--transition);
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, background 0.3s;
+        }
+        .fest-card.revealed { opacity: 1; transform: translateY(0); }
+        .fest-card:nth-child(2) { transition-delay: 0.1s; }
+        .fest-card:nth-child(3) { transition-delay: 0.2s; }
+        .fest-card:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.04); }
+        .fest-card-icon {
+            font-size: 24px; margin-bottom: 16px; color: rgba(255,255,255,0.5);
+        }
+        .fest-card h4 {
+            font-family: var(--font-display); font-size: 16px; font-weight: 500;
+            letter-spacing: 0.08em; text-transform: uppercase; color: white;
+            margin-bottom: 10px;
+        }
+        .fest-card p {
+            font-size: 13px; color: var(--text-secondary); line-height: 1.7;
+        }
+
+        /* Reveal */
+        .reveal-el { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal-el.revealed { opacity: 1; transform: translateY(0); }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #000; padding: 60px 50px 40px;
             border-top: 1px solid var(--border);
         }
-        
-        .footer-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-            letter-spacing: 0.02em;
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px; max-width: 1100px; margin: 0 auto;
         }
-        
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 1024px) {
-            .header {
-                padding: 0 20px;
-            }
-            
-            .nav-links {
-                gap: 24px;
-            }
-            
-            .sponsor-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .sponsor-visual {
-                grid-column: 1 / -1;
-                min-height: 300px;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-            
-            .sponsor-details {
-                grid-column: 1 / -1;
-                flex-direction: row;
-                align-items: center;
-                gap: 40px;
-            }
-            
-            .sponsor-actions {
-                min-width: 200px;
-            }
-        }
-        
+        .footer-copyright { font-size: 13px; color: var(--text-tertiary); }
+        .footer-signature { font-family: var(--font-jp); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.15em; }
+
         @media (max-width: 768px) {
-            .header {
-                height: 48px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 100px 0 60px;
-            }
-            
-            .hero-title {
-                font-size: 40px;
-            }
-            
-            .hero-subtitle {
-                font-size: 17px;
-            }
-            
-            .sponsors-container {
-                padding: 0 20px;
-            }
-            
-            .sponsor-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .sponsor-info {
-                padding: 32px;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-            
-            .sponsor-name {
-                font-size: 32px;
-            }
-            
-            .sponsor-details {
-                flex-direction: column;
-                padding: 32px;
-                gap: 24px;
-            }
-            
-            .sponsor-quote {
-                font-size: 15px;
-            }
+            .fest-info { padding: 100px 20px; }
+            .fest-cards { grid-template-columns: 1fr; }
+            .fest-detail { gap: 20px; }
+            .fest-detail-sep { display: none; }
+            .footer { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <a href="index.html" class="logo">Kittens Managers</a>
-        
-        <nav class="nav-links">
-            <a href="index.html">Inicio</a>
-            <a href="patrocinados.html" class="active">Patrocinados</a>
-            <a href="soporte.html">Soporte</a>
-            <a href="contactanos.html">Contacto</a>
-            <a href="kiritsu.html">Kiritsu</a>
+
+    <!-- HEADER INICIAL -->
+    <header class="header-initial" id="headerInitial">
+        <div class="logo-container" id="lc1">
+            <div class="logo" onclick="toggleDD('lc1')">
+                <span>KITTENS</span><span>MANAGERS</span>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-center">
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
+            </div>
         </nav>
-        
-        <i class="fas fa-search search-icon"></i>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
     </header>
 
-    <!-- MAIN -->
-    <main>
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-kanji">協力</div>
-                <h1 class="hero-title">Patrocinados</h1>
-                <p class="hero-subtitle">
-                    Cada uno tiene su propio proceso, pero nuestro proceso es bestial.
-                </p>
-                <div class="hero-divider"></div>
+    <!-- HEADER SCROLL -->
+    <header class="header-scroll" id="headerScroll">
+        <div class="logo-container" id="lc2">
+            <div class="logo" onclick="toggleDD('lc2')">
+                <span>KITTENS</span><span>MANAGERS</span>
             </div>
-        </section>
-
-        <!-- SPONSORS -->
-        <section class="sponsors">
-            <div class="sponsors-container">
-                
-                <!-- QUANTIX -->
-                <article class="sponsor-card quantix" onmousemove="handleMouseMove(event, this)">
-                    <div class="sponsor-grid">
-                        <div class="sponsor-info">
-                            <div>
-                                <div class="sponsor-header">
-                                    <span class="sponsor-number">01</span>
-                                    <div class="sponsor-line"></div>
-                                </div>
-                                <h2 class="sponsor-name">Quantix</h2>
-                                <div class="sponsor-name-jp">クアンティックス</div>
-                            </div>
-                            <div class="sponsor-status">
-                                <span class="status-indicator"></span>
-                                Próximamente
-                            </div>
-                        </div>
-                        
-                        <div class="sponsor-visual">
-                            <span class="image-placeholder">Imagen principal</span>
-                            <img class="sponsor-image" data-src="quantix-main.jpg" alt="Quantix">
-                        </div>
-                        
-                        <div class="sponsor-details">
-                            <p class="sponsor-quote">
-                                "Innovación que transforma el mañana. La precisión en cada detalle."
-                            </p>
-                            <div class="sponsor-actions">
-                                <a href="#" class="btn-primary">
-                                    Ver proyecto
-                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
-                                </a>
-                                <div class="thumbnails">
-                                    <div class="thumbnail">Img 1</div>
-                                    <div class="thumbnail">Img 2</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- SKARLYNC -->
-                <article class="sponsor-card skarlync" onmousemove="handleMouseMove(event, this)">
-                    <div class="sponsor-grid">
-                        <div class="sponsor-info">
-                            <div>
-                                <div class="sponsor-header">
-                                    <span class="sponsor-number">02</span>
-                                    <div class="sponsor-line"></div>
-                                </div>
-                                <h2 class="sponsor-name">Skarlync</h2>
-                                <div class="sponsor-name-jp">スカーリンク</div>
-                            </div>
-                            <div class="sponsor-status">
-                                <span class="status-indicator"></span>
-                                Próximamente
-                            </div>
-                        </div>
-                        
-                        <div class="sponsor-visual">
-                            <span class="image-placeholder">Imagen principal</span>
-                            <img class="sponsor-image" data-src="skarlync-main.jpg" alt="Skarlync">
-                        </div>
-                        
-                        <div class="sponsor-details">
-                            <p class="sponsor-quote">
-                                "Diseño sin límites. Donde la creatividad encuentra su forma."
-                            </p>
-                            <div class="sponsor-actions">
-                                <a href="#" class="btn-primary">
-                                    Ver proyecto
-                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
-                                </a>
-                                <div class="thumbnails">
-                                    <div class="thumbnail">Img 1</div>
-                                    <div class="thumbnail">Img 2</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- DORIAN -->
-                <article class="sponsor-card dorian" onmousemove="handleMouseMove(event, this)">
-                    <div class="sponsor-grid">
-                        <div class="sponsor-info">
-                            <div>
-                                <div class="sponsor-header">
-                                    <span class="sponsor-number">03</span>
-                                    <div class="sponsor-line"></div>
-                                </div>
-                                <h2="sponsor-name">*******</h2>
-                                <div class="sponsor-name-jp">ドリアン</div>
-                            </div>
-                            <div class="sponsor-status">
-                                <span class="status-indicator"></span>
-                                Con Dorian
-                            </div>
-                        </div>
-                        
-                        <div class="sponsor-visual">
-                            <span class="image-placeholder">Imagen principal</span>
-                            <img class="sponsor-image" data-src="dorian-main.jpg" alt="Dorian">
-                        </div>
-                        
-                        <div class="sponsor-details">
-                            <p class="sponsor-quote">
-                                "Llama a la fiscalía, eche. La excelencia no negocia."
-                            </p>
-                            <div class="sponsor-actions">
-                                <a href="#" class="btn-primary">
-                                    Ver proyecto
-                                    <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
-                                </a>
-                                <div class="thumbnails">
-                                    <div class="thumbnail">Img 1</div>
-                                    <div class="thumbnail">Img 2</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
+            <div class="dropdown">
+                <div class="dropdown-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+        <nav class="nav-center">
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
+            </div>
+        </nav>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <!-- FEST HERO -->
+    <section class="fest-hero">
+        <div class="fest-grain"></div>
+        <div class="fest-lines"></div>
+        <div class="fest-glow"></div>
+        <div class="fest-vignette"></div>
+
+        <div class="fest-content">
+            <div class="fest-label">Kittens Managers presenta</div>
+            <h1 class="fest-main-title">Con Dorian</h1>
+            <p class="fest-subtitle">Eche kike que</p>
+            <div class="fest-divider"></div>
+            <div class="fest-detail">
+                <div class="fest-detail-item">
+                    <span>場所</span>
+                    <span>Barranquilla</span>
+                </div>
+                <div class="fest-detail-sep"></div>
+                <div class="fest-detail-item">
+                    <span>イベント</span>
+                    <span>Carnaval</span>
+                </div>
+                <div class="fest-detail-sep"></div>
+                <div class="fest-detail-item">
+                    <span>夢</span>
+                    <span>Próximamente</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fest-scroll">
+            <span>Scroll</span>
+            <div class="fest-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- FEST INFO -->
+    <section class="fest-info">
+        <div class="fest-info-inner">
+            <div class="fest-info-kanji reveal-el">祭り / Festival</div>
+            <h2 class="fest-info-title reveal-el">Un sueño que<br>se está construyendo</h2>
+            <p class="fest-info-text reveal-el">
+                En pleno <strong>Carnaval de Barranquilla</strong>, Kittens Managers tiene un sueño: crear un festival que fusione cultura, música y creatividad en uno solo. No nos rendiremos hasta lograrlo. Este es el comienzo de algo que <strong>el mundo verá</strong>.
+            </p>
+
+            <div class="fest-cards">
+                <div class="fest-card">
+                    <div class="fest-card-icon"><i class="fas fa-music"></i></div>
+                    <h4>Música en vivo</h4>
+                    <p>Una experiencia sonora única que mezcla géneros y culturas en el corazón del Caribe colombiano.</p>
+                </div>
+                <div class="fest-card">
+                    <div class="fest-card-icon"><i class="fas fa-masks-theater"></i></div>
+                    <h4>Cultura y arte</h4>
+                    <p>Carnaval de Barranquilla como escenario: tradición, color y la energía más viva del país.</p>
+                </div>
+                <div class="fest-card">
+                    <div class="fest-card-icon"><i class="fas fa-star"></i></div>
+                    <h4>Experiencia total</h4>
+                    <p>No es solo un evento. Es la prueba de que los sueños grandes se construyen con disciplina y visión.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p class="footer-text">Kittens Managers © 2024</p>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2024 Kittens Managers. Todos los derechos reservados.</p>
+            <p class="footer-signature">設計によるディシプリンとビジョン</p>
+        </div>
     </footer>
 
     <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
+        // Header scroll
+        const hi = document.getElementById('headerInitial');
+        const hs = document.getElementById('headerScroll');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
+            if (window.scrollY > 80) { hi.classList.add('scrolled'); hs.classList.add('visible'); }
+            else { hi.classList.remove('scrolled'); hs.classList.remove('visible'); }
         });
-        
-        // Mouse follow effect for cards
-        function handleMouseMove(e, card) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        }
-        
-        // Lazy load images
-        const images = document.querySelectorAll('.sponsor-image, .thumbnail img');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.onload = () => img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
+
+        // Dropdown
+        function toggleDD(id) { document.getElementById(id).classList.toggle('active'); }
+        document.addEventListener('click', e => {
+            ['lc1','lc2'].forEach(id => {
+                const c = document.getElementById(id);
+                if (c && !c.contains(e.target)) c.classList.remove('active');
             });
         });
-        
-        images.forEach(img => imageObserver.observe(img));
+
+        // Reveal observer
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal-el, .fest-card').forEach(el => obs.observe(el));
     </script>
 </body>
 </html>
