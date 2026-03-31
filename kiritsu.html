@@ -1,494 +1,639 @@
-'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kittens Manager - Kiritsu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;600&family=Oswald:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.cdnfonts.com/css/true-typewriter');
-        @import url('https://fonts.cdnfonts.com/css/brindan-writte');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --bg-black: #000000;
-            --text-white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --accent-gold: #ffd700;
+            --bg-primary: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.6);
+            --text-tertiary: rgba(255,255,255,0.4);
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.15);
+            --accent-gold: #d4af37;
+            --accent-red: #e63946;
+            --accent-blue: #4361ee;
+            --font-primary: 'Inter', sans-serif;
+            --font-jp: 'Noto Serif JP', serif;
+            --font-display: 'Oswald', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --blur: blur(20px) saturate(180%);
+            --transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
-        
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            min-height: 100vh;
-        }
-        
-        /* HEADER */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-primary); color: white; font-family: var(--font-primary); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        ::selection { background: rgba(255,255,255,0.2); color: white; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+        /* ── HEADER ── */
+        .header-initial {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            padding: 0 50px; display: flex; justify-content: space-between;
+            align-items: center; z-index: 1000;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            transition: var(--transition);
         }
-        
-        .logo-container {
-            position: relative;
+        .header-initial.scrolled { opacity: 0; visibility: hidden; transform: translateY(-20px); }
+        .header-scroll {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            padding: 0 50px; display: flex; justify-content: space-between;
+            align-items: center; z-index: 999;
+            background: rgba(0,0,0,0.7); backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
         }
-        
+        .header-scroll.visible { transform: translateY(0); }
+
+        .logo-container { position: relative; }
         .logo {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 14px;
-            color: var(--text-white);
-            text-decoration: none;
-            padding: 10px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            font-family: var(--font-primary); font-size: 14px; font-weight: 500;
+            color: white; padding: 10px 20px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            border-radius: 100px; display: flex; flex-direction: column;
+            align-items: center; gap: 2px; cursor: pointer; transition: var(--transition);
         }
-        
-        .logo:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-        
+        .logo:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+        .logo span:first-child { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+        .logo span:last-child { font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-secondary); }
+
         .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-            width: 226px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: absolute; top: calc(100% + 15px); left: 0; width: 240px;
+            background: rgba(10,10,10,0.98); border: 1px solid var(--border);
+            border-radius: 16px; padding: 20px;
+            opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s; backdrop-filter: blur(20px);
         }
-        
-        .logo-container:hover .dropdown,
-        .logo-container.active .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .logo-container:hover .dropdown, .logo-container.active .dropdown {
+            opacity: 1; visibility: visible; transform: translateY(0) scale(1);
         }
-        
-        .dropdown-logo {
-            width: 100%;
-            text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        
-        .dropdown-links {
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
+        .dropdown-links { display: flex; flex-direction: column; gap: 4px; }
         .dropdown-links a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            color: var(--text-secondary); text-decoration: none; font-size: 13px;
+            padding: 12px 16px; border-radius: 8px; transition: all 0.2s; position: relative;
         }
-        
-        .dropdown-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .dropdown-links a::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background: white; transform: scaleY(0); transition: transform 0.2s;
         }
-        
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+        .dropdown-links a:hover { color: white; background: rgba(255,255,255,0.05); padding-left: 20px; }
+        .dropdown-links a:hover::before { transform: scaleY(1); }
+
+        .nav-center { display: flex; align-items: center; }
+        .nav-links-container {
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 100px; padding: 8px 30px;
+            transition: var(--transition);
         }
-        
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
+        .nav-links-container:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
+        .nav-links { display: flex; gap: 32px; }
         .nav-links a {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--text-white);
-            text-decoration: none;
-            position: relative;
-            padding: 5px 10px;
-            transition: all 0.3s ease;
+            font-size: 12px; font-weight: 500; color: var(--text-secondary);
+            text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
+            padding: 8px 0; position: relative; transition: color 0.3s;
         }
-        
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .nav-links a:hover::before {
-            opacity: 1;
-        }
-        
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: white; transition: width 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-links a:hover::after { width: 100%; }
         .search-container {
-            position: relative;
+            display: flex; align-items: center;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            border-radius: 100px; padding: 6px 6px 6px 20px; transition: all 0.5s; width: 160px;
         }
-        
-        .search-bar {
-            width: 200px;
-            padding: 10px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s ease;
+        .search-container:focus-within { width: 240px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+        .search-bar { width: 90px; background: transparent; border: none; color: white; font-size: 13px; outline: none; }
+        .search-bar::placeholder { color: var(--text-secondary); }
+        .search-container:focus-within .search-bar { width: 160px; }
+        .search-btn {
+            width: 34px; height: 34px; background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+            color: var(--text-secondary); cursor: pointer; margin-left: 10px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
         }
-        
-        .search-bar::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .search-bar:focus {
-            width: 250px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* MAIN CONTENT */
-        main {
-            padding: 120px 60px 60px;
-            min-height: 100vh;
-        }
-        
-        .page-title {
-            font-family: 'True Typewriter', 'Courier New', monospace;
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            background: linear-gradient(135deg, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .page-subtitle {
-            font-family: 'Brindan Writte', cursive;
-            font-size: 24px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 60px;
-        }
-        
-        /* Kiritsu Grid */
-        .kiritsu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .kiritsu-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--glass-border);
-            border-radius: 25px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .kiritsu-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .kiritsu-card:hover::before {
-            opacity: 1;
-        }
-        
-        .kiritsu-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .kiritsu-image {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .kiritsu-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .kiritsu-card:hover .kiritsu-image img {
-            transform: scale(1.1);
-        }
-        
-        .kiritsu-content {
-            padding: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .kiritsu-content h3 {
-            font-family: 'Brindan Writte', cursive;
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: var(--accent-gold);
-        }
-        
-        .kiritsu-content p {
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .kiritsu-btn {
-            padding: 10px 25px;
-            background: transparent;
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            color: var(--text-white);
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .kiritsu-btn:hover {
-            background: rgba(255, 215, 0, 0.2);
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-        }
-        
-        /* Featured Section */
-        .featured-section {
-            margin-top: 80px;
-            padding: 60px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--glass-border);
-            border-radius: 30px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .featured-image {
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .featured-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .featured-content h2 {
-            font-family: 'Brindan Writte', cursive;
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
-        }
-        
-        .featured-content p {
-            font-family: 'Oswald', sans-serif;
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        
-        /* RESPONSIVE */
+        .search-btn:hover { background: rgba(255,255,255,0.15); color: white; transform: scale(1.15) rotate(15deg); }
+        .search-btn i { font-size: 12px; }
+
         @media (max-width: 768px) {
-            main {
-                padding: 100px 20px 40px;
-            }
-            
-            .page-title {
-                font-size: 32px;
-            }
-            
-            .featured-section {
-                grid-template-columns: 1fr;
-                padding: 30px 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
+            .header-initial, .header-scroll { padding: 0 20px; }
+            .nav-center { display: none; }
+        }
+
+        /* ── KIRITSU HERO ── */
+        .kiritsu-hero {
+            position: relative; width: 100%; height: 100vh; min-height: 600px;
+            display: flex; align-items: flex-end; justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .kiritsu-hero-bg {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 40% 30%, rgba(212,175,55,0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 70%, rgba(67,97,238,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(230,57,70,0.04) 0%, transparent 45%);
+        }
+        .kiritsu-hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+        }
+
+        .kiritsu-hero-content {
+            position: relative; z-index: 5; width: 100%;
+            max-width: 1100px; padding: 0 50px 110px; text-align: center;
+            opacity: 0; transform: translateY(40px);
+            animation: heroIn 1.2s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+        }
+        @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
+        .kiritsu-kanji {
+            font-family: var(--font-jp); font-size: 18px; font-weight: 300;
+            color: var(--text-secondary); letter-spacing: 0.4em; margin-bottom: 24px;
+        }
+        .kiritsu-title {
+            font-family: var(--font-primary); font-size: clamp(52px, 10vw, 100px);
+            font-weight: 700; letter-spacing: -0.03em; line-height: 0.95;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 20px;
+        }
+        .kiritsu-sub {
+            font-family: var(--font-display); font-size: clamp(14px, 1.8vw, 18px);
+            font-weight: 300; color: var(--text-secondary); letter-spacing: 0.18em;
+            text-transform: uppercase; margin-bottom: 48px;
+        }
+
+        /* ── VIDEO SECTION ── */
+        .video-section {
+            position: relative; padding: 0 50px 120px;
+            background: #000; overflow: hidden;
+        }
+
+        /* Instruction note */
+        .video-note {
+            max-width: 900px; margin: 0 auto 32px;
+            padding: 16px 24px;
+            background: rgba(212,175,55,0.06); border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 12px; text-align: center;
+            font-size: 13px; color: var(--text-secondary);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .video-note i { color: var(--accent-gold); }
+        .video-note a { color: var(--accent-gold); text-decoration: none; }
+        .video-note a:hover { text-decoration: underline; }
+
+        /* Video wrapper responsive */
+        .video-wrapper {
+            max-width: 900px; margin: 0 auto;
+            position: relative; border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            background: #0a0a0a;
+            /* 16:9 ratio */
+            aspect-ratio: 16/9;
+        }
+        .video-wrapper iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* Placeholder when no video */
+        .video-placeholder {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 16px;
+            background: rgba(255,255,255,0.02);
+        }
+        .video-placeholder i { font-size: 48px; color: var(--text-tertiary); }
+        .video-placeholder p { font-size: 14px; color: var(--text-tertiary); text-align: center; padding: 0 20px; }
+        .video-placeholder code {
+            font-size: 12px; padding: 8px 16px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--accent-gold); display: block; margin-top: 8px;
+            word-break: break-all;
+        }
+
+        /* ── QUIÉNES SECTION ── */
+        .quienes-section {
+            position: relative; padding: 140px 50px;
+            background: #000; overflow: hidden;
+        }
+        .quienes-section::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 200px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        .quienes-section::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 50%, rgba(67,97,238,0.03) 0%, transparent 50%);
+        }
+        .quienes-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+        .section-label {
+            font-family: var(--font-jp); font-size: 13px; color: var(--text-tertiary);
+            letter-spacing: 0.3em; text-align: center; margin-bottom: 16px;
+        }
+        .section-heading {
+            font-family: var(--font-primary); font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600; letter-spacing: -0.02em; text-align: center; margin-bottom: 14px;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.75) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            position: relative; display: inline-block; left: 50%; transform: translateX(-50%);
+        }
+        .section-heading-wrap { text-align: center; margin-bottom: 70px; }
+        .section-heading-wrap::after {
+            content: ''; display: block; width: 40px; height: 1px;
+            background: rgba(255,255,255,0.25); margin: 28px auto 0;
+        }
+        .section-body {
+            font-size: 17px; font-weight: 300; color: var(--text-secondary);
+            line-height: 2; text-align: center; max-width: 780px; margin: 0 auto 80px;
+        }
+        .section-body strong { color: white; font-weight: 500; }
+
+        /* Team grid */
+        .team-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+        }
+        .team-card {
+            position: relative; height: 480px; border-radius: 24px; overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
+        }
+        .team-card.revealed { opacity: 1; transform: translateY(0); }
+        .team-card:nth-child(2) { transition-delay: 0.1s; }
+        .team-card:nth-child(3) { transition-delay: 0.2s; }
+        .team-card::before {
+            content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; z-index: 10; pointer-events: none;
+        }
+        .team-card.card-1 { background: linear-gradient(135deg, rgba(180,30,30,0.15), rgba(10,5,5,0.95)); }
+        .team-card.card-2 { background: linear-gradient(135deg, rgba(200,160,60,0.15), rgba(15,10,5,0.95)); }
+        .team-card.card-3 { background: linear-gradient(135deg, rgba(40,130,200,0.15), rgba(5,8,15,0.95)); }
+        .team-card::after { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; }
+        .team-card.card-1::after { background: radial-gradient(circle at 50% 0%, rgba(230,57,70,0.2), transparent 70%); }
+        .team-card.card-2::after { background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.2), transparent 70%); }
+        .team-card.card-3::after { background: radial-gradient(circle at 50% 0%, rgba(67,97,238,0.2), transparent 70%); }
+        .team-card:hover::after { opacity: 1; }
+        .team-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1); }
+
+        .team-img-wrap { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+        .team-img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center top;
+            transition: all 0.6s cubic-bezier(0.4,0,0.2,1); filter: grayscale(20%) contrast(1.1);
+        }
+        .team-card:hover .team-img { transform: scale(1.08); filter: none; }
+        .team-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.2) 60%, transparent 100%);
+            transition: all 0.4s;
+        }
+        .team-card:hover .team-overlay { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, transparent 70%); }
+        .team-info {
+            position: absolute; bottom: 0; left: 0; right: 0; padding: 36px 28px;
+            z-index: 5; transform: translateY(20px); opacity: 0.9; transition: all 0.4s;
+        }
+        .team-card:hover .team-info { transform: translateY(0); opacity: 1; }
+        .team-name { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: white; margin-bottom: 6px; }
+        .team-role { font-family: var(--font-jp); font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; }
+        .team-badge {
+            position: absolute; top: 18px; right: 18px;
+            width: 10px; height: 10px; border-radius: 50%; z-index: 10;
+        }
+        .card-1 .team-badge { background: #e63946; box-shadow: 0 0 16px #e63946; }
+        .card-2 .team-badge { background: #d4af37; box-shadow: 0 0 16px #d4af37; }
+        .card-3 .team-badge { background: #4361ee; box-shadow: 0 0 16px #4361ee; }
+
+        /* Spotlight */
+        .spotlight {
+            position: absolute; inset: 0; pointer-events: none; z-index: 5;
+            background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .team-card:hover .spotlight { opacity: 1; }
+
+        /* ── MOTIVATIONAL STRIP ── */
+        .motive-strip {
+            padding: 80px 50px;
+            background: #000;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            text-align: center; overflow: hidden;
+        }
+        .motive-text {
+            font-family: var(--font-serif); font-size: clamp(28px, 4vw, 48px);
+            font-style: italic; font-weight: 400; line-height: 1.4;
+            color: white; max-width: 900px; margin: 0 auto;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .motive-text.revealed { opacity: 1; transform: translateY(0); }
+        .motive-text em { color: var(--text-secondary); font-style: normal; }
+
+        /* ── FOOTER ── */
+        .footer { background: #000; padding: 60px 50px 40px; border-top: 1px solid var(--border); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px; max-width: 1100px; margin: 0 auto;
+        }
+        .footer-copyright { font-size: 13px; color: var(--text-tertiary); }
+        .footer-signature { font-family: var(--font-jp); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.15em; }
+
+        /* Reveal */
+        .reveal-el { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal-el.revealed { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 992px) {
+            .team-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+            .team-card { height: 380px; }
+            .team-info { transform: none; opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .kiritsu-hero-content { padding: 0 20px 90px; }
+            .video-section { padding: 0 20px 80px; }
+            .quienes-section { padding: 80px 20px; }
+            .motive-strip { padding: 60px 20px; }
+            .footer { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <div class="logo" onclick="this.parentElement.classList.toggle('active')">
-                <span style="font-size: 12px; letter-spacing: 2px;">KITTENS</span>
-                <span style="font-size: 8px; opacity: 0.8;">MANAGERS</span>
+
+    <!-- HEADER INICIAL -->
+    <header class="header-initial" id="headerInitial">
+        <div class="logo-container" id="lc1">
+            <div class="logo" onclick="toggleDD('lc1')">
+                <span>KITTENS</span><span>MANAGERS</span>
             </div>
             <div class="dropdown">
-                <div class="dropdown-logo">
-                    <svg width="80" height="60" viewBox="0 0 200 150" fill="none">
-                        <text x="100" y="40" text-anchor="middle" fill="white" font-family="serif" font-size="24">KITTENS MANAGER</text>
-                        <text x="100" y="60" text-anchor="middle" fill="white" font-family="sans-serif" font-size="10">FALLAR NO ES UNA OPCION</text>
-                        <rect x="85" y="70" width="30" height="20" rx="3" fill="white"/>
-                        <rect x="88" y="73" width="24" height="14" rx="2" fill="black"/>
-                        <circle cx="95" cy="80" r="2" fill="white"/>
-                        <circle cx="105" cy="80" r="2" fill="white"/>
-                    </svg>
-                </div>
                 <div class="dropdown-links">
                     <a href="index.html">Inicio</a>
                     <a href="patrocinados.html">Patrocinados</a>
                     <a href="soporte.html">Soporte</a>
-                    <a href="contactanos.html">Contáctanos</a>
+                    <a href="fest.html">Fest</a>
                     <a href="kiritsu.html">Kiritsu</a>
                 </div>
             </div>
         </div>
-        
-        <nav>
-            <div class="nav-links">
-                <a href="patrocinados.html">PATROCINADOS</a>
-                <a href="soporte.html">SOPORTE</a>
-                <a href="contactanos.html">CONTACTANOS</a>
-                <a href="kiritsu.html">KRITSU</a>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="busqueda">
+        <nav class="nav-center">
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
             </div>
         </nav>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
     </header>
 
-    <main>
-        <h1 class="page-title">KRITSU</h1>
-        <p class="page-subtitle">立つ - Levántate</p>
-        
-        <div class="kiritsu-grid">
-            <div class="kiritsu-card">
-                <div class="kiritsu-image">
-                    <img src="https://images.unsplash.com/photo-1614726365723-49cfae9278b7?w=600&h=400&fit=crop" alt="Kiritsu 1">
-                </div>
-                <div class="kiritsu-content">
-                    <h3>Proyecto Alpha</h3>
-                    <p>Iniciativa exclusiva de Kittens Manager para el desarrollo de talentos emergentes en la industria creativa.</p>
-                    <a href="#" class="kiritsu-btn">Ver más</a>
-                </div>
+    <!-- HEADER SCROLL -->
+    <header class="header-scroll" id="headerScroll">
+        <div class="logo-container" id="lc2">
+            <div class="logo" onclick="toggleDD('lc2')">
+                <span>KITTENS</span><span>MANAGERS</span>
             </div>
-            
-            <div class="kiritsu-card">
-                <div class="kiritsu-image">
-                    <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=600&h=400&fit=crop" alt="Kiritsu 2">
-                </div>
-                <div class="kiritsu-content">
-                    <h3>Colaboraciones</h3>
-                    <p>Alianzas estratégicas con los mejores profesionales del sector para crear experiencias únicas.</p>
-                    <a href="#" class="kiritsu-btn">Ver más</a>
-                </div>
-            </div>
-            
-            <div class="kiritsu-card">
-                <div class="kiritsu-image">
-                    <img src="https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=600&h=400&fit=crop" alt="Kiritsu 3">
-                </div>
-                <div class="kiritsu-content">
-                    <h3>Eventos Especiales</h3>
-                    <p>Participa en nuestros eventos exclusivos y conecta con la comunidad de Kittens Manager.</p>
-                    <a href="#" class="kiritsu-btn">Ver más</a>
+            <div class="dropdown">
+                <div class="dropdown-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
                 </div>
             </div>
         </div>
-        
-        <div class="featured-section">
-            <div class="featured-image">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop" alt="Featured">
+        <nav class="nav-center">
+            <div class="nav-links-container">
+                <div class="nav-links">
+                    <a href="patrocinados.html">Patrocinados</a>
+                    <a href="soporte.html">Soporte</a>
+                    <a href="fest.html">Fest</a>
+                    <a href="kiritsu.html">Kiritsu</a>
+                </div>
             </div>
-            <div class="featured-content">
-                <h2>Excelencia y Disciplina</h2>
-                <p>Kiritsu representa nuestro compromiso con la excelencia. Cada proyecto que emprendemos lleva el sello de calidad y dedicación que nos caracteriza. Nos esforzamos por superar expectativas y crear valor duradero.</p>
-                <a href="#" class="kiritsu-btn">Descubre más</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <!-- KIRITSU HERO -->
+    <section class="kiritsu-hero">
+        <div class="kiritsu-hero-bg"></div>
+        <div class="kiritsu-hero-grid"></div>
+        <div class="kiritsu-hero-content">
+            <div class="kiritsu-kanji">立つ · キリツ</div>
+            <h1 class="kiritsu-title">Kiritsu</h1>
+            <p class="kiritsu-sub">Levántate · Aquí comenzamos a mostrar quiénes somos</p>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="video-section">
+
+        <!--
+        ============================================================
+        INSTRUCCIÓN PARA EL VIDEO DE GOOGLE DRIVE:
+        1. Sube tu video a Google Drive
+        2. Clic derecho → "Compartir" → "Cualquier persona con el enlace puede ver"
+        3. Copia el ID del archivo de la URL:
+           https://drive.google.com/file/d/[ESTE_ES_EL_ID]/view
+        4. Pega el ID donde dice TU_ID_AQUI abajo
+        ============================================================
+        -->
+
+        <div class="video-note reveal-el">
+            <i class="fas fa-info-circle"></i>
+            <span>Para agregar tu video: reemplaza <code style="display:inline;padding:2px 6px;background:rgba(212,175,55,0.1);border-radius:4px;color:var(--accent-gold);font-size:12px;">TU_ID_AQUI</code> en el código del iframe con el ID de tu archivo de Google Drive.</span>
+        </div>
+
+        <div class="video-wrapper reveal-el">
+            <!--
+                REEMPLAZA "TU_ID_AQUI" CON EL ID REAL DE TU VIDEO EN GOOGLE DRIVE
+                Ejemplo: si tu URL es https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view
+                entonces tu ID es: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs
+            -->
+            <iframe
+                id="driveVideo"
+                src="https://drive.google.com/file/d/TU_ID_AQUI/preview"
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+
+            <!-- Placeholder visible hasta que pongas el ID real -->
+            <div class="video-placeholder" id="videoPlaceholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Aquí irá tu video de Kiritsu</p>
+                <code>Reemplaza TU_ID_AQUI con el ID de Google Drive</code>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section class="quienes-section">
+        <div class="quienes-inner">
+            <div class="section-heading-wrap">
+                <div class="section-label reveal-el">我々は誰か · Quiénes somos</div>
+                <h2 class="section-heading reveal-el">La cara detrás<br>de Kittens</h2>
+            </div>
+            <p class="section-body reveal-el">
+                <strong>Kiritsu</strong> es el momento en que dejamos de ser una sombra y empezamos a mostrar quiénes somos. Aquí comenzamos a poner la cara, a contar nuestra historia y a demostrar que detrás de cada proyecto hay personas reales con <strong>visión, disciplina y fuego</strong>. No nos rendiremos hasta lograrlo.
+            </p>
+
+            <div class="team-grid">
+                <div class="team-card card-1" data-tilt>
+                    <div class="team-badge"></div>
+                    <div class="team-img-wrap">
+                        <img src="https://raw.githubusercontent.com/kittensmanagers-byte/KITTENS-MANAGERS/main/images/el%20negro.png"
+                             alt="El Negro" class="team-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop'">
+                        <div class="team-overlay"></div>
+                    </div>
+                    <div class="spotlight"></div>
+                    <div class="team-info">
+                        <div class="team-name">El Negro</div>
+                        <div class="team-role">創設者 / Fundador</div>
+                    </div>
+                </div>
+                <div class="team-card card-2" data-tilt>
+                    <div class="team-badge"></div>
+                    <div class="team-img-wrap">
+                        <img src="https://raw.githubusercontent.com/kittensmanagers-byte/KITTENS-MANAGERS/main/images/el%20gordo.png"
+                             alt="El Gordo" class="team-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop'">
+                        <div class="team-overlay"></div>
+                    </div>
+                    <div class="spotlight"></div>
+                    <div class="team-info">
+                        <div class="team-name">El Gordo</div>
+                        <div class="team-role">戦略家 / Estratega</div>
+                    </div>
+                </div>
+                <div class="team-card card-3" data-tilt>
+                    <div class="team-badge"></div>
+                    <div class="team-img-wrap">
+                        <img src="https://raw.githubusercontent.com/kittensmanagers-byte/KITTENS-MANAGERS/main/images/menguan.png"
+                             alt="Laztrality" class="team-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop'">
+                        <div class="team-overlay"></div>
+                    </div>
+                    <div class="spotlight"></div>
+                    <div class="team-info">
+                        <div class="team-name">Laztrality</div>
+                        <div class="team-role">クリエイティブ / Creativo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOTIVATIONAL STRIP -->
+    <section class="motive-strip">
+        <p class="motive-text">
+            "No nos rendiremos hasta lograrlo. <em>El mundo nos verá,</em><br>o lo haremos ver."
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2024 Kittens Managers. Todos los derechos reservados.</p>
+            <p class="footer-signature">設計によるディシプリンとビジョン</p>
+        </div>
+    </footer>
 
     <script>
-        document.addEventListener('click', function(e) {
-            const logoContainer = document.querySelector('.logo-container');
-            if (!logoContainer.contains(e.target)) {
-                logoContainer.classList.remove('active');
-            }
+        // Header scroll
+        const hi = document.getElementById('headerInitial');
+        const hs = document.getElementById('headerScroll');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) { hi.classList.add('scrolled'); hs.classList.add('visible'); }
+            else { hi.classList.remove('scrolled'); hs.classList.remove('visible'); }
         });
+
+        // Dropdown
+        function toggleDD(id) { document.getElementById(id).classList.toggle('active'); }
+        document.addEventListener('click', e => {
+            ['lc1','lc2'].forEach(id => {
+                const c = document.getElementById(id);
+                if (c && !c.contains(e.target)) c.classList.remove('active');
+            });
+        });
+
+        // Reveal observer
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-el, .team-card, .motive-text').forEach(el => obs.observe(el));
+
+        // Spotlight on team cards
+        document.querySelectorAll('.team-card').forEach(card => {
+            const sp = card.querySelector('.spotlight');
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                sp.style.setProperty('--mx', `${((e.clientX-r.left)/r.width)*100}%`);
+                sp.style.setProperty('--my', `${((e.clientY-r.top)/r.height)*100}%`);
+            });
+        });
+
+        // Vanilla tilt
+        class VT {
+            constructor(el, s={}) {
+                this.el = el;
+                this.s = { max:10, speed:400, ...s };
+                this.el.style.transformStyle='preserve-3d';
+                this.el.addEventListener('mouseenter', ()=>this.onEnter());
+                this.el.addEventListener('mousemove', e=>{ cancelAnimationFrame(this._r); this._e=e; this._r=requestAnimationFrame(()=>this.update()); });
+                this.el.addEventListener('mouseleave', ()=>this.onLeave());
+            }
+            onEnter(){ const r=this.el.getBoundingClientRect(); this.w=this.el.offsetWidth; this.h=this.el.offsetHeight; this.l=r.left; this.t=r.top; this.el.style.transition=`transform ${this.s.speed}ms cubic-bezier(0.03,0.98,0.52,0.99)`; }
+            onLeave(){ this.el.style.transition=`transform ${this.s.speed}ms cubic-bezier(0.03,0.98,0.52,0.99)`; this.el.style.transform='perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)'; }
+            update(){
+                const e=this._e;
+                let x=Math.min(Math.max((e.clientX-this.l)/this.w,0),1);
+                let y=Math.min(Math.max((e.clientY-this.t)/this.h,0),1);
+                const tx=((this.s.max/2-x*this.s.max)).toFixed(2);
+                const ty=(y*this.s.max-this.s.max/2).toFixed(2);
+                this.el.style.transform=`perspective(1000px) rotateX(${ty}deg) rotateY(${tx}deg) scale3d(1.02,1.02,1.02)`;
+            }
+        }
+        document.querySelectorAll('[data-tilt]').forEach(el=>new VT(el));
+
+        // Hide placeholder if real video ID is set
+        const iframe = document.getElementById('driveVideo');
+        const placeholder = document.getElementById('videoPlaceholder');
+        if (iframe && !iframe.src.includes('TU_ID_AQUI')) {
+            placeholder.style.display = 'none';
+        }
     </script>
 </body>
-</html>'''
-
-print("✅ kiritsu.html creado")
-print(f"📄 Tamaño: {len(kiritsu_html)} caracteres")
-print("\n" + "="*50)
-print("📦 TODOS LOS ARCHIVOS CREADOS:")
-print("="*50)
+</html>
