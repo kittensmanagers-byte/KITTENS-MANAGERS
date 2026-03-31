@@ -35,6 +35,9 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        @keyframes logoPulse { 0%,100%{border-color:rgba(255,255,255,0.08);transform:scale(1);} 50%{border-color:rgba(255,255,255,0.2);transform:scale(1.08);} }
+        .dropdown-video { width:100%; aspect-ratio:16/9; background:#0a0a0a; position:relative; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .dropdown-video iframe { width:100%; height:100%; border:none; display:block; }
 
         /* ── HEADER ── */
         .header-initial {
@@ -363,6 +366,13 @@
                 <span>KITTENS</span><span>MANAGERS</span>
             </div>
             <div class="dropdown">
+                                <div class="dropdown-video">
+                    <iframe src="https://drive.google.com/file/d/TU_ID_AQUI/preview" allow="autoplay" allowfullscreen></iframe>
+                    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#080808;">
+                        <div style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;animation:logoPulse 2s ease-in-out infinite;"><i class="fas fa-play" style="font-size:12px;color:rgba(255,255,255,0.2);"></i></div>
+                        <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;color:rgba(255,255,255,0.25);">KITTENS<span style="display:block;font-size:8px;font-weight:400;letter-spacing:0.4em;color:rgba(255,255,255,0.12);margin-top:3px;text-align:center;">MANAGERS</span></div>
+                    </div>
+                </div>
                 <div class="dropdown-links">
                     <a href="index.html">Inicio</a>
                     <a href="patrocinados.html">Patrocinados</a>
@@ -395,6 +405,13 @@
                 <span>KITTENS</span><span>MANAGERS</span>
             </div>
             <div class="dropdown">
+                                <div class="dropdown-video">
+                    <iframe src="https://drive.google.com/file/d/TU_ID_AQUI/preview" allow="autoplay" allowfullscreen></iframe>
+                    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#080808;">
+                        <div style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;animation:logoPulse 2s ease-in-out infinite;"><i class="fas fa-play" style="font-size:12px;color:rgba(255,255,255,0.2);"></i></div>
+                        <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;color:rgba(255,255,255,0.25);">KITTENS<span style="display:block;font-size:8px;font-weight:400;letter-spacing:0.4em;color:rgba(255,255,255,0.12);margin-top:3px;text-align:center;">MANAGERS</span></div>
+                    </div>
+                </div>
                 <div class="dropdown-links">
                     <a href="index.html">Inicio</a>
                     <a href="patrocinados.html">Patrocinados</a>
@@ -455,7 +472,7 @@
         <div class="quienes-inner">
             <div class="section-heading-wrap">
                 <div class="section-label reveal-el">我々は誰か · Quiénes somos</div>
-                <h2 class="section-heading reveal-el">La cara detrás<br>de Kittens</h2>
+                <h2 class="section-heading reveal-el" style="display:block;text-align:center;left:0;transform:none;">La cara detrás de Kittens</h2>
             </div>
             <p class="section-body reveal-el">
                 <strong>Kiritsu</strong> es el momento en que dejamos de ser una sombra y empezamos a mostrar quiénes somos. Aquí comenzamos a poner la cara, a contar nuestra historia y a demostrar que detrás de cada proyecto hay personas reales con <strong>visión, disciplina y fuego</strong>. No nos rendiremos hasta lograrlo.
