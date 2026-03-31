@@ -156,17 +156,11 @@
         }
         .page-hero-bg {
             position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse at 30% 50%, rgba(67,97,238,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(230,57,70,0.08) 0%, transparent 60%),
-                var(--bg-primary);
+            background: var(--bg-primary);
         }
         .page-hero-grid {
             position: absolute; inset: 0;
-            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            background: radial-gradient(ellipse at 50% 60%, rgba(255,255,255,0.02) 0%, transparent 70%);
         }
         .page-hero-content {
             position: relative; z-index: 2; text-align: center;
@@ -592,7 +586,7 @@
 
                 <div class="contact-email-note">
                     <i class="fas fa-envelope"></i>
-                    <span>Tu mensaje llegará a <strong>kittensmanagers@gmail.com</strong></span>
+                    <span>Tu mensaje llegará a <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f64667b7b6a617c626e616e686a7d7c4f68626e6663216c6062">[email&#160;protected]</a></strong></span>
                 </div>
 
                 <div id="serviceFormArea">
@@ -662,7 +656,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Header scroll
         const hi = document.getElementById('headerInitial');
         const hs = document.getElementById('headerScroll');
@@ -726,10 +720,4 @@
             );
             window.location.href = `mailto:kittensmanagers@gmail.com?subject=${subject}&body=${body}`;
 
-            document.getElementById('emailConfirm').textContent = email;
-            document.getElementById('serviceFormArea').style.display = 'none';
-            document.getElementById('successMsg').classList.add('show');
-        }
-    </script>
-</body>
-</html>
+            document.getEleme
