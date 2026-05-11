@@ -6,40 +6,26 @@
     <title>Kittens Manager — Soporte</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+JP:wght@300;400;600&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+JP:wght@300;400;600&family=Oswald:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --bg: #000;
-            --card: rgba(255,255,255,0.03);
-            --text: #fff;
-            --sec: rgba(255,255,255,0.55);
-            --ter: rgba(255,255,255,0.3);
-            --border: rgba(255,255,255,0.08);
-            --border-h: rgba(255,255,255,0.18);
-            --blue: #4361ee;
-            --gold: #d4af37;
-            --red: #e63946;
-            --green: #25d366;
-            --vip: #d4af37;
-            --font: 'Inter', sans-serif;
-            --jp: 'Noto Serif JP', serif;
-            --dis: 'Oswald', sans-serif;
+            --bg: #000; --card: rgba(255,255,255,0.03); --text: #fff;
+            --sec: rgba(255,255,255,0.55); --ter: rgba(255,255,255,0.3);
+            --border: rgba(255,255,255,0.08); --border-h: rgba(255,255,255,0.18);
+            --blue: #4361ee; --gold: #d4af37; --red: #e63946; --green: #25d366;
+            --font: 'Inter', sans-serif; --jp: 'Noto Serif JP', serif;
+            --dis: 'Oswald', sans-serif; --bb: 'Bebas Neue', cursive;
             --ease: cubic-bezier(0.4,0,0.2,1);
         }
-
         html { scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         ::selection { background: rgba(255,255,255,0.15); }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
-
         @keyframes logoPulse { 0%,100%{border-color:rgba(255,255,255,0.08);transform:scale(1);}50%{border-color:rgba(255,255,255,0.2);transform:scale(1.08);} }
-        .dropdown-video { width:100%;aspect-ratio:16/9;background:#0a0a0a;position:relative;overflow:hidden;border-bottom:1px solid var(--border); }
-        .dropdown-video iframe { width:100%;height:100%;border:none;display:block; }
 
         /* ── HEADER ── */
         .header-initial {
@@ -70,36 +56,27 @@
         .logo span:first-child { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
         .logo span:last-child { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sec); }
         .dropdown {
-            position: absolute; top: calc(100% + 12px); left: 0; width: 260px;
+            position: absolute; top: calc(100% + 12px); left: 0; width: 220px;
             background: rgba(8,8,8,0.98); border: 1px solid var(--border);
             border-radius: 18px; overflow: hidden;
             opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.96);
             transition: all 0.3s var(--ease); backdrop-filter: blur(24px);
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
-        .logo-container:hover .dropdown, .logo-container.active .dropdown {
-            opacity: 1; visibility: visible; transform: translateY(0) scale(1);
-        }
+        .logo-container:hover .dropdown, .logo-container.active .dropdown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
         .dropdown-links { padding: 14px; display: flex; flex-direction: column; gap: 2px; }
         .dropdown-links a {
             color: var(--sec); text-decoration: none; font-size: 13px;
             padding: 11px 14px; border-radius: 10px; transition: all 0.2s;
             position: relative; display: flex; align-items: center; gap: 10px;
         }
-        .dropdown-links a::before {
-            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
-            background: white; transform: scaleY(0); transition: transform 0.2s; border-radius: 2px;
-        }
         .dropdown-links a:hover { color: white; background: rgba(255,255,255,0.04); padding-left: 18px; }
-        .dropdown-links a:hover::before { transform: scaleY(1); }
         .dropdown-links a i { font-size: 11px; opacity: 0.4; width: 14px; text-align: center; }
         .nav-center { display: flex; align-items: center; }
         .nav-links-container {
             background: rgba(255,255,255,0.03); backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 100px; padding: 8px 28px;
-            transition: all 0.4s var(--ease);
         }
-        .nav-links-container:hover { background: rgba(255,255,255,0.06); border-color: var(--border-h); }
         .nav-links { display: flex; gap: 28px; }
         .nav-links a {
             font-size: 12px; font-weight: 500; color: var(--sec);
@@ -122,8 +99,7 @@
             width: 32px; height: 32px; background: rgba(255,255,255,0.07);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
             color: var(--sec); cursor: pointer; margin-left: 8px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s;
         }
         .search-btn:hover { background: rgba(255,255,255,0.14); color: white; transform: scale(1.15) rotate(15deg); }
         .search-btn i { font-size: 11px; }
@@ -147,17 +123,13 @@
             font-family: var(--font); font-size: clamp(46px, 8vw, 78px); font-weight: 800;
             letter-spacing: -0.04em; line-height: 1;
             background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.65) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 14px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 14px;
         }
         .page-hero-sub { font-family: var(--dis); font-size: 13px; font-weight: 300; color: var(--ter); letter-spacing: 0.25em; text-transform: uppercase; }
         .page-hero-line { width: 1px; height: 55px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); margin: 28px auto 0; }
 
         /* ── MODE TABS ── */
-        .mode-selector {
-            display: flex; justify-content: center; gap: 14px;
-            padding: 56px 40px 0; flex-wrap: wrap;
-        }
+        .mode-selector { display: flex; justify-content: center; gap: 14px; padding: 56px 40px 0; flex-wrap: wrap; }
         .mode-btn {
             display: flex; align-items: center; gap: 10px; padding: 16px 32px;
             background: var(--card); border: 1px solid var(--border); border-radius: 100px;
@@ -180,18 +152,15 @@
         .panel.active { display: block; }
         @keyframes panelIn { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
 
-        /* ══════════════════════════════════════════
-           SERVICE PANEL
-        ══════════════════════════════════════════ */
+        /* ══ SERVICE PANEL ══ */
         .panel-service-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start; }
         .panel-sticky { position: sticky; top: 90px; }
         .panel-eyebrow { font-family: var(--jp); font-size: 11px; color: var(--ter); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; }
         .panel-heading { font-size: clamp(26px, 3vw, 36px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
         .panel-body { font-size: 14px; font-weight: 300; color: var(--sec); line-height: 1.85; margin-bottom: 36px; }
 
-        /* Service accordion cards */
+        /* Service cards */
         .services-list { display: flex; flex-direction: column; gap: 10px; }
-
         .svc-card {
             background: var(--card); border: 1px solid var(--border);
             border-radius: 16px; overflow: hidden; transition: border-color 0.3s, background 0.3s;
@@ -199,64 +168,135 @@
         }
         .svc-card:hover { border-color: var(--border-h); background: rgba(255,255,255,0.04); }
         .svc-card.selected { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); }
+        .svc-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; user-select: none; }
 
-        .svc-header {
-            display: flex; align-items: center; gap: 14px;
-            padding: 16px 18px; user-select: none;
+        /* Animal container */
+        .svc-animal {
+            width: 46px; height: 46px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
         }
-        .svc-icon {
-            width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center; font-size: 16px;
-        }
-        .svc-icon.blue  { background: rgba(67,97,238,0.15);  color: #7b97ff; }
-        .svc-icon.gold  { background: rgba(212,175,55,0.15);  color: var(--gold); }
-        .svc-icon.red   { background: rgba(230,57,70,0.15);   color: #ff7b84; }
-        .svc-icon.green { background: rgba(37,211,102,0.15);  color: var(--green); }
+        .svc-animal svg { width: 46px; height: 46px; overflow: visible; }
 
         .svc-title-wrap { flex: 1; }
         .svc-title { font-size: 13px; font-weight: 600; color: white; margin-bottom: 3px; }
         .svc-subtitle { font-size: 11px; color: var(--ter); letter-spacing: 0.02em; }
-
         .svc-toggle {
             width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center; flex-shrink: 0;
             transition: all 0.3s; color: var(--ter); font-size: 10px;
         }
         .svc-card.selected .svc-toggle { background: white; border-color: white; color: black; }
-        .svc-card.open .svc-arrow { transform: rotate(180deg); }
-
         .svc-arrow { font-size: 10px; color: var(--ter); transition: transform 0.3s; margin-left: 4px; }
-
-        /* Dropdown body */
-        .svc-body {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s var(--ease), padding 0.3s;
-            padding: 0 18px;
-        }
-        .svc-card.open .svc-body { max-height: 400px; padding: 0 18px 18px; }
-
+        .svc-card.open .svc-arrow { transform: rotate(180deg); }
+        .svc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.3s; padding: 0 18px; }
+        .svc-card.open .svc-body { max-height: 500px; padding: 0 18px 18px; }
         .svc-detail { border-top: 1px solid var(--border); padding-top: 16px; }
         .svc-detail p { font-size: 13px; font-weight: 300; color: var(--sec); line-height: 1.8; margin-bottom: 12px; }
         .svc-detail ul { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-        .svc-detail ul li {
-            font-size: 12px; color: var(--sec); padding-left: 16px; position: relative; line-height: 1.5;
-        }
+        .svc-detail ul li { font-size: 12px; color: var(--sec); padding-left: 16px; position: relative; line-height: 1.5; }
         .svc-detail ul li::before { content: '→'; position: absolute; left: 0; color: var(--ter); font-size: 11px; }
-        .svc-no-tarifa { font-size: 11px; color: var(--ter); font-style: italic; margin-bottom: 10px; }
-        .svc-doc-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 11px; font-weight: 600; color: var(--red);
-            text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+        .svc-no-tarifa { font-size: 11px; color: var(--ter); font-style: italic; margin-bottom: 14px; }
+
+        /* ── METALLIC DOC LINK ── */
+        .svc-doc-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--bb); font-size: 13px; letter-spacing: 0.12em;
+            text-transform: uppercase; border: none; background: none; cursor: pointer;
+            padding: 0; position: relative;
+            background: linear-gradient(90deg, #aaa 0%, #fff 25%, #888 45%, #fff 65%, #ccc 80%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: metalShimmer 3s linear infinite;
             transition: opacity 0.2s;
         }
-        .svc-doc-link:hover { opacity: 0.75; }
-        .svc-doc-link i { font-size: 10px; }
+        .svc-doc-btn:hover { animation-duration: 1.2s; opacity: 0.85; }
+        .svc-doc-btn i { font-size: 10px; background: linear-gradient(90deg, #aaa, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @keyframes metalShimmer { 0%{background-position:0% center} 100%{background-position:200% center} }
+
+        /* ── DOC MODAL ── */
+        .doc-modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.35s var(--ease);
+            backdrop-filter: blur(12px);
+        }
+        .doc-modal-overlay.open { opacity: 1; visibility: visible; }
+        .doc-modal {
+            width: 90vw; max-width: 860px; max-height: 88vh;
+            background: #080808; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;
+            transform: translateY(20px) scale(0.97); transition: transform 0.35s var(--ease);
+            box-shadow: 0 40px 120px rgba(0,0,0,0.9);
+        }
+        .doc-modal-overlay.open .doc-modal { transform: translateY(0) scale(1); }
+        .doc-modal-header {
+            padding: 24px 28px 0; display: flex; flex-direction: column; gap: 16px;
+            border-bottom: 1px solid var(--border); flex-shrink: 0;
+        }
+        .doc-modal-top { display: flex; align-items: center; justify-content: space-between; }
+        .doc-modal-title { font-family: var(--bb); font-size: 22px; letter-spacing: 0.08em; background: linear-gradient(90deg, #aaa 0%, #fff 40%, #888 70%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: metalShimmer 4s linear infinite; }
+        .doc-modal-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--sec); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 14px; }
+        .doc-modal-close:hover { background: rgba(255,255,255,0.1); color: white; }
+        .doc-tabs { display: flex; gap: 0; }
+        .doc-tab {
+            padding: 12px 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--sec); cursor: pointer; border: none; background: none;
+            border-bottom: 2px solid transparent; transition: all 0.3s; font-family: var(--font);
+        }
+        .doc-tab.active { color: white; border-bottom-color: white; }
+        .doc-tab:hover:not(.active) { color: rgba(255,255,255,0.75); }
+        .doc-modal-body { flex: 1; overflow-y: auto; padding: 32px 28px; }
+        .doc-modal-body::-webkit-scrollbar { width: 4px; }
+        .doc-modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .doc-pane { display: none; }
+        .doc-pane.active { display: block; animation: panelIn 0.3s var(--ease); }
+
+        /* Doc content styles */
+        .doc-version-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 100px; font-size: 10px; font-weight: 600; color: var(--ter); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px; }
+        .doc-section { margin-bottom: 36px; }
+        .doc-section-num { font-family: var(--bb); font-size: 11px; color: var(--ter); letter-spacing: 0.2em; margin-bottom: 6px; }
+        .doc-section h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; background: linear-gradient(135deg, #fff, rgba(255,255,255,0.75)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .doc-section p { font-size: 13px; color: var(--sec); line-height: 1.85; margin-bottom: 10px; }
+        .doc-section ul { list-style: none; display: flex; flex-direction: column; gap: 6px; padding-left: 4px; }
+        .doc-section ul li { font-size: 13px; color: var(--sec); padding-left: 18px; position: relative; line-height: 1.65; }
+        .doc-section ul li::before { content: '→'; position: absolute; left: 0; color: var(--ter); font-size: 11px; top: 2px; }
+        .doc-section ul li strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+        .doc-divider { height: 1px; background: var(--border); margin: 28px 0; }
+        .doc-highlight { padding: 16px 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-left: 3px solid rgba(255,255,255,0.25); border-radius: 0 10px 10px 0; margin-bottom: 16px; }
+        .doc-highlight p { margin-bottom: 0; }
+        .doc-phase { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+        .doc-phase:last-child { border-bottom: none; }
+        .doc-phase-num { font-family: var(--bb); font-size: 28px; color: var(--ter); flex-shrink: 0; line-height: 1; }
+        .doc-phase-content h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
+        .doc-phase-content p { font-size: 12px; color: var(--sec); line-height: 1.7; margin-bottom: 0; }
+        .doc-empty { text-align: center; padding: 80px 20px; }
+        .doc-empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+        .doc-empty h3 { font-size: 18px; font-weight: 600; color: var(--sec); margin-bottom: 8px; }
+        .doc-empty p { font-size: 13px; color: var(--ter); }
+
+        /* Flow diagram */
+        .flow-diagram { display: flex; flex-direction: column; gap: 0; }
+        .flow-step {
+            display: flex; gap: 20px; align-items: flex-start;
+            padding: 20px; border-radius: 14px; transition: background 0.3s; cursor: pointer;
+        }
+        .flow-step:hover { background: rgba(255,255,255,0.03); }
+        .flow-step-left { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
+        .flow-step-num { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--bb); font-size: 16px; color: var(--sec); flex-shrink: 0; }
+        .flow-step.active-step .flow-step-num { background: white; color: black; border-color: white; }
+        .flow-connector { width: 1px; flex: 1; min-height: 30px; background: var(--border); margin: 4px 0; }
+        .flow-step-content { flex: 1; padding-top: 4px; }
+        .flow-step-content h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
+        .flow-step-content p { font-size: 12px; color: var(--sec); line-height: 1.65; }
+        .flow-step-detail { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+        .flow-step.active-step .flow-step-detail { max-height: 200px; }
+        .flow-step-detail ul { margin-top: 10px; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+        .flow-step-detail ul li { font-size: 12px; color: var(--ter); padding-left: 14px; position: relative; }
+        .flow-step-detail ul li::before { content: '·'; position: absolute; left: 4px; }
 
         /* ── FORM WRAPPER ── */
-        .form-wrapper {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-            border-radius: 22px; padding: 40px; backdrop-filter: blur(10px);
-        }
+        .form-wrapper { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 22px; padding: 40px; backdrop-filter: blur(10px); }
         .form-header { margin-bottom: 32px; }
         .form-header h3 { font-size: 19px; font-weight: 600; color: white; margin-bottom: 6px; letter-spacing: -0.01em; }
         .form-header p { font-size: 13px; color: var(--sec); }
@@ -265,74 +305,79 @@
         .form-group label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ter); }
         .form-group input, .form-group textarea {
             padding: 13px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-            border-radius: 11px; color: white; font-family: var(--font); font-size: 14px;
-            outline: none; transition: all 0.3s; resize: none;
+            border-radius: 11px; color: white; font-family: var(--font); font-size: 14px; outline: none; transition: all 0.3s; resize: none;
         }
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06);
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
-        }
+        .form-group input:focus, .form-group textarea:focus { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); box-shadow: 0 0 0 3px rgba(255,255,255,0.03); }
         .form-group input::placeholder, .form-group textarea::placeholder { color: var(--ter); }
         .form-group textarea { min-height: 110px; }
-
-        .email-note {
-            display: flex; align-items: center; gap: 10px; padding: 13px 16px;
-            background: rgba(67,97,238,0.07); border: 1px solid rgba(67,97,238,0.18);
-            border-radius: 11px; margin-bottom: 22px; font-size: 12px; color: var(--sec);
-        }
-        .email-note i { color: #7b97ff; font-size: 13px; }
-        .email-note strong { color: white; }
-
         .submit-btn {
-            width: 100%; padding: 15px;
-            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
-            border-radius: 11px; color: white; font-family: var(--font); font-size: 13px;
-            font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-            cursor: pointer; transition: all 0.35s var(--ease);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            position: relative; overflow: hidden;
+            width: 100%; padding: 15px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 11px; color: white; font-family: var(--font); font-size: 13px; font-weight: 500;
+            letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.35s var(--ease);
+            display: flex; align-items: center; justify-content: center; gap: 10px; position: relative; overflow: hidden;
         }
         .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent); transition: left 0.55s; }
         .submit-btn:hover::before { left: 100%; }
         .submit-btn:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
         .submit-btn i { font-size: 12px; transition: transform 0.3s; }
         .submit-btn:hover i { transform: translateX(4px); }
-
         .success-msg { display: none; text-align: center; padding: 36px; }
         .success-msg.show { display: block; animation: panelIn 0.5s ease; }
         .success-icon { font-size: 44px; margin-bottom: 14px; }
         .success-msg h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
         .success-msg p { font-size: 13px; color: var(--sec); }
-
         .spam-msg { display: none; text-align: center; padding: 28px; }
         .spam-msg.show { display: block; animation: panelIn 0.4s ease; }
         .spam-msg p { font-size: 13px; color: #ff9a9a; line-height: 1.7; }
         .spam-msg i { font-size: 32px; color: var(--red); margin-bottom: 12px; display: block; }
 
-        /* ══════════════════════════════════════════
-           WHATSAPP PANEL
-        ══════════════════════════════════════════ */
-        .wa-wrap { max-width: 680px; margin: 0 auto; }
+        /* ══ WHATSAPP PANEL ══ */
+        .wa-wrap { max-width: 780px; margin: 0 auto; }
         .wa-hero {
-            padding: 56px 40px; text-align: center;
+            padding: 60px 40px 50px; text-align: center;
             background: rgba(37,211,102,0.03); border: 1px solid rgba(37,211,102,0.1);
-            border-radius: 26px; position: relative; overflow: hidden;
+            border-radius: 26px; position: relative; overflow: hidden; margin-bottom: 40px;
         }
         .wa-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(37,211,102,0.07) 0%, transparent 60%); }
         .wa-icon-wrap { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 26px; background: rgba(37,211,102,0.11); border: 1px solid rgba(37,211,102,0.22); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
         .wa-icon-wrap i { font-size: 38px; color: var(--green); }
-        .wa-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; position: relative; z-index: 1; }
-        .wa-desc { font-size: 14px; color: var(--sec); line-height: 1.8; max-width: 460px; margin: 0 auto 36px; position: relative; z-index: 1; }
-        .wa-feats { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-bottom: 40px; position: relative; z-index: 1; }
-        .wa-feat { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--sec); }
-        .wa-feat i { color: var(--green); font-size: 12px; }
-        .wa-btn { display: inline-flex; align-items: center; gap: 11px; padding: 17px 40px; background: rgba(37,211,102,0.11); border: 1px solid rgba(37,211,102,0.28); border-radius: 100px; color: white; font-size: 13px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.35s var(--ease); position: relative; z-index: 1; }
+        .wa-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; position: relative; z-index: 1; }
+        .wa-desc { font-size: 14px; color: var(--sec); line-height: 1.8; max-width: 500px; margin: 0 auto 40px; position: relative; z-index: 1; }
+        .wa-btn {
+            display: inline-flex; align-items: center; gap: 11px; padding: 17px 40px;
+            background: rgba(37,211,102,0.11); border: 1px solid rgba(37,211,102,0.28);
+            border-radius: 100px; color: white; font-size: 13px; font-weight: 500;
+            letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+            transition: all 0.35s var(--ease); position: relative; z-index: 1;
+        }
         .wa-btn:hover { background: rgba(37,211,102,0.2); border-color: rgba(37,211,102,0.5); transform: translateY(-3px); box-shadow: 0 18px 36px rgba(37,211,102,0.14); }
         .wa-btn i { font-size: 19px; color: var(--green); }
 
-        /* ══════════════════════════════════════════
-           VIP PANEL
-        ══════════════════════════════════════════ */
+        /* Feature cards grid */
+        .wa-features-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ter); margin-bottom: 20px; }
+        .wa-features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+        @media(max-width:700px){ .wa-features-grid{grid-template-columns:1fr 1fr;} }
+        .wa-feat-card {
+            background: rgba(37,211,102,0.03); border: 1px solid rgba(37,211,102,0.1);
+            border-radius: 16px; padding: 22px 18px; transition: all 0.3s;
+        }
+        .wa-feat-card:hover { background: rgba(37,211,102,0.07); border-color: rgba(37,211,102,0.22); transform: translateY(-3px); }
+        .wa-feat-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(37,211,102,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .wa-feat-icon i { color: var(--green); font-size: 16px; }
+        .wa-feat-card h4 { font-size: 13px; font-weight: 600; color: white; margin-bottom: 6px; }
+        .wa-feat-card p { font-size: 12px; color: var(--sec); line-height: 1.6; }
+
+        /* Flow steps */
+        .wa-flow-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ter); margin-bottom: 20px; }
+        .wa-flow-steps { display: flex; flex-direction: column; gap: 0; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+        .wa-flow-step { display: flex; align-items: center; gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+        .wa-flow-step:last-child { border-bottom: none; }
+        .wa-flow-step:hover { background: rgba(255,255,255,0.03); }
+        .wa-flow-num { font-family: var(--bb); font-size: 24px; color: rgba(37,211,102,0.4); flex-shrink: 0; line-height: 1; width: 32px; }
+        .wa-flow-content h4 { font-size: 13px; font-weight: 600; color: white; margin-bottom: 3px; }
+        .wa-flow-content p { font-size: 12px; color: var(--sec); line-height: 1.5; }
+
+        /* ══ VIP PANEL ══ */
         .vip-hero {
             text-align: center; padding: 60px 40px 48px;
             background: linear-gradient(180deg, rgba(212,175,55,0.04) 0%, transparent 100%);
@@ -341,63 +386,34 @@
         }
         .vip-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 60%); }
         .vip-crown { font-size: 48px; margin-bottom: 20px; position: relative; z-index: 1; }
-        .vip-tag {
-            display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px;
-            background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 100px; font-size: 11px; font-weight: 600; color: var(--gold);
-            letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
-            position: relative; z-index: 1;
-        }
-        .vip-tag i { font-size: 10px; }
+        .vip-tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3); border-radius: 100px; font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; position: relative; z-index: 1; }
         .vip-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; background: linear-gradient(135deg, #fff 30%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; position: relative; z-index: 1; }
         .vip-desc { font-size: 15px; color: var(--sec); line-height: 1.8; max-width: 580px; margin: 0 auto 32px; position: relative; z-index: 1; }
-        .vip-no-tarifa {
-            display: inline-block; font-size: 12px; color: var(--ter);
-            font-style: italic; padding: 10px 20px;
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-            border-radius: 100px; position: relative; z-index: 1;
-        }
-
-        /* VIP requirements accordion */
+        .vip-no-tarifa { display: inline-block; font-size: 12px; color: var(--ter); font-style: italic; padding: 10px 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; position: relative; z-index: 1; }
         .vip-reqs { margin-bottom: 40px; }
         .vip-reqs-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ter); margin-bottom: 16px; }
         .vip-req-list { display: flex; flex-direction: column; gap: 10px; }
-        .vip-req {
-            display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px;
-            background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.1);
-            border-radius: 14px; transition: all 0.3s;
-        }
+        .vip-req { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.1); border-radius: 14px; transition: all 0.3s; }
         .vip-req:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.2); }
         .vip-req-icon { width: 34px; height: 34px; border-radius: 9px; background: rgba(212,175,55,0.12); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
         .vip-req-text h5 { font-size: 13px; font-weight: 600; color: white; margin-bottom: 4px; }
         .vip-req-text p { font-size: 12px; color: var(--sec); line-height: 1.6; }
-
-        /* VIP form */
-        .vip-form-wrap {
-            background: linear-gradient(180deg, rgba(212,175,55,0.03) 0%, transparent 100%);
-            border: 1px solid rgba(212,175,55,0.15); border-radius: 22px; padding: 40px;
-        }
+        .vip-form-wrap { background: linear-gradient(180deg, rgba(212,175,55,0.03) 0%, transparent 100%); border: 1px solid rgba(212,175,55,0.15); border-radius: 22px; padding: 40px; }
         .vip-form-header { margin-bottom: 28px; }
         .vip-form-header h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; background: linear-gradient(135deg, #fff 40%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .vip-form-header p { font-size: 13px; color: var(--sec); }
         .vip-submit-btn {
-            width: 100%; padding: 16px;
-            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.08));
-            border: 1px solid rgba(212,175,55,0.35); border-radius: 11px;
-            color: white; font-family: var(--font); font-size: 13px; font-weight: 600;
-            letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
-            transition: all 0.35s var(--ease);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            position: relative; overflow: hidden;
+            width: 100%; padding: 16px; background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.08));
+            border: 1px solid rgba(212,175,55,0.35); border-radius: 11px; color: white;
+            font-family: var(--font); font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+            text-transform: uppercase; cursor: pointer; transition: all 0.35s var(--ease);
+            display: flex; align-items: center; justify-content: center; gap: 10px; position: relative; overflow: hidden;
         }
         .vip-submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); transition: left 0.6s; }
         .vip-submit-btn:hover::before { left: 100%; }
         .vip-submit-btn:hover { background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.12)); border-color: rgba(212,175,55,0.55); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,175,55,0.1); }
         .vip-submit-btn i { font-size: 13px; transition: transform 0.3s; }
         .vip-submit-btn:hover i { transform: translateX(4px); }
-        .vip-email-note { display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: rgba(212,175,55,0.06); border: 1px solid rgba(212,175,55,0.15); border-radius: 11px; margin-bottom: 22px; font-size: 12px; color: var(--sec); }
-        .vip-email-note i { color: var(--gold); font-size: 13px; }
-        .vip-email-note strong { color: white; }
 
         /* ── FOOTER ── */
         .footer { background: #000; padding: 56px 50px 40px; border-top: 1px solid var(--border); }
@@ -406,7 +422,54 @@
         .footer-signature { font-family: var(--jp); font-size: 11px; color: var(--ter); letter-spacing: 0.15em; }
 
         @media(max-width:900px){ .panel-service-layout{grid-template-columns:1fr;} .panel-sticky{position:static;} .form-row{grid-template-columns:1fr;} }
-        @media(max-width:600px){ .form-panels{padding:36px 20px 80px;} .form-wrapper,.vip-form-wrap{padding:26px 18px;} .mode-selector{padding:36px 20px 0;gap:10px;} .vip-hero{padding:40px 24px;} }
+        @media(max-width:600px){ .form-panels{padding:36px 20px 80px;} .form-wrapper,.vip-form-wrap{padding:26px 18px;} .mode-selector{padding:36px 20px 0;gap:10px;} .vip-hero{padding:40px 24px;} .doc-modal{width:96vw;} }
+
+        /* ── SVG ANIMAL ANIMATIONS ── */
+
+        /* CAT (Redes Sociales) */
+        @keyframes catBlink { 0%,90%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.05)} }
+        @keyframes catEarTwitch { 0%,80%,100%{transform:rotate(0deg)} 85%,90%{transform:rotate(-8deg)} 95%{transform:rotate(5deg)} }
+        @keyframes catTailWag { 0%,100%{transform:rotate(-10deg) translateX(0)} 50%{transform:rotate(10deg) translateX(2px)} }
+        @keyframes catBreath { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.04)} }
+        .cat-body { animation: catBreath 2.5s ease-in-out infinite; transform-origin: center; }
+        .cat-eye-l, .cat-eye-r { animation: catBlink 4s ease-in-out infinite; transform-origin: center; }
+        .cat-ear-l { animation: catEarTwitch 5s ease-in-out infinite; transform-origin: bottom center; }
+        .cat-tail { animation: catTailWag 2s ease-in-out infinite; transform-origin: top left; }
+        .svc-animal:hover .cat-eye-l, .svc-animal:hover .cat-eye-r { transform: scaleY(0.1) !important; animation: none !important; }
+        .svc-animal:hover .cat-body { transform: translateY(-3px); }
+
+        /* FOX (Diseño de Marca) */
+        @keyframes foxTailWag { 0%,100%{transform:rotate(-15deg)} 50%{transform:rotate(15deg)} }
+        @keyframes foxHeadTilt { 0%,100%{transform:rotate(0deg)} 40%,60%{transform:rotate(-8deg)} }
+        @keyframes foxBlink { 0%,85%,100%{transform:scaleY(1)} 90%{transform:scaleY(0.05)} }
+        .fox-tail { animation: foxTailWag 1.8s ease-in-out infinite; transform-origin: 8px 2px; }
+        .fox-head { animation: foxHeadTilt 4s ease-in-out infinite; transform-origin: center bottom; }
+        .fox-eye-l, .fox-eye-r { animation: foxBlink 3.5s ease-in-out infinite; transform-origin: center; }
+        .svc-animal:hover .fox-tail { animation-duration: 0.5s; }
+        .svc-animal:hover .fox-head { transform: rotate(12deg); animation: none; }
+
+        /* DRAGON (Produccion) */
+        @keyframes dragonFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+        @keyframes dragonWingFlap { 0%,100%{transform:scaleX(1) rotate(0deg)} 50%{transform:scaleX(0.7) rotate(-8deg)} }
+        @keyframes dragonEyeGlow { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .dragon-body { animation: dragonFloat 3s ease-in-out infinite; }
+        .dragon-wing-l { animation: dragonWingFlap 2s ease-in-out infinite; transform-origin: right center; }
+        .dragon-wing-r { animation: dragonWingFlap 2s ease-in-out infinite 0.1s; transform-origin: left center; }
+        .dragon-eye { animation: dragonEyeGlow 2s ease-in-out infinite; }
+        @keyframes dragonFire { 0%{opacity:0;transform:scaleX(0)} 50%{opacity:1;transform:scaleX(1)} 100%{opacity:0;transform:scaleX(1.2)} }
+        .dragon-fire { opacity: 0; transform-origin: left center; }
+        .svc-animal:hover .dragon-fire { animation: dragonFire 0.5s ease-out forwards; }
+        .svc-animal:hover .dragon-body { transform: translateY(-5px) rotate(-5deg); }
+
+        /* OWL (Consultoria) */
+        @keyframes owlBlink { 0%,75%,100%{transform:scaleY(1)} 80%{transform:scaleY(0.05)} }
+        @keyframes owlHeadRotate { 0%,100%{transform:rotate(0deg)} 30%{transform:rotate(-15deg)} 70%{transform:rotate(15deg)} }
+        @keyframes owlBreath { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.04)} }
+        .owl-eye-l, .owl-eye-r { animation: owlBlink 5s ease-in-out infinite; transform-origin: center; }
+        .owl-head { animation: owlHeadRotate 7s ease-in-out infinite; transform-origin: center bottom; }
+        .owl-body { animation: owlBreath 3s ease-in-out infinite; transform-origin: center; }
+        .svc-animal:hover .owl-head { animation: none; transform: rotate(25deg); }
+        .svc-animal:hover .owl-eye-l, .svc-animal:hover .owl-eye-r { animation: none; transform: scaleY(2); }
     </style>
 </head>
 <body>
@@ -416,13 +479,6 @@
         <div class="logo-container" id="lc1">
             <div class="logo" onclick="toggleDD('lc1')"><span>KITTENS</span><span>MANAGERS</span></div>
             <div class="dropdown">
-                <div class="dropdown-video">
-                    <iframe src="https://drive.google.com/file/d/TU_ID_AQUI/preview" allow="autoplay" allowfullscreen></iframe>
-                    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#080808;">
-                        <div style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;animation:logoPulse 2s ease-in-out infinite;"><i class="fas fa-play" style="font-size:12px;color:rgba(255,255,255,0.2);"></i></div>
-                        <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;color:rgba(255,255,255,0.25);">KITTENS<span style="display:block;font-size:8px;font-weight:400;letter-spacing:0.4em;color:rgba(255,255,255,0.12);margin-top:3px;text-align:center;">MANAGERS</span></div>
-                    </div>
-                </div>
                 <div class="dropdown-links">
                     <a href="index.html"><i class="fas fa-house"></i>Inicio</a>
                     <a href="patrocinados.html"><i class="fas fa-star"></i>Patrocinados</a>
@@ -453,13 +509,6 @@
         <div class="logo-container" id="lc2">
             <div class="logo" onclick="toggleDD('lc2')"><span>KITTENS</span><span>MANAGERS</span></div>
             <div class="dropdown">
-                <div class="dropdown-video">
-                    <iframe src="https://drive.google.com/file/d/TU_ID_AQUI/preview" allow="autoplay" allowfullscreen></iframe>
-                    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#080808;">
-                        <div style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;animation:logoPulse 2s ease-in-out infinite;"><i class="fas fa-play" style="font-size:12px;color:rgba(255,255,255,0.2);"></i></div>
-                        <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;color:rgba(255,255,255,0.25);">KITTENS<span style="display:block;font-size:8px;font-weight:400;letter-spacing:0.4em;color:rgba(255,255,255,0.12);margin-top:3px;text-align:center;">MANAGERS</span></div>
-                    </div>
-                </div>
                 <div class="dropdown-links">
                     <a href="index.html"><i class="fas fa-house"></i>Inicio</a>
                     <a href="patrocinados.html"><i class="fas fa-star"></i>Patrocinados</a>
@@ -500,16 +549,13 @@
     <!-- TABS -->
     <div class="mode-selector">
         <button class="mode-btn active" id="btnService" onclick="setMode('service')">
-            <i class="fas fa-concierge-bell icon-service"></i>
-            <span>Servicios</span>
+            <i class="fas fa-concierge-bell icon-service"></i><span>Servicios</span>
         </button>
         <button class="mode-btn" id="btnWa" onclick="setMode('wa')">
-            <i class="fab fa-whatsapp icon-wa"></i>
-            <span>WhatsApp</span>
+            <i class="fab fa-whatsapp icon-wa"></i><span>WhatsApp</span>
         </button>
         <button class="mode-btn" id="btnVip" onclick="setMode('vip')">
-            <i class="fas fa-crown icon-vip"></i>
-            <span>VIP — Patrocinio</span>
+            <i class="fas fa-crown icon-vip"></i><span>VIP — Patrocinio</span>
         </button>
     </div>
 
@@ -518,8 +564,6 @@
         <!-- ══ PANEL SERVICIOS ══ -->
         <div class="panel active" id="panelService">
             <div class="panel-service-layout">
-
-                <!-- LEFT: service selector -->
                 <div class="panel-sticky">
                     <div class="panel-eyebrow">サービス · Servicios</div>
                     <h2 class="panel-heading">¿En qué te podemos ayudar?</h2>
@@ -527,10 +571,56 @@
 
                     <div class="services-list">
 
-                        <!-- Gestión de Redes Sociales -->
+                        <!-- Gestión de Redes Sociales — CAT -->
                         <div class="svc-card selected open" id="svc-redes" onclick="toggleSvc(this,'Gestión de Redes Sociales')">
                             <div class="svc-header">
-                                <div class="svc-icon blue"><i class="fas fa-share-nodes"></i></div>
+                                <div class="svc-animal">
+                                    <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Cat with headphones -->
+                                        <g class="cat-tail">
+                                            <path d="M 8 36 Q 2 28 5 22 Q 7 18 10 22" stroke="#7b97ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                        </g>
+                                        <g class="cat-body">
+                                            <!-- Body -->
+                                            <ellipse cx="23" cy="30" rx="11" ry="9" fill="#1a1f4e"/>
+                                            <!-- Head -->
+                                            <ellipse cx="23" cy="19" rx="10" ry="9" fill="#1a1f4e"/>
+                                            <!-- Ear left -->
+                                            <g class="cat-ear-l">
+                                                <polygon points="14,13 11,5 18,11" fill="#1a1f4e"/>
+                                                <polygon points="14,12 12,7 17,11" fill="#4361ee" opacity="0.5"/>
+                                            </g>
+                                            <!-- Ear right -->
+                                            <polygon points="32,13 35,5 28,11" fill="#1a1f4e"/>
+                                            <polygon points="32,12 34,7 29,11" fill="#4361ee" opacity="0.5"/>
+                                            <!-- Eyes -->
+                                            <g class="cat-eye-l">
+                                                <ellipse cx="19" cy="18" rx="2.5" ry="3" fill="#7b97ff"/>
+                                                <ellipse cx="19" cy="18" rx="1" ry="1.5" fill="#000"/>
+                                                <circle cx="19.8" cy="17" r="0.6" fill="white" opacity="0.8"/>
+                                            </g>
+                                            <g class="cat-eye-r">
+                                                <ellipse cx="27" cy="18" rx="2.5" ry="3" fill="#7b97ff"/>
+                                                <ellipse cx="27" cy="18" rx="1" ry="1.5" fill="#000"/>
+                                                <circle cx="27.8" cy="17" r="0.6" fill="white" opacity="0.8"/>
+                                            </g>
+                                            <!-- Nose -->
+                                            <polygon points="23,22 21.5,23.5 24.5,23.5" fill="#7b97ff" opacity="0.7"/>
+                                            <!-- Whiskers -->
+                                            <line x1="13" y1="22" x2="20" y2="23" stroke="#7b97ff" stroke-width="0.8" opacity="0.5"/>
+                                            <line x1="13" y1="24" x2="20" y2="24" stroke="#7b97ff" stroke-width="0.8" opacity="0.5"/>
+                                            <line x1="26" y1="23" x2="33" y2="22" stroke="#7b97ff" stroke-width="0.8" opacity="0.5"/>
+                                            <line x1="26" y1="24" x2="33" y2="24" stroke="#7b97ff" stroke-width="0.8" opacity="0.5"/>
+                                            <!-- Headphones -->
+                                            <path d="M 13 17 Q 13 8 23 8 Q 33 8 33 17" stroke="#4361ee" stroke-width="2" fill="none"/>
+                                            <rect x="11" y="15" width="5" height="7" rx="2.5" fill="#4361ee"/>
+                                            <rect x="30" y="15" width="5" height="7" rx="2.5" fill="#4361ee"/>
+                                            <!-- Paws -->
+                                            <ellipse cx="17" cy="38" rx="4" ry="3" fill="#232870"/>
+                                            <ellipse cx="29" cy="38" rx="4" ry="3" fill="#232870"/>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <div class="svc-title-wrap">
                                     <div class="svc-title">Gestión de Redes Sociales</div>
                                     <div class="svc-subtitle">Estrategia · Contenido · Crecimiento</div>
@@ -547,15 +637,56 @@
                                         <li>Crecimiento orgánico medible y sostenible</li>
                                     </ul>
                                     <div class="svc-no-tarifa">* Las tarifas varían según la complejidad y alcance del proyecto.</div>
-                                    <a href="#" class="svc-doc-link"><i class="fas fa-arrow-right"></i> Ver documentación completa</a>
+                                    <button class="svc-doc-btn" onclick="openDocModal(event,'Gestión de Redes Sociales')"><i class="fas fa-arrow-right"></i> Ver documentación completa</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Diseño de Marca -->
+                        <!-- Diseño de Marca — FOX -->
                         <div class="svc-card" id="svc-marca" onclick="toggleSvc(this,'Diseño de Marca / Identidad')">
                             <div class="svc-header">
-                                <div class="svc-icon gold"><i class="fas fa-palette"></i></div>
+                                <div class="svc-animal">
+                                    <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                                        <g class="fox-tail">
+                                            <path d="M 34 34 Q 42 28 40 20 Q 39 15 36 18" stroke="#d4af37" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                            <circle cx="40" cy="20" r="4" fill="white" opacity="0.9"/>
+                                        </g>
+                                        <g class="fox-head" style="transform-origin:23px 25px">
+                                            <!-- Body -->
+                                            <ellipse cx="23" cy="31" rx="10" ry="8" fill="#c47a2a"/>
+                                            <!-- Chest -->
+                                            <ellipse cx="23" cy="33" rx="6" ry="5" fill="#f0d080"/>
+                                            <!-- Head -->
+                                            <ellipse cx="23" cy="20" rx="10" ry="9" fill="#c47a2a"/>
+                                            <!-- Ear left -->
+                                            <polygon points="15,14 12,4 20,12" fill="#c47a2a"/>
+                                            <polygon points="15,13 13,6 19,12" fill="#e63946" opacity="0.6"/>
+                                            <!-- Ear right -->
+                                            <polygon points="31,14 34,4 26,12" fill="#c47a2a"/>
+                                            <polygon points="31,13 33,6 27,12" fill="#e63946" opacity="0.6"/>
+                                            <!-- Face mask -->
+                                            <ellipse cx="23" cy="22" rx="7" ry="5" fill="#f0d080"/>
+                                            <!-- Eyes -->
+                                            <g class="fox-eye-l">
+                                                <ellipse cx="19.5" cy="19" rx="2" ry="2.5" fill="#d4af37"/>
+                                                <ellipse cx="19.5" cy="19" rx="0.8" ry="1.3" fill="#000"/>
+                                                <circle cx="20.1" cy="18" r="0.5" fill="white"/>
+                                            </g>
+                                            <g class="fox-eye-r">
+                                                <ellipse cx="26.5" cy="19" rx="2" ry="2.5" fill="#d4af37"/>
+                                                <ellipse cx="26.5" cy="19" rx="0.8" ry="1.3" fill="#000"/>
+                                                <circle cx="27.1" cy="18" r="0.5" fill="white"/>
+                                            </g>
+                                            <!-- Nose -->
+                                            <ellipse cx="23" cy="23" rx="1.5" ry="1" fill="#333"/>
+                                            <!-- Mouth -->
+                                            <path d="M 21 24.5 Q 23 26 25 24.5" stroke="#c47a2a" stroke-width="0.8" fill="none"/>
+                                            <!-- Paws -->
+                                            <ellipse cx="16" cy="38" rx="4" ry="2.5" fill="#a05a18"/>
+                                            <ellipse cx="30" cy="38" rx="4" ry="2.5" fill="#a05a18"/>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <div class="svc-title-wrap">
                                     <div class="svc-title">Diseño de Marca / Identidad</div>
                                     <div class="svc-subtitle">Logo · Branding · Guía visual</div>
@@ -572,15 +703,62 @@
                                         <li>Guía de marca para mantener coherencia en todo</li>
                                     </ul>
                                     <div class="svc-no-tarifa">* Sin tarifas fijas — depende del alcance y complejidad del proyecto.</div>
-                                    <a href="#" class="svc-doc-link"><i class="fas fa-arrow-right"></i> Ver documentación completa</a>
+                                    <button class="svc-doc-btn" onclick="openDocModal(event,'Diseño de Marca / Identidad')"><i class="fas fa-arrow-right"></i> Ver documentación completa</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Producción de Contenido -->
+                        <!-- Producción de Contenido — DRAGON -->
                         <div class="svc-card" id="svc-contenido" onclick="toggleSvc(this,'Producción de Contenido')">
                             <div class="svc-header">
-                                <div class="svc-icon red"><i class="fas fa-film"></i></div>
+                                <div class="svc-animal">
+                                    <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                                        <g class="dragon-body">
+                                            <!-- Wings -->
+                                            <g class="dragon-wing-l">
+                                                <path d="M 14 20 Q 4 12 6 24 Q 8 30 14 26" fill="#8b1a1a" opacity="0.8"/>
+                                            </g>
+                                            <g class="dragon-wing-r">
+                                                <path d="M 32 20 Q 42 12 40 24 Q 38 30 32 26" fill="#8b1a1a" opacity="0.8"/>
+                                            </g>
+                                            <!-- Body -->
+                                            <ellipse cx="23" cy="30" rx="9" ry="8" fill="#1a0a0a"/>
+                                            <!-- Belly -->
+                                            <ellipse cx="23" cy="31" rx="5" ry="5" fill="#e63946" opacity="0.3"/>
+                                            <!-- Head -->
+                                            <ellipse cx="23" cy="19" rx="10" ry="9" fill="#1a0a0a"/>
+                                            <!-- Horns -->
+                                            <path d="M 17 12 Q 15 5 18 8" stroke="#e63946" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 29 12 Q 31 5 28 8" stroke="#e63946" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <!-- Eyes -->
+                                            <g class="dragon-eye">
+                                                <ellipse cx="19" cy="18" rx="2.5" ry="2.5" fill="#e63946"/>
+                                                <ellipse cx="19" cy="18" rx="1" ry="1.3" fill="#000"/>
+                                                <circle cx="19.6" cy="17" r="0.5" fill="#ff9999"/>
+                                            </g>
+                                            <ellipse cx="27" cy="18" rx="2.5" ry="2.5" fill="#e63946"/>
+                                            <ellipse cx="27" cy="18" rx="1" ry="1.3" fill="#000"/>
+                                            <circle cx="27.6" cy="17" r="0.5" fill="#ff9999"/>
+                                            <!-- Nostrils -->
+                                            <ellipse cx="21" cy="22" rx="1" ry="0.7" fill="#e63946" opacity="0.6"/>
+                                            <ellipse cx="25" cy="22" rx="1" ry="0.7" fill="#e63946" opacity="0.6"/>
+                                            <!-- Spikes on back -->
+                                            <polygon points="23,10 21,14 25,14" fill="#e63946" opacity="0.8"/>
+                                            <polygon points="20,11 18,15 22,15" fill="#e63946" opacity="0.5"/>
+                                            <polygon points="26,11 24,15 28,15" fill="#e63946" opacity="0.5"/>
+                                            <!-- Fire -->
+                                            <g class="dragon-fire">
+                                                <path d="M 26 23 Q 32 20 36 22 Q 40 19 38 24 Q 36 28 32 26 Q 28 28 26 23" fill="#ff6b00" opacity="0.9"/>
+                                                <path d="M 28 23 Q 33 21 36 23" fill="#ffdd00" opacity="0.7"/>
+                                            </g>
+                                            <!-- Tail -->
+                                            <path d="M 31 35 Q 38 38 36 43 Q 34 46 32 43" stroke="#1a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                            <!-- Claws -->
+                                            <ellipse cx="16" cy="37" rx="4" ry="2.5" fill="#0d0505"/>
+                                            <ellipse cx="30" cy="37" rx="4" ry="2.5" fill="#0d0505"/>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <div class="svc-title-wrap">
                                     <div class="svc-title">Producción de Contenido</div>
                                     <div class="svc-subtitle">Video · Foto · Material creativo</div>
@@ -597,15 +775,59 @@
                                         <li>Copywriting y narrativa de marca</li>
                                     </ul>
                                     <div class="svc-no-tarifa">* Tarifa según tipo de producción, duración y complejidad.</div>
-                                    <a href="#" class="svc-doc-link"><i class="fas fa-arrow-right"></i> Ver documentación completa</a>
+                                    <button class="svc-doc-btn" onclick="openDocModal(event,'Producción de Contenido')"><i class="fas fa-arrow-right"></i> Ver documentación completa</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Consultoría -->
+                        <!-- Consultoría — OWL -->
                         <div class="svc-card" id="svc-consultoria" onclick="toggleSvc(this,'Consultoría General')">
                             <div class="svc-header">
-                                <div class="svc-icon green"><i class="fas fa-lightbulb"></i></div>
+                                <div class="svc-animal">
+                                    <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Body -->
+                                        <ellipse class="owl-body" cx="23" cy="31" rx="10" ry="9" fill="#1a2f1a"/>
+                                        <!-- Wing feathers -->
+                                        <path d="M 13 28 Q 8 24 10 32 Q 12 36 15 33" fill="#0d200d"/>
+                                        <path d="M 33 28 Q 38 24 36 32 Q 34 36 31 33" fill="#0d200d"/>
+                                        <!-- Belly pattern -->
+                                        <ellipse cx="23" cy="32" rx="6" ry="6" fill="#2a4a2a"/>
+                                        <ellipse cx="23" cy="34" rx="4" ry="4" fill="#1a3a1a"/>
+                                        <g class="owl-head" style="transform-origin:23px 21px">
+                                            <!-- Head -->
+                                            <circle cx="23" cy="19" r="10" fill="#1a2f1a"/>
+                                            <!-- Ear tufts -->
+                                            <polygon points="16,11 13,4 19,10" fill="#1a2f1a"/>
+                                            <polygon points="30,11 33,4 27,10" fill="#1a2f1a"/>
+                                            <!-- Eye rings -->
+                                            <circle cx="19" cy="19" r="5" fill="#0a1a0a"/>
+                                            <circle cx="27" cy="19" r="5" fill="#0a1a0a"/>
+                                            <circle cx="23" cy="19" r="2" fill="#0a1a0a"/>
+                                            <!-- Eyes -->
+                                            <g class="owl-eye-l">
+                                                <circle cx="19" cy="19" r="3.5" fill="#25d366"/>
+                                                <circle cx="19" cy="19" r="1.8" fill="#000"/>
+                                                <circle cx="19.7" cy="18" r="0.7" fill="white"/>
+                                            </g>
+                                            <g class="owl-eye-r">
+                                                <circle cx="27" cy="19" r="3.5" fill="#25d366"/>
+                                                <circle cx="27" cy="19" r="1.8" fill="#000"/>
+                                                <circle cx="27.7" cy="18" r="0.7" fill="white"/>
+                                            </g>
+                                            <!-- Beak -->
+                                            <polygon points="23,22 21,25 25,25" fill="#d4af37"/>
+                                            <!-- Glasses -->
+                                            <circle cx="19" cy="19" r="5" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+                                            <circle cx="27" cy="19" r="5" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+                                            <line x1="24" y1="19" x2="22" y2="19" stroke="#d4af37" stroke-width="1.2"/>
+                                            <line x1="14" y1="18" x2="11" y2="17" stroke="#d4af37" stroke-width="1.2"/>
+                                            <line x1="32" y1="18" x2="35" y2="17" stroke="#d4af37" stroke-width="1.2"/>
+                                        </g>
+                                        <!-- Feet -->
+                                        <path d="M 18 39 L 15 43 M 18 39 L 18 43 M 18 39 L 21 43" stroke="#25d366" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M 28 39 L 25 43 M 28 39 L 28 43 M 28 39 L 31 43" stroke="#25d366" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
                                 <div class="svc-title-wrap">
                                     <div class="svc-title">Consultoría General</div>
                                     <div class="svc-subtitle">Asesoría · Dirección estratégica</div>
@@ -622,7 +844,7 @@
                                         <li>Seguimiento y ajuste de estrategia</li>
                                     </ul>
                                     <div class="svc-no-tarifa">* Las tarifas dependen del número de sesiones y alcance del proyecto.</div>
-                                    <a href="#" class="svc-doc-link"><i class="fas fa-arrow-right"></i> Ver documentación completa</a>
+                                    <button class="svc-doc-btn" onclick="openDocModal(event,'Consultoría General')"><i class="fas fa-arrow-right"></i> Ver documentación completa</button>
                                 </div>
                             </div>
                         </div>
@@ -635,10 +857,6 @@
                     <div class="form-header">
                         <h3>Cuéntanos tu proyecto</h3>
                         <p>Completa el formulario y te contactamos en menos de 48 horas.</p>
-                    </div>
-                    <div class="email-note">
-                        <i class="fas fa-envelope"></i>
-                        <span>Tu mensaje llegará a <strong>kittensmanagers@gmail.com</strong></span>
                     </div>
                     <div id="svcFormArea">
                         <div class="form-row">
@@ -687,23 +905,90 @@
                 <div class="wa-hero">
                     <div class="wa-icon-wrap"><i class="fab fa-whatsapp"></i></div>
                     <h2 class="wa-title">Bot de WhatsApp</h2>
-                    <p class="wa-desc">Nuestro bot responde tus preguntas al instante, 24/7. Automatización inteligente al servicio de tu marca — sin esperas.</p>
-                    <div class="wa-feats">
-                        <div class="wa-feat"><i class="fas fa-bolt"></i><span>Respuestas instantáneas</span></div>
-                        <div class="wa-feat"><i class="fas fa-clock"></i><span>Disponible 24/7</span></div>
-                        <div class="wa-feat"><i class="fas fa-shield-alt"></i><span>Seguro y confiable</span></div>
-                    </div>
+                    <p class="wa-desc">Sistema de automatización inteligente conectado a WhatsApp — diseñado para gestionar consultas, dar seguimiento a proyectos y coordinar operaciones, sin esperas y sin límite de horario.</p>
                     <a href="https://wa.me/573000000000" target="_blank" class="wa-btn">
                         <i class="fab fa-whatsapp"></i>
-                        <span>Abrir en WhatsApp</span>
+                        <span>Contactar ahora</span>
                     </a>
+                </div>
+
+                <div class="wa-features-title">Lo que hace el sistema</div>
+                <div class="wa-features-grid">
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Respuestas 24/7</h4>
+                        <p>Disponible en cualquier momento. Sin horarios, sin esperas — siempre activo para ti.</p>
+                    </div>
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-brain"></i></div>
+                        <h4>Enrutamiento inteligente</h4>
+                        <p>Identifica automáticamente el tipo de consulta y la dirige al área correcta del equipo.</p>
+                    </div>
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Confidencialidad total</h4>
+                        <p>Toda la información que compartes es gestionada con protocolos de seguridad y privacidad.</p>
+                    </div>
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Seguimiento en tiempo real</h4>
+                        <p>Consulta el estado de tu proyecto, avances y reportes directamente desde el chat.</p>
+                    </div>
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <h4>Coordinación automática</h4>
+                        <p>Agenda reuniones y registra compromisos sin necesidad de correos de ida y vuelta.</p>
+                    </div>
+                    <div class="wa-feat-card">
+                        <div class="wa-feat-icon"><i class="fas fa-file-alt"></i></div>
+                        <h4>Reportes automáticos</h4>
+                        <p>Genera resúmenes de avances, finanzas y tareas pendientes de forma periódica.</p>
+                    </div>
+                </div>
+
+                <div class="wa-flow-title">Cómo funciona — Flujo paso a paso</div>
+                <div class="wa-flow-steps">
+                    <div class="wa-flow-step">
+                        <div class="wa-flow-num">01</div>
+                        <div class="wa-flow-content">
+                            <h4>Recibes atención al instante</h4>
+                            <p>Envías tu mensaje por WhatsApp y el sistema lo recibe de inmediato a través de la API de WhatsApp Business.</p>
+                        </div>
+                    </div>
+                    <div class="wa-flow-step">
+                        <div class="wa-flow-num">02</div>
+                        <div class="wa-flow-content">
+                            <h4>El sistema identifica tu consulta</h4>
+                            <p>Analiza el contenido del mensaje, detecta qué necesitas y clasifica el tipo de solicitud automáticamente.</p>
+                        </div>
+                    </div>
+                    <div class="wa-flow-step">
+                        <div class="wa-flow-num">03</div>
+                        <div class="wa-flow-content">
+                            <h4>Se dirige al área correcta</h4>
+                            <p>La solicitud es enrutada al módulo especializado: atención al cliente, finanzas, seguimiento de proyectos o reportes.</p>
+                        </div>
+                    </div>
+                    <div class="wa-flow-step">
+                        <div class="wa-flow-num">04</div>
+                        <div class="wa-flow-content">
+                            <h4>Acción y respuesta</h4>
+                            <p>El sistema ejecuta la acción: consulta información, registra datos, coordina agendas o genera reportes — y te responde directo al chat.</p>
+                        </div>
+                    </div>
+                    <div class="wa-flow-step">
+                        <div class="wa-flow-num">05</div>
+                        <div class="wa-flow-content">
+                            <h4>Reporte diario automático</h4>
+                            <p>Cada día, el equipo recibe un resumen de avances, pendientes y estado financiero de los proyectos activos.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ══ PANEL VIP ══ -->
         <div class="panel" id="panelVip">
-
             <div class="vip-hero">
                 <div class="vip-crown">👑</div>
                 <div class="vip-tag"><i class="fas fa-star"></i> Acceso VIP</div>
@@ -711,7 +996,6 @@
                 <p class="vip-desc">¿Tienes un proyecto que merece visibilidad? Cuéntanos tu idea. Evaluamos cada propuesta con atención y te respondemos si encaja con la visión de Kittens Managers.</p>
                 <span class="vip-no-tarifa">No existen tarifas fijas — todo depende de la complejidad, potencial y alineación del proyecto.</span>
             </div>
-
             <div class="vip-reqs">
                 <div class="vip-reqs-title">¿Qué evaluamos en tu proyecto?</div>
                 <div class="vip-req-list">
@@ -745,15 +1029,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="vip-form-wrap">
                 <div class="vip-form-header">
                     <h3>Envía tu propuesta</h3>
                     <p>Completa el formulario. Revisamos cada propuesta personalmente.</p>
-                </div>
-                <div class="vip-email-note">
-                    <i class="fas fa-crown"></i>
-                    <span>Tu propuesta llegará directamente a <strong>kittensmanagers@gmail.com</strong></span>
                 </div>
                 <div id="vipFormArea">
                     <div class="form-row">
@@ -809,6 +1088,182 @@
         </div>
     </footer>
 
+    <!-- ══ DOC MODAL ══ -->
+    <div class="doc-modal-overlay" id="docModal" onclick="closeDocModalOutside(event)">
+        <div class="doc-modal">
+            <div class="doc-modal-header">
+                <div class="doc-modal-top">
+                    <span class="doc-modal-title" id="docModalTitle">Documentación</span>
+                    <button class="doc-modal-close" onclick="closeDocModal()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="doc-tabs">
+                    <button class="doc-tab active" onclick="switchDocTab('documento',this)">Documento v1.0</button>
+                    <button class="doc-tab" onclick="switchDocTab('ficha',this)">Ficha Técnica</button>
+                    <button class="doc-tab" onclick="switchDocTab('flujo',this)">Flujo de Trabajo</button>
+                </div>
+            </div>
+            <div class="doc-modal-body">
+
+                <!-- DOCUMENTO -->
+                <div class="doc-pane active" id="pane-documento">
+                    <div class="doc-version-badge"><i class="fas fa-file-alt"></i> Versión 1.0 — Documentación Pública</div>
+
+                    <div class="doc-section">
+                        <div class="doc-section-num">01 · INTRODUCCIÓN</div>
+                        <h3>Kittens Managers</h3>
+                        <div class="doc-highlight">
+                            <p>Esta documentación ha sido diseñada para brindarte total claridad y seguridad sobre el ecosistema de trabajo en KM. Entendemos que tu marca es tu activo más valioso.</p>
+                        </div>
+                        <p>Nuestro objetivo es simple pero ambicioso: garantizar la transparencia absoluta y la excelencia operativa. En KM no solo gestionamos activos digitales, sino que potenciamos la esencia de tu marca para que destaque en un mercado saturado.</p>
+                    </div>
+
+                    <div class="doc-divider"></div>
+
+                    <div class="doc-section">
+                        <div class="doc-section-num">02 · CATÁLOGO DE SERVICIOS</div>
+                        <h3>Nuestros pilares</h3>
+                        <p>Cuatro áreas estratégicas diseñadas para cubrir desde la estructura visual hasta la ejecución completa:</p>
+                        <ul>
+                            <li><strong>A. Gestión de Redes Sociales</strong> — Auditoría de canales, calendarios editoriales, copywriting estratégico y métricas mensuales.</li>
+                            <li><strong>B. Diseño de Marca / Identidad</strong> — Logotipo, paleta cromática, tipografías y manual de identidad completo.</li>
+                            <li><strong>C. Producción de Contenido</strong> — Reels, TikToks, fotografía editorial, piezas gráficas y post-producción cinematográfica.</li>
+                            <li><strong>D. Consultoría General</strong> — Diagnóstico de marca, estrategia de lanzamiento y optimización de procesos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-divider"></div>
+
+                    <div class="doc-section">
+                        <div class="doc-section-num">04 · POLÍTICA DE SERVICIOS</div>
+                        <h3>Gestión de pagos y cambios</h3>
+                        <ul>
+                            <li><strong>Anticipo:</strong> 50% al iniciar. 50% restante antes de la entrega final.</li>
+                            <li><strong>Retainers:</strong> Pago dentro de los primeros 5 días hábiles de cada mes.</li>
+                            <li><strong>Revisiones:</strong> Hasta 2 rondas de cambios menores sin costo adicional.</li>
+                            <li><strong>Aprobación:</strong> El cliente tiene 48 h para revisar cada entrega. Pasado ese tiempo se da por aprobado.</li>
+                            <li><strong>Propiedad intelectual:</strong> Al pagar el total, el cliente adquiere todos los derechos sobre el material final.</li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-divider"></div>
+
+                    <div class="doc-section">
+                        <div class="doc-section-num">05 · PRIVACIDAD Y TÉRMINOS</div>
+                        <h3>Tu información, segura</h3>
+                        <ul>
+                            <li>Solo solicitamos datos necesarios para el servicio. Nunca los vendemos a terceros.</li>
+                            <li>Los accesos a redes sociales se manejan con protocolos de seguridad. Al finalizar, se recomienda revocarlos.</li>
+                            <li>El cliente garantiza que el material entregado (logos, fotos) es de su propiedad.</li>
+                            <li>Cualquiera de las partes puede dar por terminada la relación con 15 días de aviso previo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-divider"></div>
+
+                    <div class="doc-section">
+                        <div class="doc-section-num">06 · SOPORTE TÉCNICO</div>
+                        <h3>Horarios y canales</h3>
+                        <ul>
+                            <li><strong>Lun–Vie:</strong> 8:00 AM – 6:00 PM (Bogotá)</li>
+                            <li><strong>Sábados:</strong> 9:00 AM – 1:00 PM</li>
+                            <li><strong>Consultas generales:</strong> Respuesta en 12–24 horas hábiles</li>
+                            <li><strong>Emergencias técnicas:</strong> Respuesta en menos de 4 horas</li>
+                            <li><strong>Correo:</strong> kittensmanagers@gmail.com</li>
+                        </ul>
+                        <div class="doc-highlight" style="margin-top:14px;">
+                            <p style="margin:0;font-size:12px;font-style:italic;color:var(--ter);">NO NOS RENDIREMOS HASTA LOGRARLO — KM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FICHA TÉCNICA -->
+                <div class="doc-pane" id="pane-ficha">
+                    <div class="doc-empty">
+                        <div class="doc-empty-icon">📋</div>
+                        <h3>Ficha Técnica</h3>
+                        <p>Próximamente — Estamos preparando las fichas técnicas detalladas de cada servicio. Disponibles en la versión 1.1.</p>
+                    </div>
+                </div>
+
+                <!-- FLUJO -->
+                <div class="doc-pane" id="pane-flujo">
+                    <div class="doc-version-badge"><i class="fas fa-project-diagram"></i> El Proceso KM — 4 Fases</div>
+                    <p style="font-size:13px;color:var(--sec);margin-bottom:24px;line-height:1.7;">Nuestro sistema de trabajo está dividido en cuatro fases claras. Haz clic en cada fase para ver el detalle.</p>
+                    <div class="flow-diagram">
+                        <div class="flow-step" onclick="toggleFlowStep(this)">
+                            <div class="flow-step-left">
+                                <div class="flow-step-num">01</div>
+                                <div class="flow-connector"></div>
+                            </div>
+                            <div class="flow-step-content">
+                                <h4>Onboarding y Diagnóstico</h4>
+                                <p>Semana 1 — Entendimiento profundo de tu marca y objetivos.</p>
+                                <div class="flow-step-detail">
+                                    <ul>
+                                        <li>Briefing inicial: valores, objetivos y tono de marca</li>
+                                        <li>Auditoría de activos: perfiles, manuales y material previo</li>
+                                        <li>Configuración de accesos bajo protocolos de seguridad</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-step" onclick="toggleFlowStep(this)">
+                            <div class="flow-step-left">
+                                <div class="flow-step-num">02</div>
+                                <div class="flow-connector"></div>
+                            </div>
+                            <div class="flow-step-content">
+                                <h4>Planificación y Estrategia</h4>
+                                <p>Antes de crear, diseñamos el mapa de ruta completo.</p>
+                                <div class="flow-step-detail">
+                                    <ul>
+                                        <li>Propuesta creativa: concepto visual y editorial</li>
+                                        <li>Calendario maestro mensual con fechas claras</li>
+                                        <li>Aprobación del cliente antes de cualquier ejecución</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-step" onclick="toggleFlowStep(this)">
+                            <div class="flow-step-left">
+                                <div class="flow-step-num">03</div>
+                                <div class="flow-connector"></div>
+                            </div>
+                            <div class="flow-step-content">
+                                <h4>Producción y Ejecución</h4>
+                                <p>El equipo KM entra en acción con herramientas profesionales.</p>
+                                <div class="flow-step-detail">
+                                    <ul>
+                                        <li>Creación de contenido: diseño, video y copywriting</li>
+                                        <li>Optimización para cada plataforma digital</li>
+                                        <li>Rondas de revisión pactadas con el cliente</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-step" onclick="toggleFlowStep(this)">
+                            <div class="flow-step-left">
+                                <div class="flow-step-num">04</div>
+                            </div>
+                            <div class="flow-step-content">
+                                <h4>Análisis y Optimización</h4>
+                                <p>El trabajo no termina al publicar — medimos y mejoramos.</p>
+                                <div class="flow-step-detail">
+                                    <ul>
+                                        <li>Monitoreo constante del rendimiento en tiempo real</li>
+                                        <li>Reporte mensual con métricas clave: alcance, interacción y crecimiento</li>
+                                        <li>Ajuste estratégico basado en datos reales</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script>
         // ── Header scroll ──
         const hi = document.getElementById('headerInitial');
@@ -829,8 +1284,8 @@
 
         // ── Mode tabs ──
         function setMode(mode) {
-            const tabs = { service: 'btnService', wa: 'btnWa', vip: 'btnVip' };
-            const panels = { service: 'panelService', wa: 'panelWa', vip: 'panelVip' };
+            const tabs = { service:'btnService', wa:'btnWa', vip:'btnVip' };
+            const panels = { service:'panelService', wa:'panelWa', vip:'panelVip' };
             Object.keys(tabs).forEach(k => {
                 document.getElementById(tabs[k]).classList.toggle('active', k === mode);
                 document.getElementById(panels[k]).classList.toggle('active', k === mode);
@@ -838,47 +1293,67 @@
         }
 
         // ── Service accordion ──
-        let currentSvc = 'svc-redes';
         function toggleSvc(card, name) {
             const isOpen = card.classList.contains('open');
-            // Close all
-            document.querySelectorAll('.svc-card').forEach(c => {
-                c.classList.remove('open');
-                // Don't deselect — keep selected state separate
-            });
-            // Select this one always
+            document.querySelectorAll('.svc-card').forEach(c => c.classList.remove('open'));
             document.querySelectorAll('.svc-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             document.getElementById('servicioInput').value = name;
-            // Toggle open
             if (!isOpen) card.classList.add('open');
         }
 
-        // ── Anti-spam helper ──
+        // ── Doc modal ──
+        function openDocModal(e, serviceName) {
+            e.stopPropagation();
+            document.getElementById('docModalTitle').textContent = serviceName;
+            document.getElementById('docModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDocModal() {
+            document.getElementById('docModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function closeDocModalOutside(e) {
+            if (e.target === document.getElementById('docModal')) closeDocModal();
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDocModal(); });
+
+        function switchDocTab(tab, btn) {
+            document.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.doc-pane').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('pane-' + tab).classList.add('active');
+        }
+
+        // ── Flow steps ──
+        function toggleFlowStep(step) {
+            const isActive = step.classList.contains('active-step');
+            document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active-step'));
+            if (!isActive) step.classList.add('active-step');
+        }
+
+        // ── Anti-spam ──
         const SPAM_HOURS = 72;
         function checkSpam(key) {
-            const stored = localStorage.getItem(key);
-            if (!stored) return null;
-            const diff = (Date.now() - parseInt(stored)) / 3600000;
-            if (diff < SPAM_HOURS) return Math.ceil(SPAM_HOURS - diff);
+            try {
+                const stored = localStorage.getItem(key);
+                if (!stored) return null;
+                const diff = (Date.now() - parseInt(stored)) / 3600000;
+                if (diff < SPAM_HOURS) return Math.ceil(SPAM_HOURS - diff);
+            } catch(e) {}
             return null;
         }
-        function markSent(key) { localStorage.setItem(key, Date.now()); }
+        function markSent(key) { try { localStorage.setItem(key, Date.now()); } catch(e) {} }
 
-        // ── Service form submit ──
+        // ── Service form ──
         function submitSvc() {
-            const nombre   = document.getElementById('nombre').value.trim();
-            const email    = document.getElementById('email').value.trim();
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
             const servicio = document.getElementById('servicioInput').value;
-            const titulo   = document.getElementById('titulo').value.trim();
-            const desc     = document.getElementById('descripcion').value.trim();
-
-            if (!nombre || !email || !titulo || !desc) {
-                alert('Por favor completa todos los campos.'); return;
-            }
+            const titulo = document.getElementById('titulo').value.trim();
+            const desc = document.getElementById('descripcion').value.trim();
+            if (!nombre || !email || !titulo || !desc) { alert('Por favor completa todos los campos.'); return; }
             if (!email.includes('@')) { alert('Ingresa un correo válido.'); return; }
-
-            // Anti-spam check
             const spamKey = `svc_spam_${email.toLowerCase()}`;
             const wait = checkSpam(spamKey);
             if (wait) {
@@ -887,31 +1362,25 @@
                 document.getElementById('svcSpam').classList.add('show');
                 return;
             }
-
             const subject = encodeURIComponent(`[Soporte] ${servicio} — ${titulo}`);
-            const body    = encodeURIComponent(`Nombre: ${nombre}\nCorreo: ${email}\nServicio: ${servicio}\n\nProyecto: ${titulo}\n\n${desc}`);
+            const body = encodeURIComponent(`Nombre: ${nombre}\nCorreo: ${email}\nServicio: ${servicio}\n\nProyecto: ${titulo}\n\n${desc}`);
             window.location.href = `mailto:kittensmanagers@gmail.com?subject=${subject}&body=${body}`;
-
             markSent(spamKey);
             document.getElementById('emailConfirm').textContent = email;
             document.getElementById('svcFormArea').style.display = 'none';
             document.getElementById('svcSuccess').classList.add('show');
         }
 
-        // ── VIP form submit ──
+        // ── VIP form ──
         function submitVip() {
-            const nombre   = document.getElementById('vipNombre').value.trim();
-            const email    = document.getElementById('vipEmail').value.trim();
+            const nombre = document.getElementById('vipNombre').value.trim();
+            const email = document.getElementById('vipEmail').value.trim();
             const proyecto = document.getElementById('vipProyecto').value.trim();
-            const tipo     = document.getElementById('vipTipo').value.trim();
-            const vision   = document.getElementById('vipVision').value.trim();
-            const porque   = document.getElementById('vipPorque').value.trim();
-
-            if (!nombre || !email || !proyecto || !vision || !porque) {
-                alert('Por favor completa todos los campos.'); return;
-            }
+            const tipo = document.getElementById('vipTipo').value.trim();
+            const vision = document.getElementById('vipVision').value.trim();
+            const porque = document.getElementById('vipPorque').value.trim();
+            if (!nombre || !email || !proyecto || !vision || !porque) { alert('Por favor completa todos los campos.'); return; }
             if (!email.includes('@')) { alert('Ingresa un correo válido.'); return; }
-
             const spamKey = `vip_spam_${email.toLowerCase()}`;
             const wait = checkSpam(spamKey);
             if (wait) {
@@ -920,11 +1389,9 @@
                 document.getElementById('vipSpam').classList.add('show');
                 return;
             }
-
             const subject = encodeURIComponent(`[VIP] Propuesta de patrocinio — ${proyecto}`);
-            const body    = encodeURIComponent(`Nombre: ${nombre}\nCorreo: ${email}\nProyecto: ${proyecto}\nTipo: ${tipo}\n\nVisión:\n${vision}\n\n¿Por qué Kittens?\n${porque}`);
+            const body = encodeURIComponent(`Nombre: ${nombre}\nCorreo: ${email}\nProyecto: ${proyecto}\nTipo: ${tipo}\n\nVisión:\n${vision}\n\n¿Por qué Kittens?\n${porque}`);
             window.location.href = `mailto:kittensmanagers@gmail.com?subject=${subject}&body=${body}`;
-
             markSent(spamKey);
             document.getElementById('vipEmailConfirm').textContent = email;
             document.getElementById('vipFormArea').style.display = 'none';
